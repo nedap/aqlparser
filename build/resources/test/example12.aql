@@ -1,5 +1,0 @@
-SELECT
-   TOP 10 c/name/value AS Name, c/context/start_time AS date_time, c/composer/name AS Composer
-FROM
-   EHR e[ehr_id/value=$ehrUid]
-      CONTAINS COMPOSITION c

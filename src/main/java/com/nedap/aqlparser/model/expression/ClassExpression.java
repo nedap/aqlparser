@@ -20,8 +20,6 @@ public class ClassExpression extends Leaf {
             predicate = new ArchetypePredicate(ctx.archetypePredicate());
         } else if (ctx.standardPredicate() != null) {
             predicate = new StandardPredicate(ctx.standardPredicate());
-        } else {
-            throw new RuntimeException("Must not be reached");
         }
     }
 

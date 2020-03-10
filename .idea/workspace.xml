@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ef773c96-0bd6-4565-a735-53c661951691" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ClassExpressionContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsExpressionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsExpressionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/TopClause.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Containment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Containment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/FromClause.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/FromClause.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Query.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Query.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/SelectClause.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/SelectClause.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/WhereClause.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/WhereClause.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ClassExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ClassExpression.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ContainsExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ContainsExpression.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/IdentifiedExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/IdentifiedExpression.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/NodePredicate.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/NodePredicate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/StandardPredicate.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/StandardPredicate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/ClassExpressionTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/ClassExpressionTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/SelectClauseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/SelectClauseTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.nedap.aqlparser.model.ClassExpressionTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/com.nedap.aqlparser.model.ClassExpressionTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.nedap.aqlparser.model.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.nedap.aqlparser.model.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example10.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example11.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example12.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example2.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example3.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example4.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example5.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example6.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example7.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example8.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/example9.aql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.nedap.aqlparser.model.ClassExpressionTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-com.nedap.aqlparser.model.ClassExpressionTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/aqlparser/model/expression/ClassExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/aqlparser/model/expression/ClassExpression.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aqlparser" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aqlparser" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aqlparser" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="aqlparser" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YIFC6wkitwZoQ5ZzJQB3qVJOgo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/nedap/aqlparser/model/expression" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.nedap.aqlparser" />
+      <recent name="" />
+    </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="com.nedap.aqlparser.model.expression" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.aqlparser [generateGrammarSource]">
+    <configuration name="PathPartTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.nedap.aqlparser.model.PathPartTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="SelectClauseTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.nedap.aqlparser.model.SelectClauseTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ValueListTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.nedap.aqlparser.model.ValueListTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="aqlparser [build]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="aqlparser [generateGrammarSource]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="generateGrammarSource" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="aqlparser [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.aqlparser [generateGrammarSource]" />
+        <item itemvalue="Gradle.aqlparser [test]" />
+        <item itemvalue="Gradle.ValueListTest" />
+        <item itemvalue="Gradle.SelectClauseTest" />
+        <item itemvalue="Gradle.PathPartTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef773c96-0bd6-4565-a735-53c661951691" name="Default Changelist" comment="" />
+      <created>1582622070634</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582622070634</updated>
+      <workItem from="1582622073785" duration="4639000" />
+      <workItem from="1582627611325" duration="22638000" />
+      <workItem from="1582710967284" duration="166668000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1276" y="-43" key="#App" timestamp="1582624313403">
+      <screen x="-1920" y="-248" width="1920" height="1057" />
+    </state>
+    <state x="-1276" y="-43" key="#App/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582624313403" />
+    <state x="-1820" y="-420" width="1720" height="804" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1582896814750">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1820" y="-420" width="1720" height="804" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1582896814750" />
+    <state x="580" y="205" key="#com.intellij.ide.util.MemberChooser" timestamp="1583765608255">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="-1147" y="-29" key="#com.intellij.ide.util.MemberChooser/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582733503915" />
+    <state x="2471" y="-368" key="#com.intellij.ide.util.MemberChooser/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582644904327" />
+    <state x="580" y="194" key="#com.intellij.ide.util.MemberChooser/0.23.1440.824@0.23.1440.824" timestamp="1582828501378" />
+    <state x="-1147" y="-22" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583501646495" />
+    <state x="-1147" y="-301" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583403621998" />
+    <state x="580" y="205" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1583765608255" />
+    <state x="-1259" y="-42" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1583163504378">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1259" y="230" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582710468863" />
+    <state x="2321" y="-21" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582647571277" />
+    <state x="-1259" y="-42" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583163504378" />
+    <state x="-1219" y="-125" width="521" height="276" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1583160061867">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1219" y="-125" width="521" height="276" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583160061867" />
+    <state x="2494" y="-66" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1582647572669">
+      <screen x="1440" y="-662" width="2560" height="1417" />
+    </state>
+    <state x="2494" y="-66" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582647572669" />
+    <state x="-1188" y="-149" key="#com.intellij.refactoring.move.moveInner.MoveInnerDialog" timestamp="1583163512909">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1188" y="-149" key="#com.intellij.refactoring.move.moveInner.MoveInnerDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583163512909" />
+    <state x="-1193" y="-154" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1583163476751">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1193" y="-154" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583163476751" />
+    <state x="-1241" y="-266" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1583163457367">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1241" y="-266" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583163457367" />
+    <state x="-1571" y="-520" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583251664496">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1571" y="-520" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583251664496" />
+    <state x="-1222" y="-238" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582895297617">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1222" y="34" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582713061278" />
+    <state x="-1222" y="-238" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1582895297617" />
+    <state width="1878" height="266" key="GridCell.Tab.0.bottom" timestamp="1583834605120">
+      <screen x="-1920" y="-241" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="295" key="GridCell.Tab.0.bottom/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582735392797" />
+    <state width="2518" height="213" key="GridCell.Tab.0.bottom/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582647572863" />
+    <state width="1398" height="295" key="GridCell.Tab.0.bottom/0.23.1440.824@0.23.1440.824" timestamp="1582819031767" />
+    <state width="1878" height="266" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583834605120" />
+    <state width="1878" height="293" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583331676048" />
+    <state width="1398" height="266" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1583765503195" />
+    <state width="1878" height="266" key="GridCell.Tab.0.center" timestamp="1583834605120">
+      <screen x="-1920" y="-241" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="295" key="GridCell.Tab.0.center/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582735392796" />
+    <state width="2518" height="213" key="GridCell.Tab.0.center/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582647572862" />
+    <state width="1398" height="295" key="GridCell.Tab.0.center/0.23.1440.824@0.23.1440.824" timestamp="1582819031766" />
+    <state width="1878" height="266" key="GridCell.Tab.0.center/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583834605120" />
+    <state width="1878" height="293" key="GridCell.Tab.0.center/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583331676048" />
+    <state width="1398" height="266" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1583765503195" />
+    <state width="1878" height="266" key="GridCell.Tab.0.left" timestamp="1583834605119">
+      <screen x="-1920" y="-241" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="295" key="GridCell.Tab.0.left/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582735392796" />
+    <state width="2518" height="213" key="GridCell.Tab.0.left/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582647572849" />
+    <state width="1398" height="295" key="GridCell.Tab.0.left/0.23.1440.824@0.23.1440.824" timestamp="1582819031766" />
+    <state width="1878" height="266" key="GridCell.Tab.0.left/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583834605119" />
+    <state width="1878" height="293" key="GridCell.Tab.0.left/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583331676047" />
+    <state width="1398" height="266" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1583765503194" />
+    <state width="1878" height="266" key="GridCell.Tab.0.right" timestamp="1583834605120">
+      <screen x="-1920" y="-241" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="295" key="GridCell.Tab.0.right/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582735392796" />
+    <state width="2518" height="213" key="GridCell.Tab.0.right/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582647572863" />
+    <state width="1398" height="295" key="GridCell.Tab.0.right/0.23.1440.824@0.23.1440.824" timestamp="1582819031766" />
+    <state width="1878" height="266" key="GridCell.Tab.0.right/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583834605120" />
+    <state width="1878" height="293" key="GridCell.Tab.0.right/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583331676048" />
+    <state width="1398" height="266" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1583765503195" />
+    <state width="1398" height="261" key="GridCell.Tab.1.bottom" timestamp="1583764474370">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1878" height="357" key="GridCell.Tab.1.bottom/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582734936588" />
+    <state width="2518" height="501" key="GridCell.Tab.1.bottom/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582646881312" />
+    <state width="1398" height="263" key="GridCell.Tab.1.bottom/0.23.1440.824@0.23.1440.824" timestamp="1582816137173" />
+    <state width="1878" height="333" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583504371531" />
+    <state width="1878" height="355" key="GridCell.Tab.1.bottom/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583253827625" />
+    <state width="1398" height="261" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1583764474370" />
+    <state width="1398" height="261" key="GridCell.Tab.1.center" timestamp="1583764474369">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1878" height="357" key="GridCell.Tab.1.center/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582734936587" />
+    <state width="2518" height="501" key="GridCell.Tab.1.center/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582646881312" />
+    <state width="1398" height="263" key="GridCell.Tab.1.center/0.23.1440.824@0.23.1440.824" timestamp="1582816137172" />
+    <state width="1878" height="333" key="GridCell.Tab.1.center/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583504371530" />
+    <state width="1878" height="355" key="GridCell.Tab.1.center/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583253827624" />
+    <state width="1398" height="261" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1583764474369" />
+    <state width="1398" height="261" key="GridCell.Tab.1.left" timestamp="1583764474368">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1878" height="357" key="GridCell.Tab.1.left/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582734936587" />
+    <state width="2518" height="501" key="GridCell.Tab.1.left/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582646881311" />
+    <state width="1398" height="263" key="GridCell.Tab.1.left/0.23.1440.824@0.23.1440.824" timestamp="1582816137171" />
+    <state width="1878" height="333" key="GridCell.Tab.1.left/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583504371530" />
+    <state width="1878" height="355" key="GridCell.Tab.1.left/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583253827623" />
+    <state width="1398" height="261" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1583764474368" />
+    <state width="1398" height="261" key="GridCell.Tab.1.right" timestamp="1583764474369">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1878" height="357" key="GridCell.Tab.1.right/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582734936588" />
+    <state width="2518" height="501" key="GridCell.Tab.1.right/0.23.1440.824/1440.-662.2560.1417@1440.-662.2560.1417" timestamp="1582646881312" />
+    <state width="1398" height="263" key="GridCell.Tab.1.right/0.23.1440.824@0.23.1440.824" timestamp="1582816137172" />
+    <state width="1878" height="333" key="GridCell.Tab.1.right/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583504371531" />
+    <state width="1878" height="355" key="GridCell.Tab.1.right/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583253827624" />
+    <state width="1398" height="261" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1583764474369" />
+    <state x="-1372" y="3" key="IDE.errors.dialog" timestamp="1583833250667">
+      <screen x="-1920" y="-241" width="1920" height="1057" />
+    </state>
+    <state x="-1372" y="3" key="IDE.errors.dialog/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583833250667" />
+    <state x="-1451" y="-81" key="SettingsEditor" timestamp="1582627569949">
+      <screen x="-1920" y="-248" width="1920" height="1057" />
+    </state>
+    <state x="-1451" y="-81" key="SettingsEditor/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582627569949" />
+    <state x="-1165" y="-207" key="chooseDestDirectoryDialog" timestamp="1583163512858">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1165" y="-207" key="chooseDestDirectoryDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583163512858" />
+    <state x="798" y="267" key="com.intellij.ide.util.TipDialog" timestamp="1582627632149">
+      <screen x="0" y="23" width="1440" height="824" />
+    </state>
+    <state x="798" y="267" key="com.intellij.ide.util.TipDialog/0.23.1440.824/-1920.-248.1920.1057@0.23.1440.824" timestamp="1582627632149" />
+    <state x="10" y="23" width="1382" height="824" maximized="true" key="dock-window-1" timestamp="1582878975438">
+      <screen x="0" y="23" width="1440" height="824" />
+    </state>
+    <state x="10" y="23" width="1382" height="824" maximized="true" key="dock-window-1/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582878975438" />
+    <state x="-1253" y="-369" key="refactoring.ChangeSignatureDialog" timestamp="1583154163133">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1253" y="-369" key="refactoring.ChangeSignatureDialog/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583154163133" />
+    <state x="-1295" y="-152" key="run.anything.popup" timestamp="1583253243595">
+      <screen x="-1920" y="-520" width="1920" height="1057" />
+    </state>
+    <state x="-1295" y="120" key="run.anything.popup/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582719406625" />
+    <state x="-1295" y="-152" key="run.anything.popup/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583253243595" />
+    <state x="-1295" y="-6" width="895" height="678" key="search.everywhere.popup" timestamp="1583830963990">
+      <screen x="-1920" y="-241" width="1920" height="1057" />
+    </state>
+    <state x="-1295" y="-13" width="670" height="676" key="search.everywhere.popup/0.23.1440.824/-1920.-248.1920.1057@-1920.-248.1920.1057" timestamp="1582733483527" />
+    <state x="469" y="206" width="670" height="527" key="search.everywhere.popup/0.23.1440.824@0.23.1440.824" timestamp="1582818940994" />
+    <state x="-1295" y="-6" width="895" height="678" key="search.everywhere.popup/0.23.1440.877/-1920.-241.1920.1057@-1920.-241.1920.1057" timestamp="1583830963990" />
+    <state x="-1295" y="-285" width="894" height="677" key="search.everywhere.popup/0.23.1440.877/-1920.-520.1920.1057@-1920.-520.1920.1057" timestamp="1583326002437" />
+    <state x="469" y="218" width="671" height="562" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1583764993150" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/build/generated-src/antlr/main/com/nedap/aqlparser/AQLParser.java</url>
+          <line>1095</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
