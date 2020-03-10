@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'antlr'
+}
+
+repositories {
+    jcenter()
+}
+
+ext.antlr4Version = '4.8-1'
+
+dependencies {
+    antlr group: 'org.antlr', name: 'antlr4', version: '4.8-1'
+
+    testCompile 'junit:junit:4.12'
+}
+
+application {
+    mainClassName = 'com.nedap.aqlparser.App'
+}
+
+generateGrammarSource {
+    arguments += ["-visitor", "-package", "com.nedap.aqlparser"]
+}

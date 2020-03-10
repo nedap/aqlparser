@@ -1,0 +1,13 @@
+SELECT
+   o/data[at0001]/items[at0004]/value AS systolic,
+   o/data[at0001]/items[at0005]/value AS diastolic -- this is a comment.
+FROM
+   EHR[ehr_id=$ehrId]
+      CONTAINS
+         COMPOSITION c
+            [openEHR-EHR-COMPOSITION.encounter.v1]
+         CONTAINS
+            OBSERVATION o [openEHR-EHR-OBSERVATION.blood_pressure.v1]
+WHERE
+   o/data[at0001]/items[at0004]/value/value >= 140 OR
+   o/data[at0001]/items[at0005]/value/value >= 90
