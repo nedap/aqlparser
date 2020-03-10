@@ -1,50 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef773c96-0bd6-4565-a735-53c661951691" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLBaseVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ClassExpressionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsExpressionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser$ContainsExpressionContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/AQLVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/TopClause.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Containment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Containment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/FromClause.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/FromClause.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Query.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/Query.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/SelectClause.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/SelectClause.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/WhereClause.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/WhereClause.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ClassExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ClassExpression.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ContainsExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/ContainsExpression.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/IdentifiedExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/IdentifiedExpression.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/NodePredicate.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/NodePredicate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/StandardPredicate.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/model/expression/predicate/StandardPredicate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/nedap/aqlparser/parser/QOMUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/ClassExpressionTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/ClassExpressionTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/SelectClauseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/nedap/aqlparser/model/SelectClauseTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.nedap.aqlparser.model.ClassExpressionTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/com.nedap.aqlparser.model.ClassExpressionTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.nedap.aqlparser.model.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.nedap.aqlparser.model.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example10.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example11.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example12.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example2.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example3.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example4.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example5.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example6.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example7.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example8.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/example9.aql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.nedap.aqlparser.model.ClassExpressionTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-com.nedap.aqlparser.model.ClassExpressionTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/aqlparser/model/expression/ClassExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/aqlparser/model/expression/ClassExpression.java" afterDir="false" />
-    </list>
+    <list default="true" id="ef773c96-0bd6-4565-a735-53c661951691" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
