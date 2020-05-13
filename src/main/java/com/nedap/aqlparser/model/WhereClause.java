@@ -1,14 +1,20 @@
 package com.nedap.aqlparser.model;
 
 import com.nedap.aqlparser.AQLParser;
-import com.nedap.aqlparser.model.expression.IdentifiedExpression;
 
 public class WhereClause extends QOMObject {
 
-    IdentifiedExpression identifiedExpression;
+    private IdentifiedExpression identifiedExpression;
 
     public WhereClause(AQLParser.WhereClauseContext ctx) {
+        initialize(ctx);
+    }
+
+    private void initialize(AQLParser.WhereClauseContext ctx) {
         identifiedExpression = new IdentifiedExpression(ctx.identifiedExpr());
     }
 
+    public IdentifiedExpression getIdentifiedExpression() {
+        return identifiedExpression;
+    }
 }

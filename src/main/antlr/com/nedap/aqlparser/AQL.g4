@@ -29,7 +29,7 @@ selectVar :	identifiedPath (AS IDENTIFIER)? ;
 
 // FROM
 fromClause
-    : FROM containsExpression
+    : FROM containsExpr
     | FROM contains
 	;
 
@@ -51,14 +51,14 @@ pathPart: IDENTIFIER nodePredicate?;
 
 objectPath: pathPart ('/' pathPart)*;
 
-predicateOperand : objectPath | operand;
+predicateOperand : objectPath | primitiveOperand | PARAMETER;
 
-operand: STRING | INTEGER | FLOAT | DATE | PARAMETER | BOOLEAN;
+primitiveOperand: STRING | INTEGER | FLOAT | DATE | BOOLEAN;
 
 standardPredicate : '[' standardPredicateExpr ']' ;
 
 standardPredicateExpr
-    : predicateOperand COMPARABLEOPERATOR predicateOperand
+    : standardPredicateExprOperand
     | NOT standardPredicateExpr
     | standardPredicateExpr AND standardPredicateExpr
     | standardPredicateExpr XOR standardPredicateExpr
@@ -66,19 +66,23 @@ standardPredicateExpr
     | '(' standardPredicateExpr ')'
     ;
 
-archetypePredicate : '[' (ARCHETYPEID|PARAMETER|REGEXPATTERN) ']' ;
+standardPredicateExprOperand : predicateOperand COMPARABLEOPERATOR predicateOperand;
+
+archetypePredicate : '[' archetypePredicateExpr ']' ;
+
+archetypePredicateExpr : ARCHETYPEID|PARAMETER|REGEXPATTERN ;
 
 nodePredicate : '[' nodePredicateExpr ']' ;
 
 nodePredicateExpr
-    : nodePredicateOperand
+    : nodePredicateExprOperand
     | nodePredicateExpr AND nodePredicateExpr
     | nodePredicateExpr XOR nodePredicateExpr
     | nodePredicateExpr OR nodePredicateExpr
     | '(' nodePredicateExpr ')'
     ;
 
-nodePredicateOperand
+nodePredicateExprOperand
     : NODEID (',' (STRING|PARAMETER))?
     | ARCHETYPEID (',' (STRING|PARAMETER))?
     | PARAMETER (',' (STRING|PARAMETER))?
@@ -86,7 +90,7 @@ nodePredicateOperand
     ;
 
 identifiedExpr
-    : predicateOperand ((COMPARABLEOPERATOR predicateOperand)|(MATCHES '{' matchesOperand '}'))?
+    : identifiedExprOperand
     | NOT identifiedExpr
     | EXISTS identifiedExpr
     | identifiedExpr AND identifiedExpr
@@ -95,19 +99,21 @@ identifiedExpr
     | '(' identifiedExpr ')'
     ;
 
+identifiedExprOperand : predicateOperand ((COMPARABLEOPERATOR predicateOperand)|(MATCHES '{' matchesOperand '}'))?;
+
 matchesOperand : valueListItems | URIVALUE ;
 
-valueListItems : operand (',' operand)* ;
+valueListItems : (primitiveOperand | PARAMETER) (',' (primitiveOperand | PARAMETER) )* ;
 
-contains: classExpr (CONTAINS containsExpression)?;
+contains: classExpr (CONTAINS containsExpr)?;
 
-containsExpression
-    : containsExpression AND containsExpression
-    | containsExpression XOR containsExpression
-    | containsExpression OR containsExpression
+containsExpr
+    : containsExpr AND containsExpr
+    | containsExpr XOR containsExpr
+    | containsExpr OR containsExpr
     | classExpr
     | contains // this might accept too much?
-    | '(' containsExpression ')'
+    | '(' containsExpr ')'
     ;
 
 classExpr: IDENTIFIER IDENTIFIER? (archetypePredicate | standardPredicate)?;
