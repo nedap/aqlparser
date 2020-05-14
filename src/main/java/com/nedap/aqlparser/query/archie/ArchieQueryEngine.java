@@ -20,19 +20,10 @@ public class ArchieQueryEngine extends QueryEngine {
     public void where() {
         WhereClause whereClause = queryClause.getWhereClause();
         if (whereClause == null) return;
-
-        NodeExpressionEvaluator evaluator = new NodeExpressionEvaluator() {
-            @Override
-            protected Boolean evaluateLeaf(Leaf leaf) {
-                return ((IdentifiedExprOperand) leaf).evaluate(rmObject);
-            }
-        };
-
         ((ArchieQueryInterface) queryInterface).setRmObjects(
                 ((ArchieQueryInterface) queryInterface).getRmObjects().stream().
-                filter(rmObject -> evaluator.evaluate(whereClause.getIdentifiedExpression(),rmObject)).
+                filter(rmObject -> NodeExpressionEvaluator.evaluate(whereClause.getIdentifiedExpression(),rmObject)).
                 collect(Collectors.toList()));
-
     }
 
     private Object getObjectAtPath(RMObject rmObject,String path) {

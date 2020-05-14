@@ -42,6 +42,7 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
         return getChildren(0).getObject().toString();
     }
 
+    @Override
     public Boolean evaluate(RMObject rmObject) {
         Object o1 = new RMPathQuery(getObjectPath()).find(ArchieRMInfoLookup.getInstance(),rmObject);
         if (getChildren(1).getObject() instanceof PredicateOperand) {

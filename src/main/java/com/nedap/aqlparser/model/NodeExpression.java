@@ -3,6 +3,7 @@ package com.nedap.aqlparser.model;
 import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.leaf.Leaf;
 import com.nedap.aqlparser.util.QOMParserUtil;
+import com.nedap.archie.rm.RMObject;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.ArrayList;
@@ -79,5 +80,9 @@ public class NodeExpression extends QOMObject {
     @Override
     public void validate() throws AQLValidationException {
 
+    }
+
+    public Boolean evaluate(RMObject rmObject) {
+        throw new RuntimeException("Evaluator for " + this.getClass().toGenericString() + " not yet implemented");
     }
 }

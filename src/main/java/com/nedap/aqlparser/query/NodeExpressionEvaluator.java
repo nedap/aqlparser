@@ -1,29 +1,17 @@
 package com.nedap.aqlparser.query;
 
 import com.nedap.aqlparser.model.NodeExpression;
-import com.nedap.aqlparser.model.leaf.Leaf;
 import com.nedap.aqlparser.model.leaf.Operator;
 import com.nedap.aqlparser.model.leaf.OperatorType;
 import com.nedap.archie.rm.RMObject;
 
-public abstract class NodeExpressionEvaluator {
+public class NodeExpressionEvaluator {
 
-    protected RMObject rmObject;
-
-    protected abstract Boolean evaluateLeaf(Leaf leaf);
-
-    public Boolean evaluate(NodeExpression nodeExpression, RMObject rmObject) {
-        this.rmObject = rmObject;
+    public static Boolean evaluate(NodeExpression nodeExpression, RMObject rmObject) {
         if (!nodeExpression.hasChildren()) {
-//            if (nodeExpression.getObject() instanceof Leaf) {
-//                return evaluateLeaf((Leaf) nodeExpression.getObject());
-//            } else if (nodeExpression.getObject() instanceof NodeExpression) {
-                return evaluate((NodeExpression) nodeExpression.getObject(),rmObject);
-//            } else {
-//                throw new RuntimeException("Must not be reached");
-//            }
+            return evaluate((NodeExpression) nodeExpression.getObject(),rmObject);
         } else if (nodeExpression.isLeaf()) {
-            return evaluateLeaf((Leaf) nodeExpression);
+            return nodeExpression.evaluate(rmObject);
         } else {
             OperatorType type = ((Operator) nodeExpression.getObject()).getType();
             switch (type) {
