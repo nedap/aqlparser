@@ -22,4 +22,9 @@ public class PathPart extends QOMObject implements Leaf {
     public String toString() {
         return identifier + ((nodePredicate != null) ? nodePredicate.toString() : "");
     }
+
+    @Override
+    public void validate() {
+
+    }
 }

@@ -1,6 +1,10 @@
 package com.nedap.aqlparser.model;
 
 
-public class QOMObject {
+import com.nedap.aqlparser.exception.AQLValidationException;
+
+public abstract class QOMObject {
+
+    public abstract void validate() throws AQLValidationException;
 
 }

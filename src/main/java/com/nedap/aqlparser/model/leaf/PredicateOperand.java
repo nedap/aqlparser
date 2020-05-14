@@ -17,7 +17,7 @@ public class PredicateOperand extends QOMObject implements Leaf {
     }
 
     private void initialize(AQLParser.PredicateOperandContext ctx) {
-        operand = QOMParserUtil.parse(ctx.objectPath(),ctx.primitiveOperand(),ctx.PARAMETER()).get(0);
+        operand = QOMParserUtil.parse(ctx.objectPath(),ctx.primitiveOperand()).get(0);
     }
 
     @Override
@@ -29,4 +29,8 @@ public class PredicateOperand extends QOMObject implements Leaf {
         return operand;
     }
 
+    @Override
+    public void validate() {
+
+    }
 }

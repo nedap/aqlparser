@@ -1,5 +1,6 @@
 package com.nedap.aqlparser.model;
 
+import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.leaf.IdentifiedExprOperand;
 import com.nedap.aqlparser.model.leaf.Operator;
 import com.nedap.aqlparser.model.leaf.OperatorType;
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
 public class IdentifiedExpressionTest {
 
     @Test
-    public void operand_comparable_operand() {
+    public void operand_comparable_operand() throws AQLValidationException {
         String aql = "o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/value >= 140";
         IdentifiedExpression identifiedExpression = (IdentifiedExpression) QOMParser.parse(aql,"identifiedExpr");
         assertEquals(OperatorType.GREATER_EQUAL_TO,((Operator) ((IdentifiedExprOperand) identifiedExpression.getObject()).getObject()).getType());

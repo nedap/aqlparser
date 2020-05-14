@@ -25,4 +25,8 @@ public class ObjectPath extends QOMObject implements Leaf {
         //ToDo: Add function to remove aql identifier! Will fail for certain paths
         return '/' + pathParts.subList(1,pathParts.size()).stream().map(PathPart::toString).collect(Collectors.joining("/"));
     }
+
+    @Override
+    public void validate() {
+    }
 }

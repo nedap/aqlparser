@@ -11,4 +11,8 @@ public class Predicate extends QOMObject {
         return "[" + predicateExpression.toString() + "]";
     }
 
+    @Override
+    public void validate() {
+
+    }
 }

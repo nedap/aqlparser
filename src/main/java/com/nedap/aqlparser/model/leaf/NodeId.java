@@ -20,4 +20,8 @@ public class NodeId extends QOMObject implements Leaf {
         return nodeId;
     }
 
+    @Override
+    public void validate() {
+
+    }
 }

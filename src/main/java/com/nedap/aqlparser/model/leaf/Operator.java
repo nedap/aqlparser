@@ -48,6 +48,7 @@ public class Operator extends QOMObject implements Leaf {
     public <T extends Comparable<T>> Boolean compare(T left, T right) {
         switch (type) {
             case EQUAL:
+            case MATCHES:
                 return left.compareTo(right) == 0;
             case GREATER_THAN:
                 return left.compareTo(right) > 0;
@@ -64,4 +65,8 @@ public class Operator extends QOMObject implements Leaf {
         }
     }
 
+    @Override
+    public void validate() {
+
+    }
 }

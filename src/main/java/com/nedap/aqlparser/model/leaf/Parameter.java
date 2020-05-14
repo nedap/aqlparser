@@ -23,4 +23,8 @@ public class Parameter extends QOMObject implements Leaf {
     public Object getValue() {
         throw new RuntimeException("NYI");
     }
+
+    @Override
+    public void validate() {
+    }
 }

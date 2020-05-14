@@ -14,4 +14,9 @@ public class URIValue extends QOMObject implements Leaf {
     public URIValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public void validate() {
+
+    }
 }

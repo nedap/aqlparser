@@ -51,9 +51,9 @@ pathPart: IDENTIFIER nodePredicate?;
 
 objectPath: pathPart ('/' pathPart)*;
 
-predicateOperand : objectPath | primitiveOperand | PARAMETER;
+predicateOperand : objectPath | primitiveOperand ;
 
-primitiveOperand: STRING | INTEGER | FLOAT | DATE | BOOLEAN;
+primitiveOperand: STRING | INTEGER | FLOAT | DATE | BOOLEAN | PARAMETER;
 
 standardPredicate : '[' standardPredicateExpr ']' ;
 
@@ -103,7 +103,7 @@ identifiedExprOperand : predicateOperand ((COMPARABLEOPERATOR predicateOperand)|
 
 matchesOperand : valueListItems | URIVALUE ;
 
-valueListItems : (primitiveOperand | PARAMETER) (',' (primitiveOperand | PARAMETER) )* ;
+valueListItems : primitiveOperand  (',' primitiveOperand )* ;
 
 contains: classExpr (CONTAINS containsExpr)?;
 

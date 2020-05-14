@@ -1,5 +1,6 @@
 package com.nedap.aqlparser.model;
 
+import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.leaf.Leaf;
 import com.nedap.aqlparser.util.QOMParserUtil;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -75,4 +76,8 @@ public class NodeExpression extends QOMObject {
         return result;
     }
 
+    @Override
+    public void validate() throws AQLValidationException {
+
+    }
 }

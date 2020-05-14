@@ -3,6 +3,7 @@ package com.nedap.aqlparser.parser;
 import com.nedap.aqlparser.AQLBaseVisitor;
 import com.nedap.aqlparser.AQLLexer;
 import com.nedap.aqlparser.AQLParser;
+import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.QOMObject;
 import com.nedap.aqlparser.model.QueryClause;
 import com.nedap.aqlparser.util.QOMParserUtil;
@@ -17,11 +18,11 @@ import java.lang.reflect.Method;
 
 public class QOMParser extends AQLBaseVisitor<QOMObject> {
 
-    public static QueryClause parse(String aql) {
+    public static QueryClause parse(String aql) throws AQLValidationException {
         return (QueryClause) parse(aql,"query");
     }
 
-    public static QOMObject parse(String aql, String startRuleName) {
+    public static QOMObject parse(String aql, String startRuleName) throws AQLValidationException {
         final CharStream input = CharStreams.fromString(aql);
         final AQLLexer lexer = new AQLLexer(input);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -36,6 +37,7 @@ public class QOMParser extends AQLBaseVisitor<QOMObject> {
         final QOMParser visitor = new QOMParser();
         QOMObject object = visitor.visit(parseTree);
         if (object == null) throw new RuntimeException("Visitor for " + startRuleName + " not yet implement");
+        object.validate();
         return object;
     }
 

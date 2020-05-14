@@ -1,5 +1,6 @@
 package com.nedap.aqlparser.query;
 
+import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.QueryClause;
 import com.nedap.aqlparser.parser.QOMParser;
 
@@ -9,7 +10,7 @@ public abstract class QueryEngine {
 
     protected QueryInterface queryInterface;
 
-    public QueryEngine(String aql, QueryInterface queryInterface) {
+    public QueryEngine(String aql, QueryInterface queryInterface) throws AQLValidationException {
         this.queryInterface = queryInterface;
         this.queryClause = QOMParser.parse(aql);
     }

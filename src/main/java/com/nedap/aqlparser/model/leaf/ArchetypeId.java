@@ -14,4 +14,8 @@ public class ArchetypeId extends QOMObject implements Leaf {
     public ArchetypeId(String archetypeId) {
         this.archetypeId = archetypeId;
     }
+
+    @Override
+    public void validate() {
+    }
 }

@@ -5,5 +5,6 @@ public enum PrimitiveType {
     INTEGER,
     FLOAT,
     DATE,
-    BOOLEAN
+    BOOLEAN,
+    PARAMETER
 }

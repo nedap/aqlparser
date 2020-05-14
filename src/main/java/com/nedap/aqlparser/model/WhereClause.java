@@ -1,6 +1,7 @@
 package com.nedap.aqlparser.model;
 
 import com.nedap.aqlparser.AQLParser;
+import com.nedap.aqlparser.exception.AQLValidationException;
 
 public class WhereClause extends QOMObject {
 
@@ -16,5 +17,10 @@ public class WhereClause extends QOMObject {
 
     public IdentifiedExpression getIdentifiedExpression() {
         return identifiedExpression;
+    }
+
+    @Override
+    public void validate() throws AQLValidationException {
+        identifiedExpression.validate();
     }
 }

@@ -15,4 +15,8 @@ public class RegexPattern extends QOMObject implements Leaf {
         this(pattern.getText());
     }
 
+    @Override
+    public void validate() {
+
+    }
 }

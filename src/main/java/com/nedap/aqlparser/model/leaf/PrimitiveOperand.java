@@ -35,6 +35,9 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
         } else if (ctx.BOOLEAN() != null) {
             type = PrimitiveType.BOOLEAN;
             value = castValueToType(ctx.BOOLEAN().getText());
+        } else if (ctx.PARAMETER() != null) {
+            type = PrimitiveType.PARAMETER;
+            value = castValueToType(ctx.PARAMETER().getText());
         } else {
             throw new RuntimeException("Unknown operand type");
         }
@@ -51,6 +54,8 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
             throw new RuntimeException("NYI");
         } else if (type == PrimitiveType.BOOLEAN) {
             return Boolean.parseBoolean((String) value);
+        } else if (type == PrimitiveType.PARAMETER) {
+            return value.toString();
         } else {
             throw new RuntimeException("Unknown operand type");
         }
@@ -61,6 +66,8 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
     }
 
     public Object getValue() {
+        //ToDo:
+        if (type.equals(PrimitiveType.PARAMETER)) throw new RuntimeException("Parameters not yet supported");
         return value;
     }
 
@@ -69,8 +76,9 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
         return value.toString();
     }
 
-//    public Boolean compare(OperatorType type, PrimitiveOperand other) {
-//        if (this.type != other.type) throw new RuntimeException("Cannot compare operands of different type");
-//
-//    }
+    @Override
+    public void validate() {
+
+    }
+
 }
