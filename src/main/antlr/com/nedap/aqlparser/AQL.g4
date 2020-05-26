@@ -4,7 +4,7 @@
 /// Licensed under LGPL: http://www.gnu.org/copyleft/lesser.html
 /// Based on AQL grammar by Ocean Informatics: http://www.openehr.org/wiki/download/attachments/2949295/EQL_v0.6.grm?version=1&modificationDate=1259650833000
 // and
-/// https://github.com/ehrbase/ehrbase/blob/develop/service/src/main/antlr4/org/ehrbase/aql/parser/Aql.g4 (mostly for the lexer)
+/// https://github.com/ehrbase/ehrbase/blob/develop/service/src/main/antlr4/org/ehrbase/AQL/parser/Aql.g4 (mostly for the lexer)
 
 // not implement (yet?):
 // - timewindow
@@ -19,19 +19,14 @@ grammar AQL;
 query :	selectClause fromClause whereClause? orderByClause? EOF ;
 
 // SELECT
-selectClause : SELECT topClause? selectExpr ;
+selectClause : SELECT topClause? selectOperand (',' selectOperand)* ;
 
 topClause : TOP INTEGER direction=(FORWARD|BACKWARD)? ;
 
-selectExpr : selectVar (',' selectVar)*  ;
-
-selectVar :	identifiedPath (AS IDENTIFIER)? ;
+selectOperand :	identifiedPath (AS IDENTIFIER)? ;
 
 // FROM
-fromClause
-    : FROM containsExpr
-    | FROM contains
-	;
+fromClause : FROM containsExpr;
 
 // WHERE
 whereClause : WHERE identifiedExpr ;
@@ -45,13 +40,13 @@ orderByExpr : identifiedPath order=(ASC | ASCENDING | DESC | DESCENDING)? ;
 // TODO
 
 // global
-identifiedPath : IDENTIFIER nodePredicate? ('/' pathPart)*;
+identifiedPath : IDENTIFIER nodePredicate? ('/' objectPath)?;
 
 pathPart: IDENTIFIER nodePredicate?;
 
 objectPath: pathPart ('/' pathPart)*;
 
-predicateOperand : objectPath | primitiveOperand ;
+predicateOperand : identifiedPath | primitiveOperand ;
 
 primitiveOperand: STRING | INTEGER | FLOAT | DATE | BOOLEAN | PARAMETER;
 
@@ -105,18 +100,15 @@ matchesOperand : valueListItems | URIVALUE ;
 
 valueListItems : primitiveOperand  (',' primitiveOperand )* ;
 
-contains: classExpr (CONTAINS containsExpr)?;
-
 containsExpr
-    : containsExpr AND containsExpr
+    : classExprOperand (CONTAINS containsExpr)?
+    | containsExpr AND containsExpr
     | containsExpr XOR containsExpr
     | containsExpr OR containsExpr
-    | classExpr
-    | contains // this might accept too much?
     | '(' containsExpr ')'
     ;
 
-classExpr: IDENTIFIER IDENTIFIER? (archetypePredicate | standardPredicate)?;
+classExprOperand: IDENTIFIER IDENTIFIER? (archetypePredicate | standardPredicate)?;
 
 // LEXER (might need some cleaning up still)
 WS : [ \t\r\n] -> channel(HIDDEN) ;
@@ -138,7 +130,6 @@ DESC : D E S C ;
 DESCENDING : D E S C E N D I N G ;
 ASC : A S C ;
 ASCENDING : A S C E N D I N G ;
-EHR : E H R ;
 AND : A N D ;
 OR : O R ;
 XOR : X O R ;
@@ -208,7 +199,7 @@ UNIQUEID
     | HEXCHAR+ ('-' HEXCHAR+)+       // UUID
 	;
 
-ARCHETYPEID : LETTER+ '-' LETTER+ '-' (LETTER|'_')+ '.' (IDCHAR|'-')+ '.v' DIGIT+ ('.' DIGIT+)? ;
+ARCHETYPEID : LETTER+ '-' LETTER+ '-' (LETTER|'_')+ '.' (IDCHAR|'-')+ '.v' DIGIT ('.' DIGIT)? ('.' DIGIT)?;
 COMPARABLEOPERATOR :	'=' | '!=' | '>' | '>=' | '<' | '<=' ;
 URIVALUE: LETTER+ '://' (URISTRING|'['|']'|', \''|'\'')* ;
 REGEXPATTERN : '{/' REGEXCHAR+ '/}';

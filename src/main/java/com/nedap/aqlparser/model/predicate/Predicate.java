@@ -15,4 +15,8 @@ public class Predicate extends QOMObject {
     public void validate() {
 
     }
+
+    public QOMObject getPredicateExpression() {
+        return predicateExpression;
+    }
 }

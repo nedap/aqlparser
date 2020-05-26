@@ -1,10 +1,9 @@
 package com.nedap.aqlparser.util;
 
 import com.nedap.aqlparser.AQLParser;
-import com.nedap.aqlparser.model.IdentifiedExpression;
-import com.nedap.aqlparser.model.QOMObject;
-import com.nedap.aqlparser.model.QueryClause;
+import com.nedap.aqlparser.model.*;
 import com.nedap.aqlparser.model.leaf.*;
+import com.nedap.aqlparser.model.predicate.ArchetypePredicate;
 import com.nedap.aqlparser.model.predicate.NodePredicate;
 import com.nedap.aqlparser.model.predicate.NodePredicateExpression;
 import com.nedap.aqlparser.model.leaf.NodePredicateExprOperand;
@@ -50,7 +49,7 @@ public class QOMParserUtil {
                     objects.add(new NodeId(terminalNode));
                     break;
                 case AQLParser.PARAMETER:
-                    objects.add(new Parameter(terminalNode));
+                    objects.add(new PrimitiveOperand(PrimitiveType.PARAMETER,terminalNode.getText()));
                     break;
                 case AQLParser.ARCHETYPEID:
                     objects.add(new ArchetypeId(terminalNode));
@@ -83,6 +82,7 @@ public class QOMParserUtil {
                 case AQLParser.NOT:
                 case AQLParser.EXISTS:
                 case AQLParser.MATCHES:
+                case AQLParser.CONTAINS:
                     objects.add(new Operator(terminalNode));
                     break;
                 default:
@@ -128,6 +128,20 @@ public class QOMParserUtil {
                 objects.add(new NodePredicateExprOperand((AQLParser.NodePredicateExprOperandContext) ctx));
             } else if (ctx instanceof AQLParser.QueryContext) {
                 objects.add(new QueryClause((AQLParser.QueryContext) ctx));
+            } else if (ctx instanceof AQLParser.ClassExprOperandContext) {
+                objects.add(new ClassExprOperand((AQLParser.ClassExprOperandContext) ctx));
+            } else if (ctx instanceof AQLParser.ContainsExprContext) {
+                objects.add(new ContainsExpression((AQLParser.ContainsExprContext) ctx));
+            } else if (ctx instanceof AQLParser.FromClauseContext) {
+                objects.add(new FromClause((AQLParser.FromClauseContext) ctx));
+            } else if (ctx instanceof AQLParser.ArchetypePredicateContext) {
+                objects.add(new ArchetypePredicate((AQLParser.ArchetypePredicateContext) ctx));
+            } else if (ctx instanceof AQLParser.IdentifiedPathContext) {
+                objects.add(new IdentifiedPath((AQLParser.IdentifiedPathContext) ctx));
+            } else if (ctx instanceof AQLParser.SelectOperandContext) {
+                objects.add(new SelectOperand((AQLParser.SelectOperandContext) ctx));
+            } else if (ctx instanceof AQLParser.SelectClauseContext) {
+                objects.add(new SelectClause((AQLParser.SelectClauseContext) ctx));
             } else {
                 throw new RuntimeException("NYI");
             }

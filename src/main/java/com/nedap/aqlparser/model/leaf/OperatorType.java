@@ -19,7 +19,8 @@ public enum OperatorType {
     OR("OR"),
     XOR("XOR"),
     NOT("NOT"),
-    EXISTS("EXISTS");
+    EXISTS("EXISTS"),
+    CONTAINS("CONTAINS");//This one is not li
 
     private String type;
     private static final Map<String,OperatorType> lookup = new HashMap<>();

@@ -82,7 +82,4 @@ public class NodeExpression extends QOMObject {
 
     }
 
-    public Boolean evaluate(RMObject rmObject) {
-        throw new RuntimeException("Evaluator for " + this.getClass().toGenericString() + " not yet implemented");
-    }
 }

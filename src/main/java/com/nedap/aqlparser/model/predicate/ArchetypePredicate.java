@@ -10,6 +10,6 @@ public class ArchetypePredicate extends Predicate {
     }
 
     private void initialize(AQLParser.ArchetypePredicateContext ctx) {
-        predicateExpression = QOMParserUtil.parse(ctx);
+        predicateExpression = QOMParserUtil.parse(ctx.archetypePredicateExpr());
     }
 }

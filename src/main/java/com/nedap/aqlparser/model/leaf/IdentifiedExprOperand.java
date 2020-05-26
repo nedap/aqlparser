@@ -3,9 +3,6 @@ package com.nedap.aqlparser.model.leaf;
 import com.nedap.aqlparser.AQLParser;
 import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.NodeExpression;
-import com.nedap.archie.query.RMPathQuery;
-import com.nedap.archie.rm.RMObject;
-import com.nedap.archie.rminfo.ArchieRMInfoLookup;
 
 /**
  * An identified expression specifies matching criteria in the WHERE clause and comes in two forms. The first form is
@@ -33,39 +30,16 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
 
     @Override
     public void validate() throws AQLValidationException {
-        if (!(getChildren(0).getObject() instanceof ObjectPath)) {
-            throw new AQLValidationException("ObjectPath required in IdentifiedExprOperand");
+        if (!(getChildren(0).getObject() instanceof IdentifiedPath)) {
+            throw new AQLValidationException("IdentifiedPath required in IdentifiedExprOperand");
         }
     }
 
-    private String getObjectPath() {
-        return getChildren(0).getObject().toString();
+    public String getObjectPath() {
+        PredicateOperand predicateOperand = (PredicateOperand) getChildren(0).getObject();
+        IdentifiedPath identifiedPath = (IdentifiedPath) predicateOperand.getOperand();
+        return identifiedPath.getObjectPath().toString();
     }
 
-    @Override
-    public Boolean evaluate(RMObject rmObject) {
-        Object o1 = new RMPathQuery(getObjectPath()).find(ArchieRMInfoLookup.getInstance(),rmObject);
-        if (getChildren(1).getObject() instanceof PredicateOperand) {
-            PredicateOperand operand = (PredicateOperand) getChildren(1).getObject();
-            Object o2;
-            if (operand.getOperand() instanceof ObjectPath) {
-                o2 = new RMPathQuery(operand.toString()).find(ArchieRMInfoLookup.getInstance(),rmObject);
-            } else if (operand.getOperand() instanceof PrimitiveOperand) {
-                o2 = ((PrimitiveOperand) operand.getOperand()).getValue();
-            } else {
-                throw new RuntimeException("Must not be reached");
-            }
-            return ((Operator) getObject()).compare(o1,o2);
-        } else if (getChildren(1).getObject() instanceof ValueList) {
-            return ((ValueList) getChildren(1).getObject()).getItems().
-                    stream().
-                    map(PrimitiveOperand::getValue).
-                    anyMatch(o2 -> ((Operator) getObject()).compare(o1,o2));
-        } else if (getChildren(1).getObject() instanceof URIValue) {
-            throw new RuntimeException("Comparison to URI not yet supported");
-        } else {
-            throw new RuntimeException("Must not be reached");
-        }
-    }
 
 }
