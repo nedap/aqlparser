@@ -2,6 +2,7 @@ package com.nedap.aqlparser.model.leaf;
 
 import com.nedap.aqlparser.AQLParser;
 import com.nedap.aqlparser.exception.AQLValidationException;
+import com.nedap.aqlparser.model.Lookup;
 import com.nedap.aqlparser.model.NodeExpression;
 
 /**
@@ -30,14 +31,29 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
 
     @Override
     public void validate() throws AQLValidationException {
-        if (!(getChildren(0).getObject() instanceof IdentifiedPath)) {
+        if (getChildren(0).getObject() instanceof PrimitiveOperand) {
+            PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
+            IdentifiedPath identifiedPath = Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+            if (identifiedPath == null) {
+                throw new AQLValidationException("Failed to find path for alias " +
+                        ((PrimitiveOperand) getChildren(0).getObject()).getValue().toString());
+            }
+        } else if (!(getChildren(0).getObject() instanceof IdentifiedPath)) {
             throw new AQLValidationException("IdentifiedPath required in IdentifiedExprOperand");
         }
     }
 
     public String getObjectPath() {
-        PredicateOperand predicateOperand = (PredicateOperand) getChildren(0).getObject();
-        IdentifiedPath identifiedPath = (IdentifiedPath) predicateOperand.getOperand();
+        IdentifiedPath identifiedPath;
+        if (getChildren(0).getObject() instanceof IdentifiedPath) {
+            identifiedPath = (IdentifiedPath) getChildren(0).getObject();
+        } else if (getChildren(0).getObject() instanceof PrimitiveOperand) {
+            PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
+            identifiedPath = Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+        } else {
+            throw new RuntimeException("Must not be reached");
+        }
+
         return identifiedPath.getObjectPath().toString();
     }
 

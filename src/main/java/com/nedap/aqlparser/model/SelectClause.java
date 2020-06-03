@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class SelectClause extends QOMObject {
 
+    private TopClause topClause;
     private List<SelectOperand> selection;
 
     public SelectClause(AQLParser.SelectClauseContext ctx) {
@@ -17,17 +18,16 @@ public class SelectClause extends QOMObject {
     }
 
     private void initialize(AQLParser.SelectClauseContext ctx) {
+        if (ctx.topClause() != null) topClause = new TopClause(ctx.topClause());
         selection = new ArrayList<>();
         ctx.selectOperand().forEach(selectOperandContext -> selection.add(new SelectOperand(selectOperandContext)));
     }
 
     @Override
     public void validate() throws AQLValidationException {
+        if (topClause != null) topClause.validate();
         for (SelectOperand selectOperand : selection) {
             selectOperand.validate();
-            if (getByVariableName(selectOperand.getIdentifiedPath().getVariableName()).size() > 1) {
-                throw new AQLValidationException("Duplicate variable name " + selectOperand.getIdentifiedPath().getVariableName());
-            }
         }
     }
 
@@ -36,11 +36,16 @@ public class SelectClause extends QOMObject {
     }
 
     public SelectOperand getSelectOperand(String variableName) {
-        return getByVariableName(variableName).get(0);
+        List<SelectOperand> result = getByVariableName(variableName);
+        return result.isEmpty() ? null : getByVariableName(variableName).get(0);
     }
 
     private List<SelectOperand> getByVariableName(String variableName) {
         return selection.stream().filter(selectOperand -> selectOperand.getIdentifiedPath().getVariableName().
                 equals(variableName)).collect(Collectors.toList());
+    }
+
+    public TopClause getTopClause() {
+        return topClause;
     }
 }

@@ -3,6 +3,8 @@ package com.nedap.aqlparser.model.leaf;
 import com.nedap.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.time.LocalDateTime;
+
 public class Operator extends QOMObject implements Leaf {
 
     private final OperatorType type;
@@ -39,6 +41,8 @@ public class Operator extends QOMObject implements Leaf {
             return compare(((Number) o1).doubleValue(), ((Number) o2).doubleValue());
         } else if (o1 instanceof String && o2 instanceof String) {
             return compare(o1.toString(), o2.toString());
+        } else if (o1 instanceof LocalDateTime && o2 instanceof LocalDateTime) {
+            return compare((LocalDateTime) o1, (LocalDateTime) o2);
         } else {
             throw new RuntimeException(
                     "Cannot compare " + o1.getClass().toGenericString() + " to " + o2.getClass().toGenericString());

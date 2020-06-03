@@ -1,5 +1,6 @@
 package com.nedap.aqlparser.model.predicate;
 
+import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.QOMObject;
 
 public class Predicate extends QOMObject {
@@ -12,8 +13,8 @@ public class Predicate extends QOMObject {
     }
 
     @Override
-    public void validate() {
-
+    public void validate() throws AQLValidationException {
+        predicateExpression.validate();
     }
 
     public QOMObject getPredicateExpression() {

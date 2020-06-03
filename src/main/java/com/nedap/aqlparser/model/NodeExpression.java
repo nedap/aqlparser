@@ -6,6 +6,7 @@ import com.nedap.aqlparser.util.QOMParserUtil;
 import com.nedap.archie.rm.RMObject;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +80,12 @@ public class NodeExpression extends QOMObject {
 
     @Override
     public void validate() throws AQLValidationException {
-
+        if (object != null) getObject().validate();
+        if (children != null) {
+            for (NodeExpression child : children) {
+                child.validate();
+            }
+        }
     }
 
 }

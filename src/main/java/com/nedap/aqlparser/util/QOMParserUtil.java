@@ -3,9 +3,7 @@ package com.nedap.aqlparser.util;
 import com.nedap.aqlparser.AQLParser;
 import com.nedap.aqlparser.model.*;
 import com.nedap.aqlparser.model.leaf.*;
-import com.nedap.aqlparser.model.predicate.ArchetypePredicate;
-import com.nedap.aqlparser.model.predicate.NodePredicate;
-import com.nedap.aqlparser.model.predicate.NodePredicateExpression;
+import com.nedap.aqlparser.model.predicate.*;
 import com.nedap.aqlparser.model.leaf.NodePredicateExprOperand;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -110,7 +108,16 @@ public class QOMParserUtil {
             }else if (ctx instanceof AQLParser.ValueListItemsContext) {
                 objects.add(new ValueList((AQLParser.ValueListItemsContext) ctx));
             } else if (ctx instanceof AQLParser.PredicateOperandContext) {
-                objects.add(new PredicateOperand((AQLParser.PredicateOperandContext) ctx));
+                AQLParser.PredicateOperandContext poctx = (AQLParser.PredicateOperandContext) ctx;
+                if (poctx.identifiedPath() != null &&
+                        poctx.identifiedPath().objectPath() == null &&
+                        poctx.identifiedPath().nodePredicate() == null) {
+                    //If only an IDENTIFIER is specified, an IdentifiedPath can not be distinguished from a
+                    //PrimitiveOperand of type String.
+                    objects.add(new PrimitiveOperand(PrimitiveType.STRING,poctx.identifiedPath().IDENTIFIER().getText()));
+                } else {
+                    objects.addAll(QOMParserUtil.parse(poctx.identifiedPath(),poctx.primitiveOperand()));
+                }
             } else if (ctx instanceof AQLParser.PrimitiveOperandContext) {
                 objects.add(new PrimitiveOperand((AQLParser.PrimitiveOperandContext) ctx));
             } else if (ctx instanceof AQLParser.ArchetypePredicateExprContext) {
@@ -142,6 +149,18 @@ public class QOMParserUtil {
                 objects.add(new SelectOperand((AQLParser.SelectOperandContext) ctx));
             } else if (ctx instanceof AQLParser.SelectClauseContext) {
                 objects.add(new SelectClause((AQLParser.SelectClauseContext) ctx));
+            } else if (ctx instanceof AQLParser.TopClauseContext) {
+                objects.add(new TopClause((AQLParser.TopClauseContext) ctx));
+            } else if (ctx instanceof AQLParser.OrderByExprContext) {
+                objects.add(new OrderByExpression((AQLParser.OrderByExprContext) ctx));
+            } else if (ctx instanceof AQLParser.OrderByClauseContext) {
+                objects.add(new OrderByClause((AQLParser.OrderByClauseContext) ctx));
+            } else if (ctx instanceof AQLParser.StandardPredicateExprContext) {
+                objects.add(new StandardPredicateExpression((AQLParser.StandardPredicateExprContext) ctx));
+            } else if (ctx instanceof AQLParser.StandardPredicateContext) {
+                objects.add(new StandardPredicate((AQLParser.StandardPredicateContext) ctx));
+            } else if (ctx instanceof AQLParser.StandardPredicateExprOperandContext) {
+                objects.add(new StandardPredicateExprOperand((AQLParser.StandardPredicateExprOperandContext) ctx));
             } else {
                 throw new RuntimeException("NYI");
             }

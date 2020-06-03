@@ -2,6 +2,7 @@ package com.nedap.aqlparser.model.leaf;
 
 import com.nedap.aqlparser.AQLParser;
 import com.nedap.aqlparser.exception.AQLValidationException;
+import com.nedap.aqlparser.model.Lookup;
 import com.nedap.aqlparser.model.QOMObject;
 import com.nedap.aqlparser.model.predicate.NodePredicate;
 
@@ -30,6 +31,12 @@ public class IdentifiedPath extends QOMObject implements Leaf {
     }
 
     public ObjectPath getObjectPath() {
+        if (objectPath == null) {
+            IdentifiedPath identifiedPath = Lookup.getIdentifiedPath(variableName);
+            if (identifiedPath != null) {
+                return identifiedPath.getObjectPath();
+            }
+        }
         return objectPath;
     }
 

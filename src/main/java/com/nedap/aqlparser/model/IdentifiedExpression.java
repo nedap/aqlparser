@@ -1,6 +1,7 @@
 package com.nedap.aqlparser.model;
 
 import com.nedap.aqlparser.AQLParser;
+import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.util.QOMParserUtil;
 
 public class IdentifiedExpression extends NodeExpression {

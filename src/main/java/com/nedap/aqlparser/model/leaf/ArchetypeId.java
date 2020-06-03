@@ -21,6 +21,11 @@ public class ArchetypeId extends QOMObject implements Leaf {
         new ArchetypeHRID(archetypeId);
     }
 
+    @Override
+    public String toString() {
+        return archetypeId;
+    }
+
     public String getArchetypeId() {
         return archetypeId;
     }
