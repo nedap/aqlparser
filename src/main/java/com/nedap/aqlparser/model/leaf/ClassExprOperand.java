@@ -50,6 +50,8 @@ public class ClassExprOperand extends QOMObject implements Leaf {
 
     @Override
     public void validate() throws AQLValidationException {
-
+        if (predicate != null) {
+            predicate.validate();
+        }
     }
 }

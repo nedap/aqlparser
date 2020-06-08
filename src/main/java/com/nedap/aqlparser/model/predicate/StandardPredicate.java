@@ -10,6 +10,7 @@ public class StandardPredicate extends Predicate {
     }
 
     private void initialize(AQLParser.StandardPredicateContext ctx) {
+        predicateExpression = new StandardPredicateExpression(ctx.standardPredicateExpr());
     }
 
 

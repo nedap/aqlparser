@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'antlr'
+    id "com.jfrog.artifactory" version "4.15.2"
+    id "maven-publish"
 }
 
 repositories {
@@ -18,4 +20,32 @@ dependencies {
 
 generateGrammarSource {
     arguments += ["-visitor", "-package", "com.nedap.aqlparser"]
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+            repoKey = 'libs-releases-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'libs-releases'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
 }

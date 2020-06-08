@@ -61,7 +61,7 @@ standardPredicateExpr
     | '(' standardPredicateExpr ')'
     ;
 
-standardPredicateExprOperand : predicateOperand COMPARABLEOPERATOR predicateOperand;
+standardPredicateExprOperand : objectPath COMPARABLEOPERATOR predicateOperand;
 
 archetypePredicate : '[' archetypePredicateExpr ']' ;
 

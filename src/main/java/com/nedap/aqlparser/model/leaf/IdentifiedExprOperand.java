@@ -43,18 +43,27 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
         }
     }
 
-    public String getObjectPath() {
-        IdentifiedPath identifiedPath;
+    public IdentifiedPath getIdentifiedPath() {
         if (getChildren(0).getObject() instanceof IdentifiedPath) {
-            identifiedPath = (IdentifiedPath) getChildren(0).getObject();
+            return (IdentifiedPath) getChildren(0).getObject();
         } else if (getChildren(0).getObject() instanceof PrimitiveOperand) {
             PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
-            identifiedPath = Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+            return Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
         } else {
             throw new RuntimeException("Must not be reached");
         }
+    }
 
-        return identifiedPath.getObjectPath().toString();
+    public String getObjectPath() {
+        return getIdentifiedPath().getObjectPath().toString();
+    }
+
+    public String getVariableName() {
+        return getIdentifiedPath().getVariableName();
+    }
+
+    public ClassExprOperand getClassExprOperand() {
+        return Lookup.getClassExprOperand(getVariableName());
     }
 
 

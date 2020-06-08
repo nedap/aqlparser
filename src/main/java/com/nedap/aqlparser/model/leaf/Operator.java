@@ -4,6 +4,7 @@ import com.nedap.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 public class Operator extends QOMObject implements Leaf {
 
@@ -31,6 +32,12 @@ public class Operator extends QOMObject implements Leaf {
     }
 
     public Boolean compare(Object o1, Object o2) {
+        if (o1 == null && o2 != null) {
+            return false;
+        }
+        if (o1 != null && o2 == null) {
+            return false;
+        }
         if (!(o1 instanceof Comparable) || !(o2 instanceof Comparable)) {
             throw new RuntimeException("Expected instance of Comparable");
         }
@@ -43,6 +50,8 @@ public class Operator extends QOMObject implements Leaf {
             return compare(o1.toString(), o2.toString());
         } else if (o1 instanceof LocalDateTime && o2 instanceof LocalDateTime) {
             return compare((LocalDateTime) o1, (LocalDateTime) o2);
+        } else if (o1 instanceof OffsetDateTime && o2 instanceof OffsetDateTime) {
+            return compare((OffsetDateTime) o1, (OffsetDateTime) o2);
         } else {
             throw new RuntimeException(
                     "Cannot compare " + o1.getClass().toGenericString() + " to " + o2.getClass().toGenericString());

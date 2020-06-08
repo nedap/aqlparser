@@ -45,7 +45,11 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
 
     private Object castValueToType(Object value) {
         if (type == PrimitiveType.STRING) {
-            return value.toString();
+            String result = value.toString();
+            if (result.startsWith("'") || result.startsWith("\"")) {
+                result = result.substring(1,result.length() - 1);
+            }
+            return result;
         } else if (type == PrimitiveType.INTEGER) {
             return Integer.parseInt((String) value);
         } else if (type == PrimitiveType.FLOAT) {

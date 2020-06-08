@@ -11,7 +11,11 @@ public class StandardPredicateExprOperand extends NodeExpression implements Leaf
 
     private void initialize(AQLParser.StandardPredicateExprOperandContext ctx) {
         setObject(ctx.COMPARABLEOPERATOR());
-        addChildren(ctx.predicateOperand(0),ctx.predicateOperand(1));
+        addChildren(ctx.objectPath(),ctx.predicateOperand());
+    }
+
+    public Operator getOperator() {
+        return (Operator) getObject();
     }
 
 }

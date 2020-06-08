@@ -48,4 +48,8 @@ public class IdentifiedPath extends QOMObject implements Leaf {
         return variableName;
     }
 
+    public ClassExprOperand getClassExprOperand() {
+        return Lookup.getClassExprOperand(getVariableName());
+    }
+
 }
