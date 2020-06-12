@@ -19,4 +19,8 @@ public class RegexPattern extends QOMObject implements Leaf {
     public void validate() {
 
     }
+
+    public String getPattern() {
+        return pattern;
+    }
 }

@@ -19,4 +19,8 @@ public class URIValue extends QOMObject implements Leaf {
     public void validate() {
 
     }
+
+    public String getValue() {
+        return value;
+    }
 }

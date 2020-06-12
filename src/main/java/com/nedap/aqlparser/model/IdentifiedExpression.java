@@ -11,7 +11,10 @@ public class IdentifiedExpression extends NodeExpression {
     }
 
     private void initialize(AQLParser.IdentifiedExprContext ctx) {
-        if (ctx.OPEN() != null) initialize(ctx.identifiedExpr(0));
+        if (ctx.OPEN() != null) {
+            initialize(ctx.identifiedExpr(0));
+            return;
+        }
         setObject(ctx.identifiedExprOperand(), ctx.NOT(), ctx.EXISTS(), ctx.AND(), ctx.XOR(), ctx.OR());
         addChildren(ctx.identifiedExpr(0), ctx.identifiedExpr(1));
     }

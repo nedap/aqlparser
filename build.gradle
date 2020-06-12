@@ -49,3 +49,6 @@ artifactory {
         }
     }
 }
+
+version = '0.0.1'
+group = 'com.nedap'

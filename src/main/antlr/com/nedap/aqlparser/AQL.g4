@@ -16,7 +16,7 @@
 grammar AQL;
 
 // root rule
-query :	selectClause fromClause whereClause? orderByClause? EOF ;
+queryClause :	selectClause fromClause whereClause? orderByClause? EOF ;
 
 // SELECT
 selectClause : SELECT topClause? selectOperand (',' selectOperand)* ;
@@ -96,9 +96,9 @@ identifiedExpr
 
 identifiedExprOperand : predicateOperand ((COMPARABLEOPERATOR predicateOperand)|(MATCHES '{' matchesOperand '}'))?;
 
-matchesOperand : valueListItems | URIVALUE ;
+matchesOperand : valueList | URIVALUE ;
 
-valueListItems : primitiveOperand  (',' primitiveOperand )* ;
+valueList : primitiveOperand  (',' primitiveOperand )* ;
 
 containsExpr
     : classExprOperand (CONTAINS containsExpr)?
@@ -190,7 +190,10 @@ INTEGER	: '-'? DIGIT+;
 
 FLOAT :	'-'? DIGIT+ '.' DIGIT+;
 
-DATE : '\'' DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT 'T' DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT '.' DIGIT DIGIT DIGIT '+' DIGIT DIGIT DIGIT DIGIT '\'';
+DATE
+    : DIGIT DIGIT DIGIT DIGIT '-' DIGIT DIGIT'-' DIGIT DIGIT  //1909-12-19
+    | DIGIT DIGIT DIGIT DIGIT '-' DIGIT DIGIT'-' DIGIT DIGIT (' ')* DIGIT DIGIT ':' DIGIT DIGIT //1909-12-19 19:09
+    | DIGIT DIGIT DIGIT DIGIT '-' DIGIT DIGIT'-' DIGIT DIGIT (' ')* DIGIT DIGIT ':' DIGIT DIGIT ':' DIGIT DIGIT; //1909-12-19 19:09:00
 
 PARAMETER :	'$' LETTER IDCHAR*;
 

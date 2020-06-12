@@ -3,10 +3,8 @@ package com.nedap.aqlparser.model;
 import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.leaf.Leaf;
 import com.nedap.aqlparser.util.QOMParserUtil;
-import com.nedap.archie.rm.RMObject;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,8 @@ public class NodeExpression extends QOMObject {
     }
 
     protected void setObject(ParseTree... parseTrees) {
-        this.object = QOMParserUtil.parse(parseTrees).get(0);
+        List<QOMObject> objects = QOMParserUtil.parse(parseTrees);
+        this.object = objects.get(0);
     }
 
     protected void addChild(QOMObject object) {
@@ -48,7 +47,14 @@ public class NodeExpression extends QOMObject {
     }
 
     protected void addChildren(List<QOMObject> children) {
-        children.forEach(this::addChild);
+        for (QOMObject qomObject : children) {
+            //Explicitly call correct method, cannot resolve this since NodeExpression is also of type QOMObject
+            if (qomObject instanceof NodeExpression) {
+                addChild((NodeExpression) qomObject);
+            } else {
+                addChild(qomObject);
+            }
+        }
     }
 
     public QOMObject getObject() {

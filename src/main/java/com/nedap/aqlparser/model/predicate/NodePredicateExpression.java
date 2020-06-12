@@ -12,10 +12,12 @@ public class NodePredicateExpression extends NodeExpression {
     }
 
     private void initialize(AQLParser.NodePredicateExprContext ctx) {
-        if (ctx.OPEN() != null) initialize(ctx.nodePredicateExpr(0));
+        if (ctx.OPEN() != null) {
+            initialize(ctx.nodePredicateExpr(0));
+            return;
+        }
         setObject(ctx.AND(),ctx.XOR(),ctx.OR(),ctx.nodePredicateExprOperand());
         addChildren(ctx.nodePredicateExpr(0),ctx.nodePredicateExpr(1));
     }
-
 
 }

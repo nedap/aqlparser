@@ -10,11 +10,11 @@ public class QueryClause extends QOMObject{
     private WhereClause whereClause;
     private OrderByClause orderByClause;
 
-    public QueryClause(AQLParser.QueryContext ctx) {
+    public QueryClause(AQLParser.QueryClauseContext ctx) {
         initialize(ctx);
     }
 
-    private void initialize(AQLParser.QueryContext ctx) {
+    private void initialize(AQLParser.QueryClauseContext ctx) {
         selectClause = new SelectClause(ctx.selectClause());
         fromClause = new FromClause(ctx.fromClause());
         if (ctx.whereClause() != null) {

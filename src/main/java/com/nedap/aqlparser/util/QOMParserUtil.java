@@ -104,9 +104,10 @@ public class QOMParserUtil {
                 objects.add(new IdentifiedExprOperand((AQLParser.IdentifiedExprOperandContext) ctx));
             } else if (ctx instanceof AQLParser.MatchesOperandContext) {
                 AQLParser.MatchesOperandContext moctx = (AQLParser.MatchesOperandContext) ctx;
-                objects.add(parse(moctx.valueListItems(), moctx.URIVALUE()).get(0));
-            }else if (ctx instanceof AQLParser.ValueListItemsContext) {
-                objects.add(new ValueList((AQLParser.ValueListItemsContext) ctx));
+                List<QOMObject> trest123 = parse(moctx.valueList(), moctx.URIVALUE());
+                objects.add(parse(moctx.valueList(), moctx.URIVALUE()).get(0));
+            }else if (ctx instanceof AQLParser.ValueListContext) {
+                objects.add(new ValueList((AQLParser.ValueListContext) ctx));
             } else if (ctx instanceof AQLParser.PredicateOperandContext) {
                 AQLParser.PredicateOperandContext poctx = (AQLParser.PredicateOperandContext) ctx;
                 if (poctx.identifiedPath() != null &&
@@ -133,8 +134,8 @@ public class QOMParserUtil {
                 objects.add(new NodePredicateExpression((AQLParser.NodePredicateExprContext) ctx));
             } else if (ctx instanceof AQLParser.NodePredicateExprOperandContext) {
                 objects.add(new NodePredicateExprOperand((AQLParser.NodePredicateExprOperandContext) ctx));
-            } else if (ctx instanceof AQLParser.QueryContext) {
-                objects.add(new QueryClause((AQLParser.QueryContext) ctx));
+            } else if (ctx instanceof AQLParser.QueryClauseContext) {
+                objects.add(new QueryClause((AQLParser.QueryClauseContext) ctx));
             } else if (ctx instanceof AQLParser.ClassExprOperandContext) {
                 objects.add(new ClassExprOperand((AQLParser.ClassExprOperandContext) ctx));
             } else if (ctx instanceof AQLParser.ContainsExprContext) {
@@ -161,6 +162,8 @@ public class QOMParserUtil {
                 objects.add(new StandardPredicate((AQLParser.StandardPredicateContext) ctx));
             } else if (ctx instanceof AQLParser.StandardPredicateExprOperandContext) {
                 objects.add(new StandardPredicateExprOperand((AQLParser.StandardPredicateExprOperandContext) ctx));
+            } else if (ctx instanceof AQLParser.WhereClauseContext) {
+                objects.add(new WhereClause((AQLParser.WhereClauseContext) ctx));
             } else {
                 throw new RuntimeException("NYI");
             }

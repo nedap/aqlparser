@@ -4,6 +4,7 @@ import com.nedap.aqlparser.AQLParser;
 import com.nedap.aqlparser.exception.AQLValidationException;
 import com.nedap.aqlparser.model.Lookup;
 import com.nedap.aqlparser.model.NodeExpression;
+import com.nedap.aqlparser.model.QOMObject;
 
 /**
  * An identified expression specifies matching criteria in the WHERE clause and comes in two forms. The first form is
@@ -25,32 +26,37 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
     }
 
     private void initialize(AQLParser.IdentifiedExprOperandContext ctx) {
-        setObject(ctx.COMPARABLEOPERATOR(),ctx.MATCHES());
-        addChildren(ctx.predicateOperand(0),ctx.predicateOperand(1),ctx.matchesOperand());
+        setObject(ctx.COMPARABLEOPERATOR(), ctx.MATCHES(),ctx.predicateOperand(0));
+        if (ctx.COMPARABLEOPERATOR() != null || ctx.MATCHES() != null) {
+            addChildren(ctx.predicateOperand(0),ctx.predicateOperand(1),ctx.matchesOperand());
+        }
     }
 
     @Override
     public void validate() throws AQLValidationException {
-        if (getChildren(0).getObject() instanceof PrimitiveOperand) {
-            PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
-            IdentifiedPath identifiedPath = Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
-            if (identifiedPath == null) {
-                throw new AQLValidationException("Failed to find path for alias " +
-                        ((PrimitiveOperand) getChildren(0).getObject()).getValue().toString());
-            }
-        } else if (!(getChildren(0).getObject() instanceof IdentifiedPath)) {
-            throw new AQLValidationException("IdentifiedPath required in IdentifiedExprOperand");
+        IdentifiedPath identifiedPath = getIdentifiedPath();
+        if (identifiedPath == null) {
+            throw new AQLValidationException("Failed to set identified Path");
         }
     }
 
     public IdentifiedPath getIdentifiedPath() {
-        if (getChildren(0).getObject() instanceof IdentifiedPath) {
-            return (IdentifiedPath) getChildren(0).getObject();
-        } else if (getChildren(0).getObject() instanceof PrimitiveOperand) {
-            PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
-            return Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+        if (!hasChildren()){
+            return getIdentifiedPath(getObject());
         } else {
-            throw new RuntimeException("Must not be reached");
+            return getIdentifiedPath(getChildren(0).getObject());
+        }
+    }
+
+    private IdentifiedPath getIdentifiedPath(QOMObject qomObject) {
+        if (qomObject instanceof IdentifiedPath) {
+            return (IdentifiedPath) qomObject;
+        } else if (qomObject instanceof PrimitiveOperand) {
+            PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
+            IdentifiedPath identifiedPath = Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+            return identifiedPath;
+        } else {
+            return null;
         }
     }
 
@@ -66,5 +72,8 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
         return Lookup.getClassExprOperand(getVariableName());
     }
 
+    public Operator getOperator() {
+        return (Operator) getObject();
+    }
 
 }

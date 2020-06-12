@@ -35,15 +35,15 @@ public class SelectClause extends QOMObject {
         return selection;
     }
 
-    public SelectOperand getSelectOperand(String variableName) {
-        List<SelectOperand> result = getByVariableName(variableName);
-        return result.isEmpty() ? null : getByVariableName(variableName).get(0);
-    }
-
-    private List<SelectOperand> getByVariableName(String variableName) {
-        return selection.stream().filter(selectOperand -> selectOperand.getIdentifiedPath().getVariableName().
-                equals(variableName)).collect(Collectors.toList());
-    }
+//    public SelectOperand getSelectOperand(String variableName) {
+//        List<SelectOperand> result = getByVariableName(variableName);
+//        return result.isEmpty() ? null : getByVariableName(variableName).get(0);
+//    }
+//
+//    private List<SelectOperand> getByVariableName(String variableName) {
+//        return selection.stream().filter(selectOperand -> selectOperand.getIdentifiedPath().getVariableName().
+//                equals(variableName)).collect(Collectors.toList());
+//    }
 
     public TopClause getTopClause() {
         return topClause;

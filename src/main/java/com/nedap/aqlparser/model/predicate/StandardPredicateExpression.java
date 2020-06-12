@@ -10,7 +10,10 @@ public class StandardPredicateExpression extends NodeExpression {
     }
 
     private void initialize(AQLParser.StandardPredicateExprContext ctx) {
-        if (ctx.OPEN() != null) initialize(ctx.standardPredicateExpr(0));
+        if (ctx.OPEN() != null) {
+            initialize(ctx.standardPredicateExpr(0));
+            return;
+        }
         setObject(ctx.standardPredicateExprOperand(),ctx.NOT(),ctx.AND(),ctx.XOR(),ctx.OR());
         addChildren(ctx.standardPredicateExpr(0),ctx.standardPredicateExpr(1));
     }

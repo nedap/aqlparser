@@ -18,4 +18,8 @@ public class StandardPredicateExprOperand extends NodeExpression implements Leaf
         return (Operator) getObject();
     }
 
+    public ObjectPath getObjectPath() {
+        return (ObjectPath) getChildren(0).getObject();
+    }
+
 }

@@ -24,4 +24,8 @@ public class NodeId extends QOMObject implements Leaf {
     public void validate() {
 
     }
+
+    public String getNodeId() {
+        return nodeId;
+    }
 }

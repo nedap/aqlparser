@@ -14,11 +14,11 @@ public class ValueList extends QOMObject implements Leaf {
 
     private List<PrimitiveOperand> items;
 
-    public ValueList(AQLParser.ValueListItemsContext ctx) {
+    public ValueList(AQLParser.ValueListContext ctx) {
         initialize(ctx);
     }
 
-    private void initialize(AQLParser.ValueListItemsContext ctx) {
+    private void initialize(AQLParser.ValueListContext ctx) {
         items = new ArrayList<>();
         List<QOMObject> objects = QOMParserUtil.parse(ctx.primitiveOperand().toArray(new AQLParser.PrimitiveOperandContext[0]));
         objects.forEach(object -> items.add((PrimitiveOperand) object));
@@ -31,6 +31,10 @@ public class ValueList extends QOMObject implements Leaf {
 
     public List<PrimitiveOperand> getItems() {
         return items;
+    }
+
+    public PrimitiveOperand item(Integer i) {
+        return items.get(i);
     }
 
 }
