@@ -1,11 +1,32 @@
+buildscript {
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}"
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+            name = "maven-main-cache"
+        }
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.0.1"
+    }
+}
+
 plugins {
     id 'java'
     id 'antlr'
     id "com.jfrog.artifactory" version "4.15.2"
+    id 'maven'
     id "maven-publish"
 }
 
+group = 'com.nedap.healthcare'
+version = '0.0.1'
+
 repositories {
+    add buildscript.repositories.getByName("maven-main-cache")
     jcenter()
 }
 
@@ -19,12 +40,13 @@ dependencies {
 }
 
 generateGrammarSource {
-    arguments += ["-visitor", "-package", "com.nedap.aqlparser"]
+    arguments += ["-visitor", "-package", "com.nedap.healthcare.aqlparser"]
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            artifactId = 'aqlparser'
             from components.java
         }
     }
@@ -39,6 +61,12 @@ artifactory {
             password = "${artifactory_password}"
             maven = true
         }
+        defaults {
+            publications('mavenJava')
+            publishArtifacts = true
+            properties = ['qa.level': 'basic', 'dev.team' : 'core']
+            publishPom = true
+        }
     }
     resolve {
         repository {
@@ -49,6 +77,3 @@ artifactory {
         }
     }
 }
-
-version = '0.0.1'
-group = 'com.nedap'
