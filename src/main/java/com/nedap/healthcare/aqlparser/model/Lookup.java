@@ -53,4 +53,5 @@ public class Lookup {
     public static PrimitiveOperand getParameter(String param) {
         return parameter.get(param);
     }
+
 }

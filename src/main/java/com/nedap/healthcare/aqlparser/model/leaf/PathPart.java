@@ -27,4 +27,8 @@ public class PathPart extends QOMObject implements Leaf {
     public void validate() {
 
     }
+
+    public String getIdentifier() {
+        return identifier;
+    }
 }

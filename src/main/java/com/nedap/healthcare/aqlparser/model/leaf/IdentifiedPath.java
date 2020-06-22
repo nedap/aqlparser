@@ -32,6 +32,7 @@ public class IdentifiedPath extends QOMObject implements Leaf {
 
     public ObjectPath getObjectPath() {
         if (objectPath == null) {
+            //Check if variableName is alias and if so, return corresponding path
             IdentifiedPath identifiedPath = Lookup.getIdentifiedPath(variableName);
             if (identifiedPath != null) {
                 return identifiedPath.getObjectPath();

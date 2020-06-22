@@ -28,4 +28,23 @@ public class ObjectPath extends QOMObject implements Leaf {
     @Override
     public void validate() {
     }
+
+    /**
+     * @return true if the RmObject that ObjectPath is referring to is a COMPOSITION
+     */
+    public Boolean isCompositionPath() {
+        String identifier = pathParts.get(0).getIdentifier().toLowerCase();
+        //Check if first identifier equals
+        switch (identifier) {
+            case "language":
+            case "territory":
+            case "category":
+            case "context":
+            case "composer":
+            case "content":
+                return true;
+            default:
+                return false;
+        }
+    }
 }
