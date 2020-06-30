@@ -22,6 +22,8 @@ plugins {
     id "maven-publish"
 }
 
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 group = 'com.nedap.healthcare'
 version = '0.0.3'
 
