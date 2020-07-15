@@ -7,12 +7,9 @@ public class FromClause extends QOMObject {
 
     private ContainsExpression containsExpression;
 
-    public FromClause(AQLParser.FromClauseContext ctx) {
-        initialize(ctx);
-    }
+    public FromClause(AQLParser.FromClauseContext ctx, Lookup lookup) {
+        containsExpression = new ContainsExpression(ctx.containsExpr(), lookup);
 
-    private void initialize(AQLParser.FromClauseContext ctx) {
-        containsExpression = new ContainsExpression(ctx.containsExpr());
     }
 
     @Override

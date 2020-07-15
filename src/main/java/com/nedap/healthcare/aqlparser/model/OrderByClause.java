@@ -12,13 +12,9 @@ public class OrderByClause extends QOMObject {
     private List<OrderByExpression> orderByExpressions;
 
 
-    public OrderByClause(AQLParser.OrderByClauseContext ctx) {
-        initialize(ctx);
-    }
-
-    private void initialize(AQLParser.OrderByClauseContext ctx) {
+    public OrderByClause(AQLParser.OrderByClauseContext ctx, Lookup lookup) {
         orderByExpressions = new ArrayList<>();
-        ctx.orderByExpr().forEach(orderByExprContext -> orderByExpressions.add(new OrderByExpression(orderByExprContext)));
+        ctx.orderByExpr().forEach(orderByExprContext -> orderByExpressions.add(new OrderByExpression(orderByExprContext, lookup)));
     }
 
     @Override

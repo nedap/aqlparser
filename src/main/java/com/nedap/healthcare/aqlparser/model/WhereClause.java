@@ -7,12 +7,8 @@ public class WhereClause extends QOMObject {
 
     private IdentifiedExpression identifiedExpression;
 
-    public WhereClause(AQLParser.WhereClauseContext ctx) {
-        initialize(ctx);
-    }
-
-    private void initialize(AQLParser.WhereClauseContext ctx) {
-        identifiedExpression = new IdentifiedExpression(ctx.identifiedExpr());
+    public WhereClause(AQLParser.WhereClauseContext ctx, Lookup lookup) {
+        identifiedExpression = new IdentifiedExpression(ctx.identifiedExpr(), lookup);
     }
 
     public IdentifiedExpression getIdentifiedExpression() {

@@ -21,8 +21,11 @@ import com.nedap.healthcare.aqlparser.model.QOMObject;
  */
 public class IdentifiedExprOperand extends NodeExpression implements Leaf {
 
-    public IdentifiedExprOperand(AQLParser.IdentifiedExprOperandContext ctx){
+    private Lookup lookup;
+
+    public IdentifiedExprOperand(AQLParser.IdentifiedExprOperandContext ctx, Lookup lookup){
         initialize(ctx);
+        this.lookup = lookup;
     }
 
     private void initialize(AQLParser.IdentifiedExprOperandContext ctx) {
@@ -53,7 +56,7 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
             return (IdentifiedPath) qomObject;
         } else if (qomObject instanceof PrimitiveOperand) {
             PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
-            IdentifiedPath identifiedPath = Lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+            IdentifiedPath identifiedPath = lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
             return identifiedPath;
         } else {
             return null;
@@ -69,7 +72,7 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
     }
 
     public ClassExprOperand getClassExprOperand() {
-        return Lookup.getClassExprOperand(getVariableName());
+        return lookup.getClassExprOperand(getVariableName());
     }
 
     public Operator getOperator() {

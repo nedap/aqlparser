@@ -4,7 +4,8 @@ import com.nedap.healthcare.aqlparser.AQLParser;
 
 public class IdentifiedExpression extends NodeExpression {
 
-    public IdentifiedExpression(AQLParser.IdentifiedExprContext ctx) {
+    public IdentifiedExpression(AQLParser.IdentifiedExprContext ctx, Lookup lookup) {
+        setLookup(lookup);
         initialize(ctx);
     }
 

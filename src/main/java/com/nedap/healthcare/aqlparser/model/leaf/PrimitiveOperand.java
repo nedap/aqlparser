@@ -15,11 +15,15 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
 
     private Object value;
 
-    public PrimitiveOperand(AQLParser.PrimitiveOperandContext ctx) {
+    private Lookup lookup;
+
+    public PrimitiveOperand(AQLParser.PrimitiveOperandContext ctx, Lookup lookup) {
+        this.lookup = lookup;
         initialize(ctx);
     }
 
-    public PrimitiveOperand(PrimitiveType type, String value) {
+    public PrimitiveOperand(PrimitiveType type, String value, Lookup lookup) {
+        this.lookup = lookup;
         this.type = type;
         this.value = castValueToType(value);
     }
@@ -64,7 +68,7 @@ public class PrimitiveOperand extends QOMObject implements Leaf {
         } else if (type == PrimitiveType.BOOLEAN) {
             return Boolean.parseBoolean(value);
         } else if (type == PrimitiveType.PARAMETER) {
-            PrimitiveOperand result = Lookup.getParameter(value);
+            PrimitiveOperand result = lookup.getParameter(value);
             if (result == null) {
                 throw new RuntimeException("Could not resolve parameter " + value);
             }

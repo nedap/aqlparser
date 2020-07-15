@@ -10,18 +10,14 @@ public class QueryClause extends QOMObject{
     private WhereClause whereClause;
     private OrderByClause orderByClause;
 
-    public QueryClause(AQLParser.QueryClauseContext ctx) {
-        initialize(ctx);
-    }
-
-    private void initialize(AQLParser.QueryClauseContext ctx) {
-        selectClause = new SelectClause(ctx.selectClause());
-        fromClause = new FromClause(ctx.fromClause());
+    public QueryClause(AQLParser.QueryClauseContext ctx, Lookup lookup) {
+        selectClause = new SelectClause(ctx.selectClause(), lookup);
+        fromClause = new FromClause(ctx.fromClause(), lookup);
         if (ctx.whereClause() != null) {
-            whereClause = new WhereClause(ctx.whereClause());
+            whereClause = new WhereClause(ctx.whereClause(), lookup);
         }
         if (ctx.orderByClause() != null) {
-            orderByClause = new OrderByClause(ctx.orderByClause());
+            orderByClause = new OrderByClause(ctx.orderByClause(), lookup);
         }
     }
 

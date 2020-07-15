@@ -11,46 +11,46 @@ import java.util.Map;
 
 public class Lookup {
 
-    private static Map<String, IdentifiedPath> aliases;
-    private static Map<String, ClassExprOperand> variables;
-    private static Map<String, PrimitiveOperand> parameter;
+    private Map<String, IdentifiedPath> aliases;
+    private Map<String, ClassExprOperand> variables;
+    private Map<String, PrimitiveOperand> parameter;
 
-    static {
+    public Lookup() {
         aliases = new HashMap<>();
         variables = new HashMap<>();
         parameter = new HashMap<>();
     }
 
-    public static void addAlias(String alias, IdentifiedPath identifiedPath) {
+    public void addAlias(String alias, IdentifiedPath identifiedPath) {
         aliases.put(alias,identifiedPath);
     }
 
-    public static IdentifiedPath getIdentifiedPath(String alias) {
+    public IdentifiedPath getIdentifiedPath(String alias) {
         return aliases.get(alias);
     }
 
-    public static void addVariable(String variable, ClassExprOperand classExprOperand) {
+    public void addVariable(String variable, ClassExprOperand classExprOperand) {
         variables.put(variable,classExprOperand);
     }
 
-    public static ClassExprOperand getClassExprOperand(String variable) {
+    public ClassExprOperand getClassExprOperand(String variable) {
         return variables.get(variable);
     }
 
-    public static void addParameter(String parameter, Object value) {
+    public void addParameter(String parameter, Object value) {
         try {
-            PrimitiveOperand primitiveOperand = (PrimitiveOperand) QOMParser.parse(value.toString(),"primitiveOperand");
+            PrimitiveOperand primitiveOperand = (PrimitiveOperand) QOMParser.parse(value.toString(),"primitiveOperand", this);
             addParameter(parameter,primitiveOperand);
         } catch (AQLValidationException e) {
             throw new RuntimeException("Could not add parameter ", e);
         }
     }
 
-    public static void addParameter(String param, PrimitiveOperand primitiveOperand) {
+    public void addParameter(String param, PrimitiveOperand primitiveOperand) {
         parameter.put(param,primitiveOperand);
     }
 
-    public static PrimitiveOperand getParameter(String param) {
+    public PrimitiveOperand getParameter(String param) {
         return parameter.get(param);
     }
 

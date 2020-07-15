@@ -14,18 +14,18 @@ import java.util.List;
 
 public class QOMParserUtil {
 
-    public static QOMObject parse(ParseTree parseTree) {
-        return parse(new ParseTree[]{parseTree}).get(0);
+    public static QOMObject parse(Lookup lookup, ParseTree parseTree) {
+        return parse(lookup, new ParseTree[]{parseTree}).get(0);
     }
 
-    public static List<QOMObject> parse(ParseTree... parseTrees) {
+    public static List<QOMObject> parse(Lookup lookup, ParseTree... parseTrees) {
         List<QOMObject> objects = new ArrayList<>();
         for (ParseTree parseTree : parseTrees) {
             if (parseTree == null) continue;
             if (parseTree instanceof TerminalNode) {
-                objects.add(parse((TerminalNode) parseTree));
+                objects.add(parse(lookup, (TerminalNode) parseTree));
             } else if (parseTree instanceof ParserRuleContext) {
-                objects.add(parse((ParserRuleContext) parseTree));
+                objects.add(parse(lookup, (ParserRuleContext) parseTree));
             } else {
                 throw new RuntimeException("NYI");
             }
@@ -33,11 +33,11 @@ public class QOMParserUtil {
         return objects;
     }
 
-    public static QOMObject parse(TerminalNode terminalNode) {
-        return QOMParserUtil.parse(new TerminalNode[]{terminalNode}).get(0);
+    public static QOMObject parse(Lookup lookup, TerminalNode terminalNode) {
+        return QOMParserUtil.parse(lookup, new TerminalNode[]{terminalNode}).get(0);
     }
 
-    public static List<QOMObject> parse(TerminalNode... terminalNodes) {
+    public static List<QOMObject> parse(Lookup lookup, TerminalNode... terminalNodes) {
         List<QOMObject> objects = new ArrayList<>();
         for (TerminalNode terminalNode : terminalNodes) {
             if (terminalNode == null) continue;
@@ -47,7 +47,7 @@ public class QOMParserUtil {
                     objects.add(new NodeId(terminalNode));
                     break;
                 case AQLParser.PARAMETER:
-                    objects.add(new PrimitiveOperand(PrimitiveType.PARAMETER,terminalNode.getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.PARAMETER,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.ARCHETYPEID:
                     objects.add(new ArchetypeId(terminalNode));
@@ -56,19 +56,19 @@ public class QOMParserUtil {
                     objects.add(new URIValue(terminalNode));
                     break;
                 case AQLParser.STRING:
-                    objects.add(new PrimitiveOperand(PrimitiveType.STRING,terminalNode.getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.STRING,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.INTEGER:
-                    objects.add(new PrimitiveOperand(PrimitiveType.INTEGER,terminalNode.getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.INTEGER,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.FLOAT:
-                    objects.add(new PrimitiveOperand(PrimitiveType.FLOAT,terminalNode.getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.FLOAT,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.DATE:
-                    objects.add(new PrimitiveOperand(PrimitiveType.DATE,terminalNode.getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.DATE,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.BOOLEAN:
-                    objects.add(new PrimitiveOperand(PrimitiveType.BOOLEAN,terminalNode.getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.BOOLEAN,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.REGEXPATTERN:
                     objects.add(new RegexPattern(terminalNode));
@@ -90,24 +90,23 @@ public class QOMParserUtil {
         return objects;
     }
 
-    public static QOMObject parse(ParserRuleContext parserRuleContext) {
-        return QOMParserUtil.parse(new ParserRuleContext[]{parserRuleContext}).get(0);
+    public static QOMObject parse(Lookup lookup, ParserRuleContext parserRuleContext) {
+        return QOMParserUtil.parse(lookup, new ParserRuleContext[]{parserRuleContext}).get(0);
     }
 
-    public static List<QOMObject> parse(ParserRuleContext... parserRuleContexts) {
+    public static List<QOMObject> parse(Lookup lookup, ParserRuleContext... parserRuleContexts) {
         List<QOMObject> objects = new ArrayList<>();
         for (ParserRuleContext ctx : parserRuleContexts) {
             if (ctx == null) continue;
             if (ctx instanceof AQLParser.IdentifiedExprContext) {
-                objects.add(new IdentifiedExpression((AQLParser.IdentifiedExprContext) ctx));
+                objects.add(new IdentifiedExpression((AQLParser.IdentifiedExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.IdentifiedExprOperandContext) {
-                objects.add(new IdentifiedExprOperand((AQLParser.IdentifiedExprOperandContext) ctx));
+                objects.add(new IdentifiedExprOperand((AQLParser.IdentifiedExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.MatchesOperandContext) {
                 AQLParser.MatchesOperandContext moctx = (AQLParser.MatchesOperandContext) ctx;
-                List<QOMObject> trest123 = parse(moctx.valueList(), moctx.URIVALUE());
-                objects.add(parse(moctx.valueList(), moctx.URIVALUE()).get(0));
+                objects.add(parse(lookup, moctx.valueList(), moctx.URIVALUE()).get(0));
             }else if (ctx instanceof AQLParser.ValueListContext) {
-                objects.add(new ValueList((AQLParser.ValueListContext) ctx));
+                objects.add(new ValueList((AQLParser.ValueListContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.PredicateOperandContext) {
                 AQLParser.PredicateOperandContext poctx = (AQLParser.PredicateOperandContext) ctx;
                 if (poctx.identifiedPath() != null &&
@@ -115,15 +114,15 @@ public class QOMParserUtil {
                         poctx.identifiedPath().nodePredicate() == null) {
                     //If only an IDENTIFIER is specified, an IdentifiedPath can not be distinguished from a
                     //PrimitiveOperand of type String.
-                    objects.add(new PrimitiveOperand(PrimitiveType.STRING,poctx.identifiedPath().IDENTIFIER().getText()));
+                    objects.add(new PrimitiveOperand(PrimitiveType.STRING,poctx.identifiedPath().IDENTIFIER().getText(), lookup));
                 } else {
-                    objects.addAll(QOMParserUtil.parse(poctx.identifiedPath(),poctx.primitiveOperand()));
+                    objects.addAll(QOMParserUtil.parse(lookup, poctx.identifiedPath(),poctx.primitiveOperand()));
                 }
             } else if (ctx instanceof AQLParser.PrimitiveOperandContext) {
-                objects.add(new PrimitiveOperand((AQLParser.PrimitiveOperandContext) ctx));
+                objects.add(new PrimitiveOperand((AQLParser.PrimitiveOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ArchetypePredicateExprContext) {
                 AQLParser.ArchetypePredicateExprContext apctx = (AQLParser.ArchetypePredicateExprContext) ctx;
-                objects.add(parse(apctx.ARCHETYPEID(),apctx.PARAMETER(),apctx.REGEXPATTERN()).get(0));
+                objects.add(parse(lookup, apctx.ARCHETYPEID(),apctx.PARAMETER(),apctx.REGEXPATTERN()).get(0));
             } else if (ctx instanceof AQLParser.PathPartContext) {
                 objects.add(new PathPart((AQLParser.PathPartContext) ctx));
             } else if (ctx instanceof AQLParser.ObjectPathContext) {
@@ -133,29 +132,29 @@ public class QOMParserUtil {
             } else if (ctx instanceof AQLParser.NodePredicateExprContext) {
                 objects.add(new NodePredicateExpression((AQLParser.NodePredicateExprContext) ctx));
             } else if (ctx instanceof AQLParser.NodePredicateExprOperandContext) {
-                objects.add(new NodePredicateExprOperand((AQLParser.NodePredicateExprOperandContext) ctx));
+                objects.add(new NodePredicateExprOperand((AQLParser.NodePredicateExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.QueryClauseContext) {
-                objects.add(new QueryClause((AQLParser.QueryClauseContext) ctx));
+                objects.add(new QueryClause((AQLParser.QueryClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ClassExprOperandContext) {
-                objects.add(new ClassExprOperand((AQLParser.ClassExprOperandContext) ctx));
+                objects.add(new ClassExprOperand((AQLParser.ClassExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ContainsExprContext) {
-                objects.add(new ContainsExpression((AQLParser.ContainsExprContext) ctx));
+                objects.add(new ContainsExpression((AQLParser.ContainsExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.FromClauseContext) {
-                objects.add(new FromClause((AQLParser.FromClauseContext) ctx));
+                objects.add(new FromClause((AQLParser.FromClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ArchetypePredicateContext) {
-                objects.add(new ArchetypePredicate((AQLParser.ArchetypePredicateContext) ctx));
+                objects.add(new ArchetypePredicate((AQLParser.ArchetypePredicateContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.IdentifiedPathContext) {
-                objects.add(new IdentifiedPath((AQLParser.IdentifiedPathContext) ctx));
+                objects.add(new IdentifiedPath((AQLParser.IdentifiedPathContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.SelectOperandContext) {
-                objects.add(new SelectOperand((AQLParser.SelectOperandContext) ctx));
+                objects.add(new SelectOperand((AQLParser.SelectOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.SelectClauseContext) {
-                objects.add(new SelectClause((AQLParser.SelectClauseContext) ctx));
+                objects.add(new SelectClause((AQLParser.SelectClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.TopClauseContext) {
                 objects.add(new TopClause((AQLParser.TopClauseContext) ctx));
             } else if (ctx instanceof AQLParser.OrderByExprContext) {
-                objects.add(new OrderByExpression((AQLParser.OrderByExprContext) ctx));
+                objects.add(new OrderByExpression((AQLParser.OrderByExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.OrderByClauseContext) {
-                objects.add(new OrderByClause((AQLParser.OrderByClauseContext) ctx));
+                objects.add(new OrderByClause((AQLParser.OrderByClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.StandardPredicateExprContext) {
                 objects.add(new StandardPredicateExpression((AQLParser.StandardPredicateExprContext) ctx));
             } else if (ctx instanceof AQLParser.StandardPredicateContext) {
@@ -163,7 +162,7 @@ public class QOMParserUtil {
             } else if (ctx instanceof AQLParser.StandardPredicateExprOperandContext) {
                 objects.add(new StandardPredicateExprOperand((AQLParser.StandardPredicateExprOperandContext) ctx));
             } else if (ctx instanceof AQLParser.WhereClauseContext) {
-                objects.add(new WhereClause((AQLParser.WhereClauseContext) ctx));
+                objects.add(new WhereClause((AQLParser.WhereClauseContext) ctx, lookup));
             } else {
                 throw new RuntimeException("NYI");
             }

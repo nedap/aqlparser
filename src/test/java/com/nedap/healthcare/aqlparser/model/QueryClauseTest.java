@@ -1,5 +1,6 @@
 package com.nedap.healthcare.aqlparser.model;
 
+import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.leaf.*;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
@@ -8,13 +9,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class QueryClauseTest {
+public class QueryClauseTest extends BaseTest {
 
     @Test
     public void selectClause_fromClause_whereClause_orderByClause() throws AQLValidationException {
         String aql = "SELECT c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude AS bw " +
                 "FROM EHR e [ehr_id/value=1234] CONTAINS COMPOSITION c [openEHR-EHR-COMPOSITION.test.v1.0.0] WHERE bw = 42 ORDER BY bw";
-        QueryClause queryClause = (QueryClause) QOMParser.parse(aql,"queryClause");
+        QueryClause queryClause = (QueryClause) QOMParser.parse(aql,"queryClause", lookup);
 
         SelectClause selectClause = queryClause.getSelectClause();
         assertEquals("c",selectClause.getSelection().get(0).getIdentifiedPath().getVariableName());

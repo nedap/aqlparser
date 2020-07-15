@@ -4,7 +4,8 @@ import com.nedap.healthcare.aqlparser.AQLParser;
 
 public class ContainsExpression extends NodeExpression {
 
-    public ContainsExpression(AQLParser.ContainsExprContext ctx) {
+    public ContainsExpression(AQLParser.ContainsExprContext ctx, Lookup lookup) {
+        setLookup(lookup);
         initialize(ctx);
     }
 

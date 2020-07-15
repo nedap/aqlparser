@@ -21,18 +21,20 @@ public class ClassExprOperand extends QOMObject implements Leaf {
     private String className;
     private String variableName;
     private Predicate predicate;
+    private Lookup lookup;
 
-    public ClassExprOperand(AQLParser.ClassExprOperandContext ctx) {
+    public ClassExprOperand(AQLParser.ClassExprOperandContext ctx, Lookup lookup) {
+        this.lookup = lookup;
         initialize(ctx);
     }
 
     private void initialize(AQLParser.ClassExprOperandContext ctx) {
         className = ctx.IDENTIFIER(0).getText().toUpperCase();
         if (ctx.standardPredicate() != null) predicate = new StandardPredicate(ctx.standardPredicate());
-        if (ctx.archetypePredicate() != null) predicate = new ArchetypePredicate(ctx.archetypePredicate());
+        if (ctx.archetypePredicate() != null) predicate = new ArchetypePredicate(ctx.archetypePredicate(), lookup);
         if (ctx.IDENTIFIER(1) != null) {
             variableName = ctx.IDENTIFIER(1).getText();
-            Lookup.addVariable(variableName,this);
+            lookup.addVariable(variableName,this);
         }
     }
 

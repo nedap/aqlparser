@@ -13,16 +13,18 @@ public class NodeExpression extends QOMObject {
     private QOMObject object;
     private List<NodeExpression> children;
 
+    private Lookup lookup;
+
     protected void setObject(QOMObject object) {
         this.object = object;
     }
 
     protected void setObject(ParseTree parseTree) {
-        this.object = QOMParserUtil.parse(parseTree);
+        this.object = QOMParserUtil.parse(lookup, parseTree);
     }
 
     protected void setObject(ParseTree... parseTrees) {
-        List<QOMObject> objects = QOMParserUtil.parse(parseTrees);
+        List<QOMObject> objects = QOMParserUtil.parse(lookup, parseTrees);
         this.object = objects.get(0);
     }
 
@@ -33,7 +35,7 @@ public class NodeExpression extends QOMObject {
     }
 
     protected void addChild(ParseTree parseTree) {
-        addChild(QOMParserUtil.parse(parseTree));
+        addChild(QOMParserUtil.parse(lookup, parseTree));
     }
 
     protected void addChild(NodeExpression child) {
@@ -43,7 +45,7 @@ public class NodeExpression extends QOMObject {
     }
 
     protected void addChildren(ParseTree... parseTrees) {
-        addChildren(QOMParserUtil.parse(parseTrees));
+        addChildren(QOMParserUtil.parse(lookup, parseTrees));
     }
 
     protected void addChildren(List<QOMObject> children) {
@@ -92,6 +94,14 @@ public class NodeExpression extends QOMObject {
                 child.validate();
             }
         }
+    }
+
+    public Lookup getLookup() {
+        return lookup;
+    }
+
+    public void setLookup(Lookup lookup) {
+        this.lookup = lookup;
     }
 
 }

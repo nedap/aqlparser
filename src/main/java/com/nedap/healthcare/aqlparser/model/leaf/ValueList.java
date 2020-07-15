@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
 
@@ -11,13 +12,9 @@ public class ValueList extends QOMObject implements Leaf {
 
     private List<PrimitiveOperand> items;
 
-    public ValueList(AQLParser.ValueListContext ctx) {
-        initialize(ctx);
-    }
-
-    private void initialize(AQLParser.ValueListContext ctx) {
+    public ValueList(AQLParser.ValueListContext ctx, Lookup lookup) {
         items = new ArrayList<>();
-        List<QOMObject> objects = QOMParserUtil.parse(ctx.primitiveOperand().toArray(new AQLParser.PrimitiveOperandContext[0]));
+        List<QOMObject> objects = QOMParserUtil.parse(lookup, ctx.primitiveOperand().toArray(new AQLParser.PrimitiveOperandContext[0]));
         objects.forEach(object -> items.add((PrimitiveOperand) object));
     }
 

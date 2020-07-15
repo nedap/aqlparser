@@ -11,15 +11,11 @@ public class SelectOperand extends QOMObject implements Leaf {
 
     private String alias;
 
-    public SelectOperand(AQLParser.SelectOperandContext ctx) {
-        initialize(ctx);
-    }
-
-    private void initialize(AQLParser.SelectOperandContext ctx) {
-        identifiedPath = new IdentifiedPath(ctx.identifiedPath());
+    public SelectOperand(AQLParser.SelectOperandContext ctx, Lookup lookup) {
+        identifiedPath = new IdentifiedPath(ctx.identifiedPath(),lookup);
         if (ctx.AS() != null) {
             alias = ctx.IDENTIFIER().getText();
-            Lookup.addAlias(alias,identifiedPath);
+            lookup.addAlias(alias,identifiedPath);
         }
     }
 
