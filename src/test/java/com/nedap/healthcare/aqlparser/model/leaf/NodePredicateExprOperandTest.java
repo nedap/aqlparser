@@ -14,8 +14,8 @@ public class NodePredicateExprOperandTest extends BaseTest {
     public void nodeId() throws AQLValidationException {
         String aql ="id42";
         NodePredicateExprOperand nodePredicateExprOperand = (NodePredicateExprOperand) QOMParser.parse(aql,"nodePredicateExprOperand", lookup);
-        assertTrue(nodePredicateExprOperand.getObject() instanceof NodeId);
-        assertEquals("id42", ((NodeId) nodePredicateExprOperand.getObject()).getNodeId());
+        assertTrue(nodePredicateExprOperand.getObject() instanceof TerminalNodeLeaf);
+        assertEquals("id42", ((TerminalNodeLeaf) nodePredicateExprOperand.getObject()).getValue());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class NodePredicateExprOperandTest extends BaseTest {
         NodePredicateExprOperand nodePredicateExprOperand = (NodePredicateExprOperand) QOMParser.parse(aql,"nodePredicateExprOperand", lookup);
         assertTrue(nodePredicateExprOperand.getObject() instanceof Operator);
         assertEquals( OperatorType.AND, ((Operator) nodePredicateExprOperand.getObject()).getType());
-        assertEquals("id42", ((NodeId) nodePredicateExprOperand.getChildren(0).getObject()).getNodeId());
+        assertEquals("id42", ((TerminalNodeLeaf) nodePredicateExprOperand.getChildren(0).getObject()).getValue());
         assertEquals("someString", ((PrimitiveOperand) nodePredicateExprOperand.getChildren(1).getObject()).getValue());
     }
 
@@ -35,7 +35,7 @@ public class NodePredicateExprOperandTest extends BaseTest {
         NodePredicateExprOperand nodePredicateExprOperand = (NodePredicateExprOperand) QOMParser.parse(aql,"nodePredicateExprOperand", lookup);
         assertTrue(nodePredicateExprOperand.getObject() instanceof Operator);
         assertEquals( OperatorType.AND, ((Operator) nodePredicateExprOperand.getObject()).getType());
-        assertEquals("id42", ((NodeId) nodePredicateExprOperand.getChildren(0).getObject()).getNodeId());
+        assertEquals("id42", ((TerminalNodeLeaf) nodePredicateExprOperand.getChildren(0).getObject()).getValue());
         assertEquals(42, ((PrimitiveOperand) nodePredicateExprOperand.getChildren(1).getObject()).getValue());
     }
 

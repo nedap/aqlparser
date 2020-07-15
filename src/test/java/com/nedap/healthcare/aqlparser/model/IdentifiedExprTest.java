@@ -59,16 +59,6 @@ public class IdentifiedExprTest extends BaseTest {
     }
 
     @Test
-    public void xor() throws AQLValidationException {
-        String aql = "c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude = 42 " +
-                "XOR c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude > 1909-12-19";
-        IdentifiedExpression identifiedExpression = (IdentifiedExpression) QOMParser.parse(aql,"identifiedExpr", lookup);
-        assertEquals(OperatorType.XOR,((Operator) identifiedExpression.getObject()).getType());
-        assertTrue(identifiedExpression.getChildren(0).getObject() instanceof IdentifiedExprOperand);
-        assertTrue(identifiedExpression.getChildren(1).getObject() instanceof IdentifiedExprOperand);
-    }
-
-    @Test
     public void containment() throws AQLValidationException {
         String aql = "c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude = 42 " +
                 "OR c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude = 43 " +

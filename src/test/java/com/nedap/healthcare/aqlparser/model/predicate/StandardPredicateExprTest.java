@@ -41,16 +41,6 @@ public class StandardPredicateExprTest extends BaseTest {
     }
 
     @Test
-    public void xor() throws AQLValidationException {
-        String aql = "ehr_id/value = 42 XOR ehr_id/value = 43";
-        StandardPredicateExpression standardPredicateExpression = (StandardPredicateExpression) QOMParser.parse(aql,"standardPredicateExpr", lookup);
-        assertTrue(standardPredicateExpression.getObject() instanceof Operator);
-        assertEquals(OperatorType.XOR,((Operator) standardPredicateExpression.getObject()).getType());
-        assertTrue(standardPredicateExpression.getChildren(0).getObject() instanceof StandardPredicateExprOperand);
-        assertTrue(standardPredicateExpression.getChildren(1).getObject() instanceof StandardPredicateExprOperand);
-    }
-
-    @Test
     public void or() throws AQLValidationException {
         String aql = "ehr_id/value = 42 OR ehr_id/value = 43";
         StandardPredicateExpression standardPredicateExpression = (StandardPredicateExpression) QOMParser.parse(aql,"standardPredicateExpr", lookup);

@@ -2,10 +2,10 @@ package com.nedap.healthcare.aqlparser.model.predicate;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
-import com.nedap.healthcare.aqlparser.model.leaf.NodeId;
 import com.nedap.healthcare.aqlparser.model.leaf.NodePredicateExprOperand;
 import com.nedap.healthcare.aqlparser.model.leaf.Operator;
 import com.nedap.healthcare.aqlparser.model.leaf.OperatorType;
+import com.nedap.healthcare.aqlparser.model.leaf.TerminalNodeLeaf;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class NodePredicateExprTest extends BaseTest {
         String aql = "id42";
         NodePredicateExpression nodePredicateExpression = (NodePredicateExpression) QOMParser.parse(aql,"nodePredicateExpr", lookup);
         assertTrue(nodePredicateExpression.getObject() instanceof NodePredicateExprOperand);
-        assertEquals("id42", ((NodeId) ((NodePredicateExprOperand) nodePredicateExpression.getObject()).getObject()).getNodeId());
+        assertEquals("id42", ((TerminalNodeLeaf) ((NodePredicateExprOperand) nodePredicateExpression.getObject()).getObject()).getValue());
     }
 
     @Test
@@ -38,16 +38,6 @@ public class NodePredicateExprTest extends BaseTest {
         NodePredicateExpression nodePredicateExpression = (NodePredicateExpression) QOMParser.parse(aql,"nodePredicateExpr", lookup);
         assertTrue(nodePredicateExpression.getObject() instanceof Operator);
         assertEquals(OperatorType.OR,((Operator) nodePredicateExpression.getObject()).getType());
-        assertTrue(nodePredicateExpression.getChildren(0) instanceof NodePredicateExpression);
-        assertTrue(nodePredicateExpression.getChildren(1) instanceof NodePredicateExpression);
-    }
-
-    @Test
-    public void nodePredicateExpr_xor_nodePredicateExpr() throws AQLValidationException {
-        String aql = "id42 XOR id43";
-        NodePredicateExpression nodePredicateExpression = (NodePredicateExpression) QOMParser.parse(aql,"nodePredicateExpr", lookup);
-        assertTrue(nodePredicateExpression.getObject() instanceof Operator);
-        assertEquals(OperatorType.XOR,((Operator) nodePredicateExpression.getObject()).getType());
         assertTrue(nodePredicateExpression.getChildren(0) instanceof NodePredicateExpression);
         assertTrue(nodePredicateExpression.getChildren(1) instanceof NodePredicateExpression);
     }

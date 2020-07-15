@@ -14,7 +14,7 @@ public class IdentifiedExpression extends NodeExpression {
             initialize(ctx.identifiedExpr(0));
             return;
         }
-        setObject(ctx.identifiedExprOperand(), ctx.NOT(), ctx.EXISTS(), ctx.AND(), ctx.XOR(), ctx.OR());
+        setObject(ctx.identifiedExprOperand(), ctx.NOT(), ctx.EXISTS(), ctx.AND(), ctx.OR());
         addChildren(ctx.identifiedExpr(0), ctx.identifiedExpr(1));
     }
 

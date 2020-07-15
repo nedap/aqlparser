@@ -14,7 +14,7 @@ public class ContainsExpression extends NodeExpression {
             initialize(ctx.containsExpr(0));
             return;
         }
-        setObject(ctx.CONTAINS(),ctx.classExprOperand(), ctx.AND(), ctx.XOR(), ctx.OR());
+        setObject(ctx.CONTAINS(),ctx.classExprOperand(), ctx.AND(), ctx.OR());
         addChildren(
                 (ctx.CONTAINS() != null) ? ctx.classExprOperand() : null,
                 ctx.containsExpr(0),

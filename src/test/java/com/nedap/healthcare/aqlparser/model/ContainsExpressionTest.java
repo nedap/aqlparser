@@ -50,16 +50,6 @@ public class ContainsExpressionTest extends BaseTest {
     }
 
     @Test
-    public void classExpr_xor_classExpr() throws AQLValidationException {
-        String aql ="EHR e1 [ehr_id/value=1234] XOR e2 [ehr_id/value=12345]";
-        ContainsExpression containsExpression = (ContainsExpression) QOMParser.parse(aql,"containsExpr", lookup);
-        assertTrue(containsExpression.getObject() instanceof Operator);
-        assertEquals(OperatorType.XOR,((Operator) containsExpression.getObject()).getType());
-        assertTrue(containsExpression.getChildren(0).getObject() instanceof ClassExprOperand);
-        assertTrue(containsExpression.getChildren(1).getObject() instanceof ClassExprOperand);
-    }
-
-    @Test
     public void parentheses() throws AQLValidationException {
         String aql ="(EHR e1 [ehr_id/value=1234])";
         ContainsExpression containsExpression = (ContainsExpression) QOMParser.parse(aql,"containsExpr", lookup);

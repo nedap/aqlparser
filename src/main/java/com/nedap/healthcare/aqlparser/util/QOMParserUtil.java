@@ -44,16 +44,15 @@ public class QOMParserUtil {
             int type = terminalNode.getSymbol().getType();
             switch (type) {
                 case AQLParser.NODEID :
-                    objects.add(new NodeId(terminalNode));
+                case AQLParser.URIVALUE:
+                case AQLParser.REGEXPATTERN:
+                    objects.add(new TerminalNodeLeaf(terminalNode));
                     break;
                 case AQLParser.PARAMETER:
                     objects.add(new PrimitiveOperand(PrimitiveType.PARAMETER,terminalNode.getText(), lookup));
                     break;
                 case AQLParser.ARCHETYPEID:
                     objects.add(new ArchetypeId(terminalNode));
-                    break;
-                case AQLParser.URIVALUE:
-                    objects.add(new URIValue(terminalNode));
                     break;
                 case AQLParser.STRING:
                     objects.add(new PrimitiveOperand(PrimitiveType.STRING,terminalNode.getText(), lookup));
@@ -70,13 +69,9 @@ public class QOMParserUtil {
                 case AQLParser.BOOLEAN:
                     objects.add(new PrimitiveOperand(PrimitiveType.BOOLEAN,terminalNode.getText(), lookup));
                     break;
-                case AQLParser.REGEXPATTERN:
-                    objects.add(new RegexPattern(terminalNode));
-                    break;
                 case AQLParser.COMPARABLEOPERATOR:
                 case AQLParser.AND:
                 case AQLParser.OR:
-                case AQLParser.XOR:
                 case AQLParser.NOT:
                 case AQLParser.EXISTS:
                 case AQLParser.MATCHES:
@@ -105,7 +100,7 @@ public class QOMParserUtil {
             } else if (ctx instanceof AQLParser.MatchesOperandContext) {
                 AQLParser.MatchesOperandContext moctx = (AQLParser.MatchesOperandContext) ctx;
                 objects.add(parse(lookup, moctx.valueList(), moctx.URIVALUE()).get(0));
-            }else if (ctx instanceof AQLParser.ValueListContext) {
+            } else if (ctx instanceof AQLParser.ValueListContext) {
                 objects.add(new ValueList((AQLParser.ValueListContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.PredicateOperandContext) {
                 AQLParser.PredicateOperandContext poctx = (AQLParser.PredicateOperandContext) ctx;

@@ -17,7 +17,6 @@ public enum OperatorType {
     //Logical operators
     AND("AND"),
     OR("OR"),
-    XOR("XOR"),
     NOT("NOT"),
     EXISTS("EXISTS"),
     CONTAINS("CONTAINS");//This one is not li

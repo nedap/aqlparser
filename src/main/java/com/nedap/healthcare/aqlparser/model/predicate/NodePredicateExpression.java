@@ -14,7 +14,7 @@ public class NodePredicateExpression extends NodeExpression {
             initialize(ctx.nodePredicateExpr(0));
             return;
         }
-        setObject(ctx.AND(),ctx.XOR(),ctx.OR(),ctx.nodePredicateExprOperand());
+        setObject(ctx.AND(),ctx.OR(),ctx.nodePredicateExprOperand());
         addChildren(ctx.nodePredicateExpr(0),ctx.nodePredicateExpr(1));
     }
 

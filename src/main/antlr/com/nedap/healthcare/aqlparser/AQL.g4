@@ -56,7 +56,6 @@ standardPredicateExpr
     : standardPredicateExprOperand
     | NOT standardPredicateExpr
     | standardPredicateExpr AND standardPredicateExpr
-    | standardPredicateExpr XOR standardPredicateExpr
     | standardPredicateExpr OR standardPredicateExpr
     | '(' standardPredicateExpr ')'
     ;
@@ -72,7 +71,6 @@ nodePredicate : '[' nodePredicateExpr ']' ;
 nodePredicateExpr
     : nodePredicateExprOperand
     | nodePredicateExpr AND nodePredicateExpr
-    | nodePredicateExpr XOR nodePredicateExpr
     | nodePredicateExpr OR nodePredicateExpr
     | '(' nodePredicateExpr ')'
     ;
@@ -89,7 +87,6 @@ identifiedExpr
     | NOT identifiedExpr
     | EXISTS identifiedExpr
     | identifiedExpr AND identifiedExpr
-    | identifiedExpr XOR identifiedExpr
     | identifiedExpr OR identifiedExpr
     | '(' identifiedExpr ')'
     ;
@@ -103,7 +100,6 @@ valueList : primitiveOperand  (',' primitiveOperand )* ;
 containsExpr
     : classExprOperand (CONTAINS containsExpr)?
     | containsExpr AND containsExpr
-    | containsExpr XOR containsExpr
     | containsExpr OR containsExpr
     | '(' containsExpr ')'
     ;
@@ -132,7 +128,6 @@ ASC : A S C ;
 ASCENDING : A S C E N D I N G ;
 AND : A N D ;
 OR : O R ;
-XOR : X O R ;
 NOT : N O T ;
 MATCHES : M A T C H E S ;
 EXISTS: E X I S T S ;

@@ -14,7 +14,7 @@ public class StandardPredicateExpression extends NodeExpression {
             initialize(ctx.standardPredicateExpr(0));
             return;
         }
-        setObject(ctx.standardPredicateExprOperand(),ctx.NOT(),ctx.AND(),ctx.XOR(),ctx.OR());
+        setObject(ctx.standardPredicateExprOperand(),ctx.NOT(),ctx.AND(),ctx.OR());
         addChildren(ctx.standardPredicateExpr(0),ctx.standardPredicateExpr(1));
     }
 }

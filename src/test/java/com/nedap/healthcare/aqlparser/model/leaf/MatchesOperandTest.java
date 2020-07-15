@@ -22,7 +22,7 @@ public class MatchesOperandTest extends BaseTest {
     @Test
     public void urivalue() throws AQLValidationException {
         String aql ="terminology://snomed-ct/hierarchy?rootConceptId=50043002";
-        URIValue uriValue = (URIValue) QOMParser.parse(aql,"matchesOperand", lookup);
+        TerminalNodeLeaf uriValue = (TerminalNodeLeaf) QOMParser.parse(aql,"matchesOperand", lookup);
         assertEquals("terminology://snomed-ct/hierarchy?rootConceptId=50043002",uriValue.getValue());
     }
 
