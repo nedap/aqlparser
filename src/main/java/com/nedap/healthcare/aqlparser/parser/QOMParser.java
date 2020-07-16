@@ -6,7 +6,7 @@ import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
-import com.nedap.healthcare.aqlparser.model.QueryClause;
+import com.nedap.healthcare.aqlparser.model.clause.QueryClause;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;

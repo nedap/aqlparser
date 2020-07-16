@@ -1,21 +1,18 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
-import com.nedap.healthcare.aqlparser.model.predicate.NodePredicate;
+import com.nedap.healthcare.aqlparser.model.Predicate;
 
-public class PathPart extends QOMObject implements Leaf {
+public class PathPart extends QOMObject {
 
     private String identifier;
-    private NodePredicate nodePredicate;
+    private Predicate nodePredicate;
 
-    public PathPart(AQLParser.PathPartContext ctx) {
-        initialize(ctx);
-    }
-
-    private void initialize(AQLParser.PathPartContext ctx) {
+    public PathPart(AQLParser.PathPartContext ctx, Lookup lookup) {
         identifier = ctx.IDENTIFIER().getText();
-        if (ctx.nodePredicate() != null) nodePredicate = new NodePredicate(ctx.nodePredicate());
+        if (ctx.nodePredicate() != null) nodePredicate = new Predicate(ctx.nodePredicate(), lookup);
     }
 
     @Override

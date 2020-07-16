@@ -2,8 +2,7 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
-import com.nedap.healthcare.aqlparser.model.predicate.ArchetypePredicate;
-import com.nedap.healthcare.aqlparser.model.predicate.StandardPredicate;
+import com.nedap.healthcare.aqlparser.model.Predicate;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
 import org.junit.Test;
 
@@ -32,7 +31,7 @@ public class ClassExprOperandTest extends BaseTest {
         ClassExprOperand classExprOperand = (ClassExprOperand) QOMParser.parse(aql,"classExprOperand", lookup);
         assertEquals("COMPOSITION",classExprOperand.getClassName());
         assertEquals("c",classExprOperand.getVariableName());
-        assertTrue(classExprOperand.getPredicate() instanceof ArchetypePredicate);
+        assertEquals("[openEHR-EHR-COMPOSITION.test.v1.0.0]",classExprOperand.getPredicate().toString());
     }
 
     @Test
@@ -41,6 +40,6 @@ public class ClassExprOperandTest extends BaseTest {
         ClassExprOperand classExprOperand = (ClassExprOperand) QOMParser.parse(aql,"classExprOperand", lookup);
         assertEquals("EHR",classExprOperand.getClassName());
         assertEquals("e",classExprOperand.getVariableName());
-        assertTrue(classExprOperand.getPredicate() instanceof StandardPredicate);
+        assertEquals("[/ehr_id/value = 1234]",classExprOperand.getPredicate().toString());
     }
 }

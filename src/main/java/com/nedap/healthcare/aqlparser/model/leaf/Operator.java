@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
-public class Operator extends QOMObject implements Leaf {
+public class Operator extends QOMObject {
 
     private final OperatorType type;
 

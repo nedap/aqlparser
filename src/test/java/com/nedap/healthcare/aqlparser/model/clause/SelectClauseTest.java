@@ -1,7 +1,8 @@
-package com.nedap.healthcare.aqlparser.model;
+package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.clause.SelectClause;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
 import org.junit.Test;
 

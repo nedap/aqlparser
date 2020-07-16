@@ -19,20 +19,11 @@ import com.nedap.healthcare.aqlparser.model.QOMObject;
  *      - a replaceable parameter (identified with the '$' symbol); OR
  *      - an identified path.
  */
-public class IdentifiedExprOperand extends NodeExpression implements Leaf {
+public class IdentifiedExprOperand extends NodeExpression {
 
-    private Lookup lookup;
 
     public IdentifiedExprOperand(AQLParser.IdentifiedExprOperandContext ctx, Lookup lookup){
-        initialize(ctx);
-        this.lookup = lookup;
-    }
-
-    private void initialize(AQLParser.IdentifiedExprOperandContext ctx) {
-        setObject(ctx.COMPARABLEOPERATOR(), ctx.MATCHES(),ctx.predicateOperand(0));
-        if (ctx.COMPARABLEOPERATOR() != null || ctx.MATCHES() != null) {
-            addChildren(ctx.predicateOperand(0),ctx.predicateOperand(1),ctx.matchesOperand());
-        }
+        super(ctx, lookup);
     }
 
     @Override
@@ -56,7 +47,7 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
             return (IdentifiedPath) qomObject;
         } else if (qomObject instanceof PrimitiveOperand) {
             PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
-            IdentifiedPath identifiedPath = lookup.getIdentifiedPath(primitiveOperand.getValue().toString());
+            IdentifiedPath identifiedPath = getLookup().getIdentifiedPath(primitiveOperand.getValue().toString());
             return identifiedPath;
         } else {
             return null;
@@ -72,7 +63,7 @@ public class IdentifiedExprOperand extends NodeExpression implements Leaf {
     }
 
     public ClassExprOperand getClassExprOperand() {
-        return lookup.getClassExprOperand(getVariableName());
+        return getLookup().getClassExprOperand(getVariableName());
     }
 
     public Operator getOperator() {

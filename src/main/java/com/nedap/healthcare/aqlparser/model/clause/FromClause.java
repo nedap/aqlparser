@@ -1,14 +1,17 @@
-package com.nedap.healthcare.aqlparser.model;
+package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.Lookup;
+import com.nedap.healthcare.aqlparser.model.NodeExpression;
+import com.nedap.healthcare.aqlparser.model.QOMObject;
 
 public class FromClause extends QOMObject {
 
-    private ContainsExpression containsExpression;
+    private NodeExpression containsExpression;
 
     public FromClause(AQLParser.FromClauseContext ctx, Lookup lookup) {
-        containsExpression = new ContainsExpression(ctx.containsExpr(), lookup);
+        containsExpression = new NodeExpression(ctx.containsExpr(), lookup);
 
     }
 
@@ -17,7 +20,7 @@ public class FromClause extends QOMObject {
         containsExpression.validate();
     }
 
-    public ContainsExpression getContainsExpression() {
+    public NodeExpression getContainsExpression() {
         return containsExpression;
     }
 }

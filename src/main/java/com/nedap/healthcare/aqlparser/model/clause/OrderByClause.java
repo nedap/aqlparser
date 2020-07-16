@@ -1,7 +1,9 @@
-package com.nedap.healthcare.aqlparser.model;
+package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.Lookup;
+import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.leaf.OrderByExpression;
 
 import java.util.ArrayList;

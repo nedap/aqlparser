@@ -4,7 +4,7 @@ import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class TerminalNodeLeaf extends QOMObject implements Leaf {
+public class TerminalNodeLeaf extends QOMObject {
 
     private final String value;
 

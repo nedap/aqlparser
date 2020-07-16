@@ -4,9 +4,8 @@ import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
-import com.nedap.healthcare.aqlparser.model.predicate.ArchetypePredicate;
-import com.nedap.healthcare.aqlparser.model.predicate.Predicate;
-import com.nedap.healthcare.aqlparser.model.predicate.StandardPredicate;
+import com.nedap.healthcare.aqlparser.model.Predicate;
+import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
 
 /**
  * Class expressions syntax include three parts. A class expression must have part one and at least one of part two or
@@ -16,7 +15,7 @@ import com.nedap.healthcare.aqlparser.model.predicate.StandardPredicate;
  * - part two (optional): AQL variable name
  * - part three (optional): a standard predicate or an archetype predicate.
  */
-public class ClassExprOperand extends QOMObject implements Leaf {
+public class ClassExprOperand extends QOMObject {
 
     private String className;
     private String variableName;
@@ -30,8 +29,9 @@ public class ClassExprOperand extends QOMObject implements Leaf {
 
     private void initialize(AQLParser.ClassExprOperandContext ctx) {
         className = ctx.IDENTIFIER(0).getText().toUpperCase();
-        if (ctx.standardPredicate() != null) predicate = new StandardPredicate(ctx.standardPredicate());
-        if (ctx.archetypePredicate() != null) predicate = new ArchetypePredicate(ctx.archetypePredicate(), lookup);
+        if (ctx.standardPredicate() != null || ctx.archetypePredicate() != null) {
+            predicate = (Predicate) QOMParserUtil.parse(lookup, ctx.standardPredicate(), ctx.archetypePredicate()).get(0);
+        }
         if (ctx.IDENTIFIER(1) != null) {
             variableName = ctx.IDENTIFIER(1).getText();
             lookup.addVariable(variableName,this);

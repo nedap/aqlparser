@@ -8,7 +8,7 @@ import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValueList extends QOMObject implements Leaf {
+public class ValueList extends QOMObject {
 
     private List<PrimitiveOperand> items;
 

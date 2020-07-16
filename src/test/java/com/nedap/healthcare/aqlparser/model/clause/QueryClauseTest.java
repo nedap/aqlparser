@@ -1,7 +1,9 @@
-package com.nedap.healthcare.aqlparser.model;
+package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.NodeExpression;
+import com.nedap.healthcare.aqlparser.model.clause.*;
 import com.nedap.healthcare.aqlparser.model.leaf.*;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
 import org.junit.Test;
@@ -23,7 +25,7 @@ public class QueryClauseTest extends BaseTest {
         assertEquals("bw",selectClause.getSelection().get(0).getAlias());
 
         FromClause fromClause = queryClause.getFromClause();
-        ContainsExpression containsExpression = fromClause.getContainsExpression();
+        NodeExpression containsExpression = fromClause.getContainsExpression();
         assertTrue(containsExpression.getObject() instanceof Operator);
         assertEquals(OperatorType.CONTAINS,((Operator) containsExpression.getObject()).getType());
         assertEquals("e",((ClassExprOperand) containsExpression.getChildren(0).getObject()).getVariableName());

@@ -4,7 +4,7 @@ import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
-import com.nedap.healthcare.aqlparser.model.predicate.NodePredicate;
+import com.nedap.healthcare.aqlparser.model.Predicate;
 
 /**
  * In AQL, an IdentifiedPath is the association of a variable reference (the identifier; see above) and an archetype
@@ -33,11 +33,11 @@ import com.nedap.healthcare.aqlparser.model.predicate.NodePredicate;
  *
  *  cf. https://specifications.openehr.org/releases/QUERY/latest/AQL.html#_aql_identified_paths
  */
-public class IdentifiedPath extends QOMObject implements Leaf {
+public class IdentifiedPath extends QOMObject {
 
     private String variableName;
 
-    private NodePredicate nodePredicate;
+    private Predicate nodePredicate;
 
     private ObjectPath objectPath;
 
@@ -50,8 +50,8 @@ public class IdentifiedPath extends QOMObject implements Leaf {
 
     private void initialize(AQLParser.IdentifiedPathContext ctx) {
         variableName = ctx.IDENTIFIER().getText();
-        if (ctx.nodePredicate() != null) nodePredicate = new NodePredicate(ctx.nodePredicate());
-        if (ctx.objectPath() != null) objectPath = new ObjectPath(ctx.objectPath());
+        if (ctx.nodePredicate() != null) nodePredicate = new Predicate(ctx.nodePredicate(), lookup);
+        if (ctx.objectPath() != null) objectPath = new ObjectPath(ctx.objectPath(), lookup);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class IdentifiedPath extends QOMObject implements Leaf {
         return objectPath;
     }
 
-    public NodePredicate getNodePredicate() {
+    public Predicate getNodePredicate() {
         return nodePredicate;
     }
 

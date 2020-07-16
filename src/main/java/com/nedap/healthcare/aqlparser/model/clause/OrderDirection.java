@@ -1,4 +1,4 @@
-package com.nedap.healthcare.aqlparser.model;
+package com.nedap.healthcare.aqlparser.model.clause;
 
 public enum OrderDirection {
     ASCENDING,

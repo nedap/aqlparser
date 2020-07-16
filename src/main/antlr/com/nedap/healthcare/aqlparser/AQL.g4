@@ -85,13 +85,13 @@ nodePredicateExprOperand
 identifiedExpr
     : identifiedExprOperand
     | NOT identifiedExpr
-    | EXISTS identifiedExpr
+    | EXISTS identifiedExpr //This should be PredicateOperand
     | identifiedExpr AND identifiedExpr
     | identifiedExpr OR identifiedExpr
     | '(' identifiedExpr ')'
     ;
 
-identifiedExprOperand : predicateOperand ((COMPARABLEOPERATOR predicateOperand)|(MATCHES '{' matchesOperand '}'))?;
+identifiedExprOperand : predicateOperand ((COMPARABLEOPERATOR predicateOperand)|(MATCHES '{' matchesOperand '}'))?;//Should not be optional
 
 matchesOperand : valueList | URIVALUE ;
 

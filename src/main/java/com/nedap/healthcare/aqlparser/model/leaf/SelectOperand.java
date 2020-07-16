@@ -5,7 +5,7 @@ import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 
-public class SelectOperand extends QOMObject implements Leaf {
+public class SelectOperand extends QOMObject {
 
     private IdentifiedPath identifiedPath;
 

@@ -2,9 +2,8 @@ package com.nedap.healthcare.aqlparser.util;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.model.*;
+import com.nedap.healthcare.aqlparser.model.clause.*;
 import com.nedap.healthcare.aqlparser.model.leaf.*;
-import com.nedap.healthcare.aqlparser.model.predicate.*;
-import com.nedap.healthcare.aqlparser.model.leaf.NodePredicateExprOperand;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -94,7 +93,7 @@ public class QOMParserUtil {
         for (ParserRuleContext ctx : parserRuleContexts) {
             if (ctx == null) continue;
             if (ctx instanceof AQLParser.IdentifiedExprContext) {
-                objects.add(new IdentifiedExpression((AQLParser.IdentifiedExprContext) ctx, lookup));
+                objects.add(new NodeExpression((AQLParser.IdentifiedExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.IdentifiedExprOperandContext) {
                 objects.add(new IdentifiedExprOperand((AQLParser.IdentifiedExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.MatchesOperandContext) {
@@ -119,25 +118,25 @@ public class QOMParserUtil {
                 AQLParser.ArchetypePredicateExprContext apctx = (AQLParser.ArchetypePredicateExprContext) ctx;
                 objects.add(parse(lookup, apctx.ARCHETYPEID(),apctx.PARAMETER(),apctx.REGEXPATTERN()).get(0));
             } else if (ctx instanceof AQLParser.PathPartContext) {
-                objects.add(new PathPart((AQLParser.PathPartContext) ctx));
+                objects.add(new PathPart((AQLParser.PathPartContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ObjectPathContext) {
-                objects.add(new ObjectPath((AQLParser.ObjectPathContext) ctx));
+                objects.add(new ObjectPath((AQLParser.ObjectPathContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.NodePredicateContext) {
-                objects.add(new NodePredicate((AQLParser.NodePredicateContext) ctx));
+                objects.add(new Predicate((AQLParser.NodePredicateContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.NodePredicateExprContext) {
-                objects.add(new NodePredicateExpression((AQLParser.NodePredicateExprContext) ctx));
+                objects.add(new NodeExpression((AQLParser.NodePredicateExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.NodePredicateExprOperandContext) {
-                objects.add(new NodePredicateExprOperand((AQLParser.NodePredicateExprOperandContext) ctx, lookup));
+                objects.add(new NodeExpression((AQLParser.NodePredicateExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.QueryClauseContext) {
                 objects.add(new QueryClause((AQLParser.QueryClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ClassExprOperandContext) {
                 objects.add(new ClassExprOperand((AQLParser.ClassExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ContainsExprContext) {
-                objects.add(new ContainsExpression((AQLParser.ContainsExprContext) ctx, lookup));
+                objects.add(new NodeExpression((AQLParser.ContainsExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.FromClauseContext) {
                 objects.add(new FromClause((AQLParser.FromClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ArchetypePredicateContext) {
-                objects.add(new ArchetypePredicate((AQLParser.ArchetypePredicateContext) ctx, lookup));
+                objects.add(new Predicate((AQLParser.ArchetypePredicateContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.IdentifiedPathContext) {
                 objects.add(new IdentifiedPath((AQLParser.IdentifiedPathContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.SelectOperandContext) {
@@ -151,11 +150,11 @@ public class QOMParserUtil {
             } else if (ctx instanceof AQLParser.OrderByClauseContext) {
                 objects.add(new OrderByClause((AQLParser.OrderByClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.StandardPredicateExprContext) {
-                objects.add(new StandardPredicateExpression((AQLParser.StandardPredicateExprContext) ctx));
+                objects.add(new NodeExpression((AQLParser.StandardPredicateExprContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.StandardPredicateContext) {
-                objects.add(new StandardPredicate((AQLParser.StandardPredicateContext) ctx));
+                objects.add(new Predicate((AQLParser.StandardPredicateContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.StandardPredicateExprOperandContext) {
-                objects.add(new StandardPredicateExprOperand((AQLParser.StandardPredicateExprOperandContext) ctx));
+                objects.add(new NodeExpression((AQLParser.StandardPredicateExprOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.WhereClauseContext) {
                 objects.add(new WhereClause((AQLParser.WhereClauseContext) ctx, lookup));
             } else {

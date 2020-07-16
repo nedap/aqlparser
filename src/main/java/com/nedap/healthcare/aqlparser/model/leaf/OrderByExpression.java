@@ -3,10 +3,10 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
-import com.nedap.healthcare.aqlparser.model.OrderDirection;
+import com.nedap.healthcare.aqlparser.model.clause.OrderDirection;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 
-public class OrderByExpression extends QOMObject implements Leaf {
+public class OrderByExpression extends QOMObject {
 
     private IdentifiedPath identifiedPath;
     private OrderDirection order;

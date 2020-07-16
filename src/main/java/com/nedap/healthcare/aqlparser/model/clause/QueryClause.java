@@ -1,9 +1,11 @@
-package com.nedap.healthcare.aqlparser.model;
+package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.Lookup;
+import com.nedap.healthcare.aqlparser.model.QOMObject;
 
-public class QueryClause extends QOMObject{
+public class QueryClause extends QOMObject {
 
     private SelectClause selectClause;
     private FromClause fromClause;
