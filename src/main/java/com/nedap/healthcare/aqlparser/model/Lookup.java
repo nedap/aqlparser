@@ -37,13 +37,9 @@ public class Lookup {
         return variables.get(variable);
     }
 
-    public void addParameter(String parameter, Object value) {
-        try {
+    public void addParameter(String parameter, Object value) throws AQLValidationException {
             PrimitiveOperand primitiveOperand = (PrimitiveOperand) QOMParser.parse(value.toString(),"primitiveOperand", this);
             addParameter(parameter,primitiveOperand);
-        } catch (AQLValidationException e) {
-            throw new RuntimeException("Could not add parameter ", e);
-        }
     }
 
     public void addParameter(String param, PrimitiveOperand primitiveOperand) {

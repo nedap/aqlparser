@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 
@@ -48,7 +49,7 @@ public class PrimitiveOperand extends QOMObject {
             type = PrimitiveType.PARAMETER;
             value = castValueToType(ctx.PARAMETER().getText());
         } else {
-            throw new RuntimeException("Unknown operand type");
+            throw new IllegalArgumentException("Unknown operand type");
         }
     }
 
@@ -70,11 +71,11 @@ public class PrimitiveOperand extends QOMObject {
         } else if (type == PrimitiveType.PARAMETER) {
             PrimitiveOperand result = lookup.getParameter(value);
             if (result == null) {
-                throw new RuntimeException("Could not resolve parameter " + value);
+                throw new AQLValidationException("Could not resolve parameter " + value);
             }
             return result.getValue();
         } else {
-            throw new RuntimeException("Unknown operand type");
+            throw new IllegalArgumentException("Unknown operand type");
         }
     }
 

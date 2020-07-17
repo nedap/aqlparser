@@ -3,6 +3,7 @@ package com.nedap.healthcare.aqlparser.parser;
 import com.nedap.healthcare.aqlparser.AQLBaseVisitor;
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
@@ -25,11 +26,11 @@ public class QOMParser extends AQLBaseVisitor<QOMObject> {
         this.lookup = lookup;
     }
 
-    public static QueryClause parse(String aql, Lookup lookup) throws AQLValidationException {
+    public static QueryClause parse(String aql, Lookup lookup) {
         return (QueryClause) parse(aql,"queryClause", lookup);
     }
 
-    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) throws AQLValidationException {
+    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) {
         final CharStream input = CharStreams.fromString(aql);
         final AQLLexer lexer = new AQLLexer(input);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -39,11 +40,13 @@ public class QOMParser extends AQLBaseVisitor<QOMObject> {
             Method method = parser.getClass().getMethod(startRuleName);
             parseTree = (ParseTree) method.invoke(parser);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            throw new RuntimeException("Could not invoke ParseTree." + startRuleName,e);
+            throw new IllegalArgumentException("Could not invoke ParseTree." + startRuleName,e);
         }
         final QOMParser visitor = new QOMParser(lookup);
         QOMObject object = visitor.visit(parseTree);
-        if (object == null) throw new RuntimeException("Visitor for " + startRuleName + " not yet implement");
+        if (object == null) {
+            throw new AQLUnsupportedFeatureException("Visitor for " + startRuleName + " not yet implement");
+        }
         object.validate();
         return object;
     }

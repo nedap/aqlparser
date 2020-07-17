@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.temporal.Temporal;
 
 public class Operator extends QOMObject {
 
@@ -39,21 +40,19 @@ public class Operator extends QOMObject {
             return false;
         }
         if (!(o1 instanceof Comparable) || !(o2 instanceof Comparable)) {
-            throw new RuntimeException("Expected instance of Comparable");
+            throw new IllegalArgumentException("Expected instance of Comparable");
         }
 
         //In AQL, you can either compare numbers, strings or dates. Any other object is not supported.
-        //ToDo: Compare also dates
         if (o1 instanceof Number && o2 instanceof Number) {
             return compare(((Number) o1).doubleValue(), ((Number) o2).doubleValue());
         } else if (o1 instanceof String && o2 instanceof String) {
             return compare(o1.toString(), o2.toString());
-        } else if (o1 instanceof LocalDateTime && o2 instanceof LocalDateTime) {
-            return compare((LocalDateTime) o1, (LocalDateTime) o2);
-        } else if (o1 instanceof OffsetDateTime && o2 instanceof OffsetDateTime) {
-            return compare((OffsetDateTime) o1, (OffsetDateTime) o2);
+        } else if (o1 instanceof Temporal && o2 instanceof Temporal){
+            //ToDo: This will fail for certain combinations of o1 and o2! Cast dates to...?
+            return compare((Comparable) o1, (Comparable) o2);
         } else {
-            throw new RuntimeException(
+            throw new IllegalArgumentException(
                     "Cannot compare " + o1.getClass().toGenericString() + " to " + o2.getClass().toGenericString());
         }
     }
@@ -74,7 +73,7 @@ public class Operator extends QOMObject {
             case NOT_EQUAL:
                 return left.compareTo(right) != 0;
             default:
-                throw new RuntimeException("Expected comparison operator");
+                throw new IllegalArgumentException("Expected comparison operator");
         }
     }
 

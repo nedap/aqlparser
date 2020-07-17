@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.util;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.model.*;
 import com.nedap.healthcare.aqlparser.model.clause.*;
 import com.nedap.healthcare.aqlparser.model.leaf.*;
@@ -25,8 +26,6 @@ public class QOMParserUtil {
                 objects.add(parse(lookup, (TerminalNode) parseTree));
             } else if (parseTree instanceof ParserRuleContext) {
                 objects.add(parse(lookup, (ParserRuleContext) parseTree));
-            } else {
-                throw new RuntimeException("NYI");
             }
         }
         return objects;
@@ -78,7 +77,7 @@ public class QOMParserUtil {
                     objects.add(new Operator(terminalNode));
                     break;
                 default:
-                    throw new RuntimeException("NYI");
+                    throw new AQLUnsupportedFeatureException(terminalNode.getSymbol() + " not yet supported in QOMParserUtil");
             }
         }
         return objects;
@@ -158,7 +157,7 @@ public class QOMParserUtil {
             } else if (ctx instanceof AQLParser.WhereClauseContext) {
                 objects.add(new WhereClause((AQLParser.WhereClauseContext) ctx, lookup));
             } else {
-                throw new RuntimeException("NYI");
+                throw new AQLUnsupportedFeatureException(ctx.getClass().getCanonicalName() + " not yet supported in QOMParserUtil");
             }
         }
         return objects;
