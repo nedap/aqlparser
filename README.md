@@ -5,7 +5,7 @@ This QOM can be used to create an AQL query.
 
 Note that this library does not contain any query logic. This logic is e.g. contained in the query package of chiron.
  
-##Dependency
+## Dependency
 The aqlparser is available internally from artifactory and can be included in your gradle project using
 ```gradle
 dependencies {
@@ -21,7 +21,7 @@ or using maven
 </dependency>
 ```
 
-##Setup
+## Setup
 In order to setup aqlparser, please create a gradle properties file ```.../aqlparser/gradle.properties``` and add
 ```gradle
 artifactory_contextUrl=https://nedap.jfrog.io/artifactory
@@ -34,7 +34,7 @@ to it. Rember that if you build aqlparser for the first time (or altered the gra
 ```
 first.
 
-##Publishing
+## Publishing
 In order to upload a new version of aqlparser to artifactory, update ```version``` in ```build.gradle``` and run 
 ```shell script
 ./gradlew artifactoryPublish
