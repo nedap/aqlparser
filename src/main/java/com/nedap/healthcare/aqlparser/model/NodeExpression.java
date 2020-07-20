@@ -187,18 +187,6 @@ public class NodeExpression extends QOMObject {
         return (children != null && children.size() >= 1);
     }
 
-    public Boolean isTerminalNode() {
-        if (!hasChildren()) {
-            if (object instanceof NodeExpression) {
-                return ((NodeExpression) object).isTerminalNode();
-            } else {
-                return true;
-            }
-        } else {
-            return children.stream().noneMatch(NodeExpression::hasChildren);
-        }
-    }
-
     @Override
     public String toString() {
         String result = getObject().toString();

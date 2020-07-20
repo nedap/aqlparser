@@ -34,7 +34,15 @@ public class Lookup {
     }
 
     public ClassExprOperand getClassExprOperand(String variable) {
-        return variables.get(variable);
+        ClassExprOperand classExprOperand = variables.get(variable);
+        if (classExprOperand == null) {
+            //Variable could be alias
+            IdentifiedPath identifiedPath = aliases.get(variable);
+            if (identifiedPath != null) {
+                classExprOperand = variables.get(identifiedPath.getVariableName());
+            }
+        }
+        return classExprOperand;
     }
 
     public void addParameter(String parameter, Object value) throws AQLValidationException {
