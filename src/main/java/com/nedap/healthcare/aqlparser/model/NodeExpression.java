@@ -103,8 +103,8 @@ public class NodeExpression extends QOMObject {
 
     private void initialize(AQLParser.NodePredicateExprOperandContext ctx) {
         if (!ctx.predicateOperand().isEmpty()) {
-            setObject(QOMParserUtil.parse(lookup, ctx.COMPARABLEOPERATOR(),ctx.MATCHES()).get(0));
-            addChildren(QOMParserUtil.parse(lookup, ctx.predicateOperand(0),ctx.predicateOperand(1),ctx.REGEXPATTERN()));
+            setObject(QOMParserUtil.parse(lookup, ctx.COMPARABLEOPERATOR()));
+            addChildren(QOMParserUtil.parse(lookup, ctx.predicateOperand(0),ctx.predicateOperand(1)));
         } else if (ctx.COMMA() != null) {
             setObject(new Operator(OperatorType.AND));
             addChildren(QOMParserUtil.parse(lookup, ctx.NODEID(),

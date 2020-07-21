@@ -64,7 +64,7 @@ standardPredicateExprOperand : objectPath COMPARABLEOPERATOR predicateOperand;
 
 archetypePredicate : '[' archetypePredicateExpr ']' ;
 
-archetypePredicateExpr : ARCHETYPEID|PARAMETER|REGEXPATTERN ;
+archetypePredicateExpr : ARCHETYPEID|PARAMETER ;
 
 nodePredicate : '[' nodePredicateExpr ']' ;
 
@@ -79,7 +79,7 @@ nodePredicateExprOperand
     : NODEID (',' (STRING|PARAMETER))?
     | ARCHETYPEID (',' (STRING|PARAMETER))?
     | PARAMETER (',' (STRING|PARAMETER))?
-    | predicateOperand ((COMPARABLEOPERATOR predicateOperand)|(MATCHES REGEXPATTERN))
+    | predicateOperand COMPARABLEOPERATOR predicateOperand
     ;
 
 identifiedExpr
@@ -172,8 +172,6 @@ fragment IDCHARMINUST :	LETTERMINUST|DIGIT|'_';
 
 fragment URISTRING :	ALPHANUM|'_'|'-'|'/'|':'|'.'|'?'|'&'|'%'|'$'|'#'|'@'|'!'|'+'|'='|'*';
 
-fragment REGEXCHAR :	URISTRING|'('|')'|'\\'|'^'|'{'|'}'|']'|'[';
-
 BOOLEAN	:	'true' | 'false' | 'TRUE' | 'FALSE' ;
 NODEID	:	('at'|'id') DIGIT+ ('.' DIGIT+)*; // DIGIT DIGIT DIGIT DIGIT;
 IDENTIFIER
@@ -200,7 +198,6 @@ UNIQUEID
 ARCHETYPEID : LETTER+ '-' LETTER+ '-' (LETTER|'_')+ '.' (IDCHAR|'-')+ '.v' DIGIT ('.' DIGIT)? ('.' DIGIT)?;
 COMPARABLEOPERATOR :	'=' | '!=' | '>' | '>=' | '<' | '<=' ;
 URIVALUE: LETTER+ '://' (URISTRING|'['|']'|', \''|'\'')* ;
-REGEXPATTERN : '{/' REGEXCHAR+ '/}';
 STRING
    	:  '\'' ( ESC_SEQ | ~('\\'|'\'') )* '\''
    	|  '"' ( ESC_SEQ | ~('\\'|'"') )* '"'

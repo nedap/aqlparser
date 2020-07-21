@@ -26,10 +26,4 @@ public class ArchetypePredicateExprTest extends BaseTest {
         assertEquals(42,primitiveOperand.getValue());
     }
 
-    @Test
-    public void regexPattern() throws AQLValidationException {
-        String aql = "{/\\s+/}";
-        TerminalNodeLeaf regexPattern = (TerminalNodeLeaf) QOMParser.parse(aql,"archetypePredicateExpr", lookup);
-        assertEquals("{/\\s+/}",regexPattern.getValue());
-    }
 }

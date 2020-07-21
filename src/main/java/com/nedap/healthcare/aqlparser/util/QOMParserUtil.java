@@ -43,7 +43,6 @@ public class QOMParserUtil {
             switch (type) {
                 case AQLParser.NODEID :
                 case AQLParser.URIVALUE:
-                case AQLParser.REGEXPATTERN:
                     objects.add(new TerminalNodeLeaf(terminalNode));
                     break;
                 case AQLParser.PARAMETER:
@@ -115,7 +114,7 @@ public class QOMParserUtil {
                 objects.add(new PrimitiveOperand((AQLParser.PrimitiveOperandContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ArchetypePredicateExprContext) {
                 AQLParser.ArchetypePredicateExprContext apctx = (AQLParser.ArchetypePredicateExprContext) ctx;
-                objects.add(parse(lookup, apctx.ARCHETYPEID(),apctx.PARAMETER(),apctx.REGEXPATTERN()).get(0));
+                objects.add(parse(lookup, apctx.ARCHETYPEID(),apctx.PARAMETER()).get(0));
             } else if (ctx instanceof AQLParser.PathPartContext) {
                 objects.add(new PathPart((AQLParser.PathPartContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ObjectPathContext) {
@@ -135,7 +134,7 @@ public class QOMParserUtil {
             } else if (ctx instanceof AQLParser.FromClauseContext) {
                 objects.add(new FromClause((AQLParser.FromClauseContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.ArchetypePredicateContext) {
-                objects.add(new Predicate((AQLParser.ArchetypePredicateContext) ctx, lookup));
+                objects.add(new ArchetypePredicate((AQLParser.ArchetypePredicateContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.IdentifiedPathContext) {
                 objects.add(new IdentifiedPath((AQLParser.IdentifiedPathContext) ctx, lookup));
             } else if (ctx instanceof AQLParser.SelectOperandContext) {

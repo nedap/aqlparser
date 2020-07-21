@@ -23,7 +23,7 @@ plugins {
 }
 
 group = 'com.nedap.healthcare'
-version = '0.0.6'
+version = '0.0.8'
 
 repositories {
     add buildscript.repositories.getByName("maven-main-cache")
