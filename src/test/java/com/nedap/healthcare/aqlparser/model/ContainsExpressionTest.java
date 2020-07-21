@@ -80,4 +80,25 @@ public class ContainsExpressionTest extends BaseTest {
         assertTrue(containsExpression.getChildren(1).getChildren(1).getObject() instanceof ClassExprOperand);
     }
 
+    @Test
+    public void operator_precedence() {
+        String aql ="EHR e1 [ehr_id/value=123] OR EHR e2 [ehr_id/value=1234] AND EHR e3 [ehr_id/value=12345]";
+        NodeExpression containsExpression = (NodeExpression) QOMParser.parse(aql,"containsExpr", lookup);
+        assertTrue(containsExpression.getObject() instanceof Operator);
+        assertEquals(OperatorType.OR,((Operator) containsExpression.getObject()).getType());
+        assertTrue(containsExpression.getChildren(0).getObject() instanceof ClassExprOperand);
+        assertTrue(containsExpression.getChildren(1).getObject() instanceof Operator);
+        assertTrue(containsExpression.getChildren(1).getChildren(0).getObject() instanceof ClassExprOperand);
+        assertTrue(containsExpression.getChildren(1).getChildren(1).getObject() instanceof ClassExprOperand);
+
+        aql ="EHR e1 [ehr_id/value=123] AND EHR e2 [ehr_id/value=1234] OR EHR e3 [ehr_id/value=12345]";
+        containsExpression = (NodeExpression) QOMParser.parse(aql,"containsExpr", lookup);
+        assertTrue(containsExpression.getObject() instanceof Operator);
+        assertEquals(OperatorType.OR,((Operator) containsExpression.getObject()).getType());
+        assertTrue(containsExpression.getChildren(1).getObject() instanceof ClassExprOperand);
+        assertTrue(containsExpression.getChildren(0).getObject() instanceof Operator);
+        assertTrue(containsExpression.getChildren(0).getChildren(0).getObject() instanceof ClassExprOperand);
+        assertTrue(containsExpression.getChildren(0).getChildren(1).getObject() instanceof ClassExprOperand);
+    }
+
 }
