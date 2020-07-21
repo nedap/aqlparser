@@ -58,4 +58,8 @@ public class Lookup {
         return parameter.get(param);
     }
 
+    public String getParameterKey(PrimitiveOperand primitiveOperand) {
+        return parameter.entrySet().stream().filter(entry -> primitiveOperand.getValue().equals(entry.getValue()))
+    }
+
 }

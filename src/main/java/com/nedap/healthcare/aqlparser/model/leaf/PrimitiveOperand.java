@@ -122,4 +122,19 @@ public class PrimitiveOperand extends QOMObject {
         return LocalDateTime.of(year,month,day,hour,minute,second);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof PrimitiveOperand)) {
+            return false;
+        }
+        PrimitiveOperand other = (PrimitiveOperand) o;
+        if (other.getType() != this.getType()) {
+            return false;
+        }
+        return other.getValue() == this.getValue();
+    }
+
 }
