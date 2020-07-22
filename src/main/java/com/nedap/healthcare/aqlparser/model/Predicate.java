@@ -2,11 +2,7 @@ package com.nedap.healthcare.aqlparser.model;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
-import com.nedap.healthcare.aqlparser.model.Lookup;
-import com.nedap.healthcare.aqlparser.model.NodeExpression;
-import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
-import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Predicate extends QOMObject {
 

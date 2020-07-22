@@ -30,17 +30,24 @@ public class QOMParser extends AQLBaseVisitor<QOMObject> {
         return (QueryClause) parse(aql,"queryClause", lookup);
     }
 
-    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) {
+    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) throws AQLValidationException {
         final CharStream input = CharStreams.fromString(aql);
         final AQLLexer lexer = new AQLLexer(input);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         final AQLParser parser = new AQLParser(tokenStream);
+        parser.removeErrorListeners();
+        parser.addErrorListener(QOMErrorListener.getInstance());
         ParseTree parseTree;
         try {
             Method method = parser.getClass().getMethod(startRuleName);
             parseTree = (ParseTree) method.invoke(parser);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        } catch (NoSuchMethodException | IllegalAccessException e) {
             throw new IllegalArgumentException("Could not invoke ParseTree." + startRuleName,e);
+        } catch (InvocationTargetException e) {
+            if (e.getCause() instanceof AQLValidationException) {
+                throw (AQLValidationException) e.getCause();
+            }
+            throw new AQLValidationException("Invoking " + startRuleName + " failed", e);
         }
         final QOMParser visitor = new QOMParser(lookup);
         QOMObject object = visitor.visit(parseTree);
