@@ -20,6 +20,7 @@ plugins {
     id "com.jfrog.artifactory" version "4.15.2"
     id 'maven'
     id "maven-publish"
+    id 'jacoco'
 }
 
 sourceCompatibility = '1.8'
@@ -77,5 +78,17 @@ artifactory {
             password = "${artifactory_password}"
             maven = true
         }
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled false
     }
 }
