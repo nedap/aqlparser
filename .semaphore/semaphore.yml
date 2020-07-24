@@ -14,6 +14,7 @@ blocks:
         - name: Tests
           commands:
             - pwd
+            - ls -rtlh
             - './gradlew check -PartifactoryUser=${artifactory_user} -PartifactoryPassword=${artifactory_password} --console=plain'
       secrets:
         - name: jfrog
