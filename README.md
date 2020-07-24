@@ -24,7 +24,6 @@ or using maven
 ## Setup
 In order to setup aqlparser, please create a gradle properties file ```.../aqlparser/gradle.properties``` and add
 ```gradle
-artifactory_contextUrl=https://nedap.jfrog.io/artifactory
 artifactory_user=user.name
 artifactory_password=...
 ```
