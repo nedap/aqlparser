@@ -1,20 +1,33 @@
 version: v1.0
-name: Initial Pipeline
+name: aqlparser
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - sem-version java 1.8
+      - checkout
 auto_cancel:
   running:
     when: branch != 'master' AND branch !~ '^release-'
 blocks:
   - name: Tests
+    dependencies: []
     task:
+      secrets:
+        - name: jfrog
+      prologue:
+        commands:
+          - 'cache restore wrapper-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle),wrapper-master-revision-$(checksum build.gradle),wrapper-master'
+          - 'cache restore caches-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle),caches-master-revision-$(checksum build.gradle),caches-master'
       jobs:
         - name: Tests
           commands:
-            - pwd
-            - ls -rtlh
-            - './gradlew check -PartifactoryUser=${artifactory_user} -PartifactoryPassword=${artifactory_password} --console=plain'
-      secrets:
-        - name: jfrog
+            - './gradlew check jacocoTestReport -PartifactoryUser=${artifactory_user} -PartifactoryPassword=${artifactory_password} --console=plain'
+      epilogue:
+        on_pass:
+          commands:
+            - cache store wrapper-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle) $HOME/.gradle/wrapper
+            - cache store caches-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle) $HOME/.gradle/caches
