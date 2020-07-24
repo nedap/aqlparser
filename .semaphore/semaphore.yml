@@ -7,6 +7,7 @@ agent:
 global_job_config:
   prologue:
     commands:
+      - checkout
       - sem-version java 1.8
 auto_cancel:
   running:
