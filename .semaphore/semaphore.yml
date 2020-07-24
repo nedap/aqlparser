@@ -21,4 +21,4 @@ blocks:
       jobs:
         - name: Tests
           commands:
-            - './gradlew check -PartifactoryUser=${artifactory_user} -PartifactoryPassword=${artifactory_password} --console=plain'
+            - './gradlew check -Partifactory_user=${CI_MAVEN_USERNAME} -Partifactory_password=${CI_MAVEN_PASSWORD}  --console=plain'
