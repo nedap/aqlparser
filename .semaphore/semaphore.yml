@@ -1,0 +1,24 @@
+version: v1.0
+name: aqlparser
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - sem-version java 1.8
+      - checkout
+auto_cancel:
+  running:
+    when: branch != 'master' AND branch !~ '^release-'
+blocks:
+  - name: Tests
+    dependencies: []
+    task:
+      secrets:
+        - name: jfrog
+      jobs:
+        - name: Tests
+          commands:
+            - './gradlew check -Partifactory_user=${CI_MAVEN_USERNAME} -Partifactory_password=${CI_MAVEN_PASSWORD}  --console=plain'
