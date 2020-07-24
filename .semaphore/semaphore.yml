@@ -13,6 +13,7 @@ blocks:
       jobs:
         - name: Tests
           commands:
+            - pwd
             - './gradlew check -PartifactoryUser=${artifactory_user} -PartifactoryPassword=${artifactory_password} --console=plain'
       secrets:
         - name: jfrog
