@@ -18,16 +18,7 @@ blocks:
     task:
       secrets:
         - name: jfrog
-      prologue:
-        commands:
-          - 'cache restore wrapper-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle),wrapper-master-revision-$(checksum build.gradle),wrapper-master'
-          - 'cache restore caches-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle),caches-master-revision-$(checksum build.gradle),caches-master'
       jobs:
         - name: Tests
           commands:
             - './gradlew check -PartifactoryUser=${artifactory_user} -PartifactoryPassword=${artifactory_password} --console=plain'
-      epilogue:
-        on_pass:
-          commands:
-            - cache store wrapper-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle) $HOME/.gradle/wrapper
-            - cache store caches-$SEMAPHORE_GIT_BRANCH-revision-$(checksum build.gradle) $HOME/.gradle/caches
