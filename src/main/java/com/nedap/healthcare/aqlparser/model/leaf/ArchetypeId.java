@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.archie.aom.ArchetypeHRID;
+import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class ArchetypeId extends TerminalNodeLeaf  {
@@ -11,7 +12,11 @@ public class ArchetypeId extends TerminalNodeLeaf  {
 
     @Override
     public void validate() {
-        new ArchetypeHRID(getValue());
+        try {
+            new ArchetypeHRID(getValue());
+        } catch (IllegalArgumentException e) {
+            throw new AQLValidationException("ArchetypeId " + getValue() + " could not be validated", e);
+        }
     }
 
     @Override

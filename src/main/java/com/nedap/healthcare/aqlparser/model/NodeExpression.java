@@ -127,40 +127,36 @@ public class NodeExpression extends QOMObject {
     }
 
 
-    protected void setObject(QOMObject object) {
+    private void setObject(QOMObject object) {
         this.object = object;
     }
 
-    protected void setObject(ParseTree parseTree) {
+    private void setObject(ParseTree parseTree) {
         this.object = QOMParserUtil.parse(lookup, parseTree);
     }
 
-    protected void setObject(ParseTree... parseTrees) {
+    private void setObject(ParseTree... parseTrees) {
         List<QOMObject> objects = QOMParserUtil.parse(lookup, parseTrees);
         this.object = objects.get(0);
     }
 
-    protected void addChild(QOMObject object) {
+    private void addChild(QOMObject object) {
         NodeExpression child = new NodeExpression();
         child.setObject(object);
         addChild(child);
     }
 
-    protected void addChild(ParseTree parseTree) {
-        addChild(QOMParserUtil.parse(lookup, parseTree));
-    }
-
-    protected void addChild(NodeExpression child) {
+    private void addChild(NodeExpression child) {
         if (child == null) return;
         if (this.children == null) this.children = new ArrayList<>();
         children.add(child);
     }
 
-    protected void addChildren(ParseTree... parseTrees) {
+    private void addChildren(ParseTree... parseTrees) {
         addChildren(QOMParserUtil.parse(lookup, parseTrees));
     }
 
-    protected void addChildren(List<QOMObject> children) {
+    private void addChildren(List<QOMObject> children) {
         for (QOMObject qomObject : children) {
             //Explicitly call correct method, cannot resolve this since NodeExpression is also of type QOMObject
             if (qomObject instanceof NodeExpression) {

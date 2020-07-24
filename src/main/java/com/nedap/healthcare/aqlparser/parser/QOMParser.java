@@ -1,6 +1,5 @@
 package com.nedap.healthcare.aqlparser.parser;
 
-import com.nedap.healthcare.aqlparser.AQLBaseVisitor;
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
@@ -13,18 +12,11 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.RuleNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class QOMParser extends AQLBaseVisitor<QOMObject> {
-
-    private Lookup lookup;
-
-    public QOMParser(Lookup lookup) {
-        this.lookup = lookup;
-    }
+public class QOMParser {
 
     public static QueryClause parse(String aql, Lookup lookup) {
         return (QueryClause) parse(aql,"queryClause", lookup);
@@ -49,18 +41,12 @@ public class QOMParser extends AQLBaseVisitor<QOMObject> {
             }
             throw new AQLValidationException("Invoking " + startRuleName + " failed", e);
         }
-        final QOMParser visitor = new QOMParser(lookup);
-        QOMObject object = visitor.visit(parseTree);
+        QOMObject object = QOMParserUtil.parse(lookup, parseTree);
         if (object == null) {
             throw new AQLUnsupportedFeatureException("Visitor for " + startRuleName + " not yet implement");
         }
         object.validate();
         return object;
-    }
-
-    @Override
-    public QOMObject visitChildren(RuleNode node) {
-        return QOMParserUtil.parse(lookup, node);
     }
 
 }

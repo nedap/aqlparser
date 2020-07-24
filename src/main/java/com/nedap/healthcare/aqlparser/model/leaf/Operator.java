@@ -3,8 +3,6 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.temporal.Temporal;
 
 public class Operator extends QOMObject {

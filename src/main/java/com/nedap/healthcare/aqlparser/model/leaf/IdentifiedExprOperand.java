@@ -62,10 +62,6 @@ public class IdentifiedExprOperand extends NodeExpression {
         return getIdentifiedPath().getVariableName();
     }
 
-    public ClassExprOperand getClassExprOperand() {
-        return getLookup().getClassExprOperand(getVariableName());
-    }
-
     public Operator getOperator() {
         return (Operator) getObject();
     }
