@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven {
-            url "${artifactory_contextUrl}"
+            url "https://nedap.jfrog.io/artifactory"
             credentials {
                 username = "${artifactory_user}"
                 password = "${artifactory_password}"
@@ -55,7 +55,7 @@ publishing {
 }
 
 artifactory {
-    contextUrl = "${artifactory_contextUrl}"
+    contextUrl = "https://nedap.jfrog.io/artifactory"
     publish {
         repository {
             repoKey = 'libs-releases-local'
