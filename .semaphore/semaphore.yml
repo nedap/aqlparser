@@ -18,7 +18,17 @@ blocks:
     task:
       secrets:
         - name: jfrog
+      env_vars:
+        - name: CC_TEST_REPORTER_ID
+          value: 1239277fdc010850a2980f4ea05fc1d349967b7301e3debdca3c23a6db3e1c0d
       jobs:
         - name: Tests
           commands:
-            - './gradlew check -Partifactory_user=${CI_MAVEN_USERNAME} -Partifactory_password=${CI_MAVEN_PASSWORD}  --console=plain'
+            - './gradlew check jacocoTestReport -Partifactory_user=${CI_MAVEN_USERNAME} -Partifactory_password=${CI_MAVEN_PASSWORD}  --console=plain'
+      epilogue:
+        on_pass:
+          commands:
+            - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
+            - chmod +x ./cc-test-reporter
+            - JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage ./build/reports/jacoco/test/jacocoTestReport.xml --input-type jacoco
+            - ./cc-test-reporter upload-coverage -r $CC_TEST_REPORTER_ID
