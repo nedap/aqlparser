@@ -91,4 +91,12 @@ jacocoTestReport {
         csv.enabled false
         html.enabled false
     }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, excludes: [
+                    // Exclude auto generated antlr files
+                    'com/nedap/healthcare/aqlparser/**'
+            ])
+        })
+    }
 }
