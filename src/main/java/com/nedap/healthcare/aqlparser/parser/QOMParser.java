@@ -2,7 +2,6 @@ package com.nedap.healthcare.aqlparser.parser;
 
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
@@ -42,9 +41,6 @@ public class QOMParser {
             throw new AQLValidationException("Invoking " + startRuleName + " failed", e);
         }
         QOMObject object = QOMParserUtil.parse(lookup, parseTree);
-        if (object == null) {
-            throw new AQLUnsupportedFeatureException("Visitor for " + startRuleName + " not yet implement");
-        }
         object.validate();
         return object;
     }

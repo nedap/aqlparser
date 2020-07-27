@@ -4,13 +4,18 @@ import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
 public class PrimitiveOperandTest extends BaseTest {
+
+    @Rule
+    public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void string_test() throws AQLValidationException {
@@ -93,6 +98,15 @@ public class PrimitiveOperandTest extends BaseTest {
         aql = "$someDate";
         primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
         assertEquals(LocalDateTime.of(1909,12,19,19,9),primitiveOperand.getValue());
+    }
+
+    @Test
+    public void unknownParameter() throws AQLValidationException {
+        String aql = "$someParameter";
+
+        thrown.expect(AQLValidationException.class);
+        thrown.expectMessage("Could not resolve parameter $someParameter");
+        QOMParser.parse(aql,"primitiveOperand", lookup);
     }
 
 }

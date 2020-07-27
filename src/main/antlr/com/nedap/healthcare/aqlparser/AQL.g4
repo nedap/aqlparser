@@ -195,7 +195,7 @@ UNIQUEID
     | HEXCHAR+ ('-' HEXCHAR+)+       // UUID
 	;
 
-ARCHETYPEID : LETTER+ '-' LETTER+ '-' (LETTER|'_')+ '.' (IDCHAR|'-')+ '.v' DIGIT ('.' DIGIT)? ('.' DIGIT)?;
+ARCHETYPEID : LETTER+ '-' LETTER+ '-' (LETTER|'_')+ '.' (IDCHAR|'-')+ '.v' DIGIT ('.' DIGIT)? ('.' DIGIT)?; //ToDo: Add namespace
 COMPARABLEOPERATOR :	'=' | '!=' | '>' | '>=' | '<' | '<=' ;
 URIVALUE: LETTER+ '://' (URISTRING|'['|']'|', \''|'\'')* ;
 STRING

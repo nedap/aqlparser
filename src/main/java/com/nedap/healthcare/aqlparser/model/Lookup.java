@@ -6,8 +6,11 @@ import com.nedap.healthcare.aqlparser.model.leaf.IdentifiedPath;
 import com.nedap.healthcare.aqlparser.model.leaf.PrimitiveOperand;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lookup {
 
@@ -59,7 +62,10 @@ public class Lookup {
     }
 
     public String getParameterKey(PrimitiveOperand primitiveOperand) {
-        return parameter.entrySet().stream().filter(entry -> primitiveOperand.equals(entry.getValue())).map(Map.Entry::getKey).findFirst().get();
+        return parameter.entrySet().stream().
+                filter(entry -> primitiveOperand.equals(entry.getValue())).
+                map(Map.Entry::getKey).
+                findFirst().orElse(null);
     }
 
 }
