@@ -4,6 +4,12 @@ import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 
 public class Operator extends QOMObject {
@@ -52,8 +58,7 @@ public class Operator extends QOMObject {
             }
             return compare(o1.toString(), o2.toString());
         } else if (o1 instanceof Temporal && o2 instanceof Temporal){
-            //ToDo: This will fail for certain combinations of o1 and o2! Cast dates to...?
-            return compare((Comparable) o1, (Comparable) o2);
+            return compare((Temporal) o1, (Temporal) o2);
         } else {
             throw new IllegalArgumentException(
                     "Cannot compare " + o1.getClass().toGenericString() + " to " + o2.getClass().toGenericString());
@@ -75,6 +80,33 @@ public class Operator extends QOMObject {
                 return left.compareTo(right) == 0 || left.compareTo(right) < 0;
             case NOT_EQUAL:
                 return left.compareTo(right) != 0;
+            default:
+                throw new IllegalArgumentException("Expected comparison operator");
+        }
+    }
+
+    private Boolean compare(Temporal left, Temporal right) {
+        if (left instanceof ChronoLocalDate) {
+            left = LocalDateTime.of((LocalDate) left,LocalTime.MIN);
+        }
+        if (right instanceof ChronoLocalDate) {
+            right = LocalDateTime.of((LocalDate) right,LocalTime.MIN);
+        }
+        Duration duration = Duration.between(left,right);
+        switch (type) {
+            case EQUAL:
+            case MATCHES:
+                return duration.isZero();
+            case GREATER_THAN:
+                return !duration.isNegative();
+            case GREATER_EQUAL_TO:
+                return duration.isZero() || !duration.isNegative();
+            case SMALLER_THAN:
+                return duration.isNegative();
+            case SMALLER_EQUAL_TO:
+                return duration.isZero() || duration.isNegative();
+            case NOT_EQUAL:
+                return !duration.isZero();
             default:
                 throw new IllegalArgumentException("Expected comparison operator");
         }

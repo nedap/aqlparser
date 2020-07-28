@@ -8,7 +8,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -74,6 +77,7 @@ public class OperatorTest extends BaseTest {
     public void compareDates() {
         Operator operator = new Operator(OperatorType.EQUAL);
         assertTrue(operator.compare(LocalDate.of(1,1,1),LocalDate.of(1,1,1)));
+        assertTrue(operator.compare(LocalDate.of(1,1,1), LocalDateTime.of(1,1,1,0,0,0)));
         assertFalse(operator.compare(LocalDate.of(1,1,1),LocalDate.of(2,1,1)));
 
         //ToDo: Add more tests, also compare different types!
