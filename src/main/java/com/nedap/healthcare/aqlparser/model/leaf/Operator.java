@@ -18,10 +18,6 @@ public class Operator extends QOMObject {
         this.type = type;
     }
 
-    public Operator(String type) {
-        this.type = OperatorType.get(type);
-    }
-
     public OperatorType getType() {
         return type;
     }
