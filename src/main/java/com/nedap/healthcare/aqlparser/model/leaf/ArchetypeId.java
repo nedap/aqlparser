@@ -2,6 +2,7 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.archie.aom.ArchetypeHRID;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class ArchetypeId extends TerminalNodeLeaf  {
@@ -16,7 +17,7 @@ public class ArchetypeId extends TerminalNodeLeaf  {
             new ArchetypeHRID(getValue());
         } catch (IllegalArgumentException e) {
             //This should not be possible. Already checked in the grammer
-            throw new AQLValidationException("ArchetypeId " + getValue() + " could not be validated", e);
+            this.addValidationMessage(new AQLValidationMessage("ArchetypeId " + getValue() + " could not be validated"));
         }
     }
 

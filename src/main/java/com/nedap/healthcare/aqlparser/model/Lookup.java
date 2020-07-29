@@ -22,6 +22,9 @@ public class Lookup {
     }
 
     public void addAlias(String alias, IdentifiedPath identifiedPath) {
+        if (getIdentifiedPath(alias) != null) {
+            identifiedPath.addValidationMessage(new AQLValidationMessage("Alias " + alias + " is used multiple times"));
+        }
         aliases.put(alias,identifiedPath);
     }
 

@@ -17,18 +17,19 @@ public class ArchetypePredicate extends Predicate {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         getPredicateExpression().validate();
         if (getPredicateExpression() instanceof PrimitiveOperand) {
             PrimitiveOperand parameter = (PrimitiveOperand) getPredicateExpression();
             if (!(parameter.getValue() instanceof String)) {
-                throw new AQLValidationException("Expected Parameter " + lookup.getParameterKey(parameter) + " in " +
-                        "ArchetypePredicate to be of type STRING");
-            }
-            try {
-                new ArchetypeHRID((String) parameter.getValue());
-            } catch (IllegalArgumentException e) {
-                throw new AQLValidationException(parameter.getValue().toString() + " is not a valid archetype human readable id.");
+                this.addValidationMessage(new AQLValidationMessage("Expected Parameter " + lookup.getParameterKey(parameter) + " in " +
+                        "ArchetypePredicate to be of type STRING"));
+            } else {
+                try {
+                    new ArchetypeHRID((String) parameter.getValue());
+                } catch (IllegalArgumentException e) {
+                    this.addValidationMessage(new AQLValidationMessage(parameter.getValue().toString() + " is not a valid archetype human readable id."));
+                }
             }
         }
     }

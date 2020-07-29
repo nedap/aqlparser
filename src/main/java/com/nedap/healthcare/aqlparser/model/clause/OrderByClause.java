@@ -20,7 +20,7 @@ public class OrderByClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         for (OrderByExpression orderByExpression : orderByExpressions) {
             orderByExpression.validate();
         }

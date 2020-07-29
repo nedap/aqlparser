@@ -2,6 +2,7 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.NodeExpression;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
@@ -27,10 +28,10 @@ public class IdentifiedExprOperand extends NodeExpression {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         IdentifiedPath identifiedPath = getIdentifiedPath();
         if (identifiedPath == null) {
-            throw new AQLValidationException("Failed to set identified Path");
+            this.addValidationMessage(new AQLValidationMessage("Failed to set identified Path. Check parameters."));
         }
     }
 

@@ -1,8 +1,10 @@
 package com.nedap.healthcare.aqlparser.parser;
 
+import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.clause.QueryClause;
@@ -14,6 +16,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.stream.Collectors;
 
 public class QOMParser {
 
@@ -42,6 +45,13 @@ public class QOMParser {
         }
         QOMObject object = QOMParserUtil.parse(lookup, parseTree);
         object.validate();
+        if (object.hasErrors()) {
+            String message = object.getValidationMessages().
+                    stream().
+                    map(AQLValidationMessage::getMessage).
+                    collect(Collectors.joining("; "));
+            throw new AQLValidationException(message);
+        }
         return object;
     }
 

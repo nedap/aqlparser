@@ -13,7 +13,7 @@ public class TerminalNodeLeaf extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         //ToDo
     }
 

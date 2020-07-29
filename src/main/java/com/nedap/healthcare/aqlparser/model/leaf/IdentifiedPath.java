@@ -55,7 +55,7 @@ public class IdentifiedPath extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         if (nodePredicate != null) nodePredicate.validate();
         if (objectPath != null) objectPath.validate();
     }

@@ -20,7 +20,7 @@ public class SelectOperand extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         identifiedPath.validate();
     }
 

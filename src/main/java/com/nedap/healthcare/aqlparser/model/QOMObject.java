@@ -1,15 +1,28 @@
 package com.nedap.healthcare.aqlparser.model;
 
-
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
-import org.antlr.v4.runtime.tree.ParseTree;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class QOMObject {
 
-    public abstract void validate() throws AQLValidationException;
+    private List<AQLValidationMessage> validationMessages;
+
+    public abstract void validate();
+
+    public void addValidationMessage(AQLValidationMessage message) {
+        if (validationMessages == null) {
+            validationMessages = new ArrayList<>();
+        }
+        validationMessages.add(message);
+    }
+
+    public List<AQLValidationMessage> getValidationMessages() {
+        return validationMessages;
+    }
+
+    public Boolean hasErrors() {
+        return validationMessages != null;
+    }
 
 }

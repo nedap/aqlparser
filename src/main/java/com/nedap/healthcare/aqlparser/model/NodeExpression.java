@@ -191,7 +191,7 @@ public class NodeExpression extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         if (object != null) getObject().validate();
         if (children != null) {
             for (NodeExpression child : children) {

@@ -19,7 +19,7 @@ public class WhereClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         identifiedExpression.validate();
     }
 }

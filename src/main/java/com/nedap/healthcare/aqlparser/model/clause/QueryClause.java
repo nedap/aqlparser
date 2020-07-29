@@ -40,7 +40,7 @@ public class QueryClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         selectClause.validate();
         fromClause.validate();
         if (whereClause != null) {

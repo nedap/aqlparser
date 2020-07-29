@@ -21,7 +21,7 @@ public class SelectClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         if (topClause != null) topClause.validate();
         for (SelectOperand selectOperand : selection) {
             selectOperand.validate();

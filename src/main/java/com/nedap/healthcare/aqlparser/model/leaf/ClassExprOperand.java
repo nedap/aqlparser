@@ -51,7 +51,7 @@ public class ClassExprOperand extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
         if (predicate != null) {
             predicate.validate();
         }

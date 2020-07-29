@@ -18,7 +18,7 @@ public class OrderByExpression extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public void validate() {
 
     }
 
