@@ -18,7 +18,8 @@ public class QOMErrorListener extends BaseErrorListener {
             int line,
             int charPositionInLine,
             String msg, RecognitionException e) throws AQLValidationException {
-        throw new AQLValidationException("Line " + line + ":" + charPositionInLine + " " + msg);
+        String offendingSymbolString = offendingSymbol.toString();
+        throw new AQLValidationException(msg, line, charPositionInLine, offendingSymbolString.length());
     }
 
 }
