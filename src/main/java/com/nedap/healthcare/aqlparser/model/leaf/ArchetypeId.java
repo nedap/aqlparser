@@ -15,6 +15,7 @@ public class ArchetypeId extends TerminalNodeLeaf  {
         try {
             new ArchetypeHRID(getValue());
         } catch (IllegalArgumentException e) {
+            //This should not be possible. Already checked in the grammer
             throw new AQLValidationException("ArchetypeId " + getValue() + " could not be validated", e);
         }
     }

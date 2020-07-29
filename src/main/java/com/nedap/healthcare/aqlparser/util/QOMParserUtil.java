@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.util;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.exception.AQLRuntimeException;
 import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.model.*;
 import com.nedap.healthcare.aqlparser.model.clause.*;
@@ -26,6 +27,8 @@ public class QOMParserUtil {
                 objects.add(parse(lookup, (TerminalNode) parseTree));
             } else if (parseTree instanceof ParserRuleContext) {
                 objects.add(parse(lookup, (ParserRuleContext) parseTree));
+            } else {
+                throw new AQLRuntimeException("Must not be reached");
             }
         }
         return objects;
