@@ -1,5 +1,6 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
+import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -41,6 +42,14 @@ public class Operator extends QOMObject {
         if (o1 instanceof Number && o2 instanceof Number) {
             return compare(((Number) o1).doubleValue(), ((Number) o2).doubleValue());
         } else if (o1 instanceof String && o2 instanceof String) {
+            //ToDo: In SQL, these operators compare position in alphabetic ordering. There is nothing about this in
+            //      the AQL specs.
+            if (type == OperatorType.GREATER_THAN ||
+                    type == OperatorType.GREATER_EQUAL_TO ||
+                    type == OperatorType.SMALLER_THAN ||
+                    type == OperatorType.SMALLER_EQUAL_TO) {
+                throw new AQLUnsupportedFeatureException(">, >=, <, <= operators not yet supported for comparison of Strings.");
+            }
             return compare(o1.toString(), o2.toString());
         } else if (o1 instanceof Temporal && o2 instanceof Temporal){
             //ToDo: This will fail for certain combinations of o1 and o2! Cast dates to...?
@@ -51,7 +60,7 @@ public class Operator extends QOMObject {
         }
     }
 
-    public <T extends Comparable<T>> Boolean compare(T left, T right) {
+    private <T extends Comparable<T>> Boolean compare(T left, T right) {
         switch (type) {
             case EQUAL:
             case MATCHES:

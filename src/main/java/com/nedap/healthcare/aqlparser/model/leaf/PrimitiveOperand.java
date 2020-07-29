@@ -131,7 +131,7 @@ public class PrimitiveOperand extends QOMObject {
             return false;
         }
         PrimitiveOperand other = (PrimitiveOperand) o;
-        if (other.getType() != this.getType()) {
+        if (!other.getType().isAssignableFrom(this.getType())) {
             return false;
         }
         return other.getValue() == this.getValue();

@@ -28,7 +28,7 @@ public class ArchetypePredicate extends Predicate {
             try {
                 new ArchetypeHRID((String) parameter.getValue());
             } catch (IllegalArgumentException e) {
-                throw new AQLValidationException(parameter.getValue().toString() + " is not a valid archetype human readable id");
+                throw new AQLValidationException(parameter.getValue().toString() + " is not a valid archetype human readable id.");
             }
         }
     }

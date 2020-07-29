@@ -59,7 +59,10 @@ public class Lookup {
     }
 
     public String getParameterKey(PrimitiveOperand primitiveOperand) {
-        return parameter.entrySet().stream().filter(entry -> primitiveOperand.equals(entry.getValue())).map(Map.Entry::getKey).findFirst().get();
+        return parameter.entrySet().stream().
+                filter(entry -> primitiveOperand.equals(entry.getValue())).
+                map(Map.Entry::getKey).
+                findFirst().orElse(null);
     }
 
 }

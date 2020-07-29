@@ -47,8 +47,7 @@ public class IdentifiedExprOperand extends NodeExpression {
             return (IdentifiedPath) qomObject;
         } else if (qomObject instanceof PrimitiveOperand) {
             PrimitiveOperand primitiveOperand = (PrimitiveOperand) getChildren(0).getObject();
-            IdentifiedPath identifiedPath = getLookup().getIdentifiedPath(primitiveOperand.getValue().toString());
-            return identifiedPath;
+            return getLookup().getIdentifiedPath(primitiveOperand.getValue().toString());
         } else {
             return null;
         }

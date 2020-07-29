@@ -3,12 +3,17 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
 
 public class IdentifiedExprOperandTest extends BaseTest {
+
+    @Rule
+    public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void primitiveOperand() throws AQLValidationException {
@@ -31,4 +36,15 @@ public class IdentifiedExprOperandTest extends BaseTest {
         assertEquals(42,valueList.item(0).getValue());
         assertEquals(1909,valueList.item(1).getValue());
     }
+
+    @Test
+    public void unknownVariable() throws AQLValidationException {
+        String aql = "variable MATCHES {42, 1909}";
+
+        thrown.expect(AQLValidationException.class);
+        thrown.expectMessage("Failed to set identified Path");
+        QOMParser.parse(aql,"identifiedExprOperand", lookup);
+    }
+
+
 }
