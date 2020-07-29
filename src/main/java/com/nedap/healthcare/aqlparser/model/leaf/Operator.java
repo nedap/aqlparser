@@ -4,6 +4,11 @@ import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 public class Operator extends QOMObject {
@@ -52,7 +57,14 @@ public class Operator extends QOMObject {
             }
             return compare(o1.toString(), o2.toString());
         } else if (o1 instanceof Temporal && o2 instanceof Temporal){
-            //ToDo: This will fail for certain combinations of o1 and o2! Cast dates to...?
+            if (o1 instanceof OffsetDateTime && o2 instanceof ZonedDateTime) {
+                o2 = ((ZonedDateTime) o2).toOffsetDateTime();
+            } else if (o1 instanceof ZonedDateTime && o2 instanceof OffsetDateTime) {
+                o2 = ((OffsetDateTime) o2).toZonedDateTime();
+            } else if (!o1.getClass().equals(o2.getClass())) {
+                throw new IllegalArgumentException(
+                        "Cannot compare " + o1.getClass().toGenericString() + " to " + o2.getClass().toGenericString());
+            }
             return compare((Comparable) o1, (Comparable) o2);
         } else {
             throw new IllegalArgumentException(

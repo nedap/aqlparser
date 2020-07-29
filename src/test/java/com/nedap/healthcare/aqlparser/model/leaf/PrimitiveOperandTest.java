@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 import static org.junit.Assert.*;
 
@@ -52,9 +54,25 @@ public class PrimitiveOperandTest extends BaseTest {
         primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
         assertEquals(LocalDateTime.of(1909,12,19,19,9),primitiveOperand.getValue());
 
+        aql = "1909-12-19T19:09";
+        primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
+        assertEquals(LocalDateTime.of(1909,12,19,19,9),primitiveOperand.getValue());
+
         aql = "1909-12-19 19:09:09";
         primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
         assertEquals(LocalDateTime.of(1909,12,19,19,9,9),primitiveOperand.getValue());
+
+        aql = "1909-12-19T19:09:09";
+        primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
+        assertEquals(LocalDateTime.of(1909,12,19,19,9,9),primitiveOperand.getValue());
+
+        aql = "1909-12-19 19:09:09+01:00";
+        primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
+        assertEquals(OffsetDateTime.of(1909,12,19,19,9,9,0, ZoneOffset.ofHoursMinutes(1,0)),primitiveOperand.getValue());
+
+        aql = "1909-12-19T19:09:09+01:00";
+        primitiveOperand = (PrimitiveOperand) QOMParser.parse(aql,"primitiveOperand", lookup);
+        assertEquals(OffsetDateTime.of(1909,12,19,19,9,9,0, ZoneOffset.ofHoursMinutes(1,0)),primitiveOperand.getValue());
     }
 
     @Test
