@@ -1,5 +1,6 @@
 package com.nedap.healthcare.aqlparser.parser;
 
+import com.nedap.archie.antlr.errors.ANTLRParserErrors;
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
@@ -26,8 +27,13 @@ public class QOMParser {
         final AQLLexer lexer = new AQLLexer(input);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         final AQLParser parser = new AQLParser(tokenStream);
+
+        final ANTLRParserErrors errors = new ANTLRParserErrors();
+        final QOMErrorListener errorListener = new QOMErrorListener(errors);
+
         parser.removeErrorListeners();
-        parser.addErrorListener(QOMErrorListener.getInstance());
+        parser.addErrorListener(errorListener);
+
         ParseTree parseTree;
         try {
             Method method = parser.getClass().getMethod(startRuleName);
@@ -40,7 +46,7 @@ public class QOMParser {
             }
             throw new AQLValidationException("Invoking " + startRuleName + " failed", e);
         }
-        QOMObject object = QOMParserUtil.parse(lookup, parseTree);
+        final QOMObject object = QOMParserUtil.parse(lookup, parseTree);
         object.validate();
         return object;
     }

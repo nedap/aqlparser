@@ -1,5 +1,6 @@
 package com.nedap.healthcare.aqlparser.parser;
 
+import com.nedap.archie.antlr.errors.ANTLRParserErrors;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
@@ -8,8 +9,10 @@ import org.antlr.v4.runtime.Token;
 
 public class QOMErrorListener extends BaseErrorListener {
 
-    public static QOMErrorListener getInstance() {
-        return new QOMErrorListener();
+    private final ANTLRParserErrors errors;
+
+    public QOMErrorListener(ANTLRParserErrors errors) {
+        this.errors = errors;
     }
 
     @Override
@@ -29,6 +32,8 @@ public class QOMErrorListener extends BaseErrorListener {
             }
         }
 
+        String error = String.format("syntax error at %d:%d: %s. msg: %s", line, charPositionInLine, offendingSymbol, msg);
+        errors.addError(error);
         throw new AQLValidationException(msg, line, charPositionInLine, tokenLength);
     }
 
