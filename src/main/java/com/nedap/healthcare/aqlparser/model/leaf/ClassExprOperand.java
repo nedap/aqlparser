@@ -1,11 +1,14 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.Predicate;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class expressions syntax include three parts. A class expression must have part one and at least one of part two or
@@ -51,9 +54,10 @@ public class ClassExprOperand extends QOMObject {
     }
 
     @Override
-    public void validate() {
+    public List<AQLValidationMessage> validate() {
         if (predicate != null) {
-            predicate.validate();
+            return predicate.validate();
         }
+        return new ArrayList<>();
     }
 }

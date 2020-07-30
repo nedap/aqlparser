@@ -1,11 +1,13 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.NodeExpression;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An identified expression specifies matching criteria in the WHERE clause and comes in two forms. The first form is
@@ -28,11 +30,13 @@ public class IdentifiedExprOperand extends NodeExpression {
     }
 
     @Override
-    public void validate() {
+    public List<AQLValidationMessage> validate() {
         IdentifiedPath identifiedPath = getIdentifiedPath();
+        List<AQLValidationMessage> messages = new ArrayList<>();
         if (identifiedPath == null) {
-            this.addValidationMessage(new AQLValidationMessage("Failed to set identified Path. Check parameters."));
+            messages.add(new AQLValidationMessage("Failed to set identified Path. Check parameters."));
         }
+        return messages;
     }
 
     public IdentifiedPath getIdentifiedPath() {

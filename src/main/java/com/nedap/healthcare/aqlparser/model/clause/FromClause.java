@@ -1,10 +1,12 @@
 package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.NodeExpression;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
+
+import java.util.List;
 
 public class FromClause extends QOMObject {
 
@@ -16,8 +18,8 @@ public class FromClause extends QOMObject {
     }
 
     @Override
-    public void validate() {
-        containsExpression.validate();
+    public List<AQLValidationMessage> validate() {
+        return containsExpression.validate();
     }
 
     public NodeExpression getContainsExpression() {
