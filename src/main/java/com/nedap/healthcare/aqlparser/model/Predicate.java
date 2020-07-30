@@ -1,8 +1,9 @@
 package com.nedap.healthcare.aqlparser.model;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
+
+import java.util.List;
 
 public class Predicate extends QOMObject {
 
@@ -26,8 +27,8 @@ public class Predicate extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
-        predicateExpression.validate();
+    public List<AQLValidationMessage> validate() {
+        return predicateExpression.validate();
     }
 
     public QOMObject getPredicateExpression() {

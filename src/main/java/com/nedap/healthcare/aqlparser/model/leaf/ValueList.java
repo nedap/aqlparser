@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
@@ -19,8 +20,12 @@ public class ValueList extends QOMObject {
     }
 
     @Override
-    public void validate() {
-
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
+        for (PrimitiveOperand operand : items) {
+            messages.addAll(operand.validate());
+        }
+        return messages;
     }
 
     public List<PrimitiveOperand> getItems() {

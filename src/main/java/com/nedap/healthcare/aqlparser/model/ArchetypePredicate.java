@@ -3,9 +3,11 @@ package com.nedap.healthcare.aqlparser.model;
 import com.nedap.archie.aom.ArchetypeHRID;
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLRuntimeException;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.leaf.ArchetypeId;
 import com.nedap.healthcare.aqlparser.model.leaf.PrimitiveOperand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArchetypePredicate extends Predicate {
 
@@ -17,20 +19,22 @@ public class ArchetypePredicate extends Predicate {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
-        getPredicateExpression().validate();
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>(getPredicateExpression().validate());
         if (getPredicateExpression() instanceof PrimitiveOperand) {
             PrimitiveOperand parameter = (PrimitiveOperand) getPredicateExpression();
             if (!(parameter.getValue() instanceof String)) {
-                throw new AQLValidationException("Expected Parameter " + lookup.getParameterKey(parameter) + " in " +
-                        "ArchetypePredicate to be of type STRING");
-            }
-            try {
-                new ArchetypeHRID((String) parameter.getValue());
-            } catch (IllegalArgumentException e) {
-                throw new AQLValidationException(parameter.getValue().toString() + " is not a valid archetype human readable id.");
+                messages.add(new AQLValidationMessage(this.getClass(), "Expected Parameter " + lookup.getParameterKey(parameter) + " in " +
+                        "ArchetypePredicate to be of type STRING"));
+            } else {
+                try {
+                    new ArchetypeHRID((String) parameter.getValue());
+                } catch (IllegalArgumentException e) {
+                    messages.add(new AQLValidationMessage(this.getClass(), parameter.getValue().toString() + " is not a valid archetype human readable id."));
+                }
             }
         }
+        return messages;
     }
 
     public String getArchetypeId() {

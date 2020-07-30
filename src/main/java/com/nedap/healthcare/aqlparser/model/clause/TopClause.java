@@ -1,8 +1,11 @@
 package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
+
+import java.util.Collections;
+import java.util.List;
 
 public class TopClause extends QOMObject {
 
@@ -21,8 +24,8 @@ public class TopClause extends QOMObject {
 
 
     @Override
-    public void validate() throws AQLValidationException {
-
+    public List<AQLValidationMessage> validate() {
+        return Collections.emptyList();
     }
 
     public Integer getLimit() {

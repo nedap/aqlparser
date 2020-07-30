@@ -2,7 +2,6 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
-import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.NodeExpression;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
 import org.junit.Test;

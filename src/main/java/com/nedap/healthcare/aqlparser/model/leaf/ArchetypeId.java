@@ -1,8 +1,11 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.archie.aom.ArchetypeHRID;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArchetypeId extends TerminalNodeLeaf  {
 
@@ -11,13 +14,15 @@ public class ArchetypeId extends TerminalNodeLeaf  {
     }
 
     @Override
-    public void validate() {
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
         try {
             new ArchetypeHRID(getValue());
         } catch (IllegalArgumentException e) {
             //This should not be possible. Already checked in the grammer
-            throw new AQLValidationException("ArchetypeId " + getValue() + " could not be validated", e);
+            messages.add(new AQLValidationMessage(this.getClass(),  "ArchetypeId " + getValue() + " could not be validated"));
         }
+        return messages;
     }
 
     @Override

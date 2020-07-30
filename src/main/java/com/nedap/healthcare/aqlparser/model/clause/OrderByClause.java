@@ -1,7 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.leaf.OrderByExpression;
@@ -20,10 +20,12 @@ public class OrderByClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
         for (OrderByExpression orderByExpression : orderByExpressions) {
-            orderByExpression.validate();
+            messages.addAll(orderByExpression.validate());
         }
+        return messages;
     }
 
     public OrderByExpression getOrderByExpression(int index) {

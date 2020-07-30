@@ -1,10 +1,13 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.Predicate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * In AQL, an IdentifiedPath is the association of a variable reference (the identifier; see above) and an archetype
@@ -55,9 +58,11 @@ public class IdentifiedPath extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
-        if (nodePredicate != null) nodePredicate.validate();
-        if (objectPath != null) objectPath.validate();
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
+        if (nodePredicate != null) messages.addAll(nodePredicate.validate());
+        if (objectPath != null) messages.addAll(objectPath.validate());
+        return messages;
     }
 
     public ObjectPath getObjectPath() {

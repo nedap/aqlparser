@@ -2,9 +2,7 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
-import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.parser.QOMParser;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

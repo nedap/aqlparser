@@ -1,15 +1,15 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
+import java.util.Collections;
+import java.util.List;
 
 public class Operator extends QOMObject {
 
@@ -93,7 +93,7 @@ public class Operator extends QOMObject {
     }
 
     @Override
-    public void validate() {
-
+    public List<AQLValidationMessage> validate() {
+        return Collections.emptyList();
     }
 }

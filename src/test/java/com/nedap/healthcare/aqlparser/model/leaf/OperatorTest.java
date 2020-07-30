@@ -2,14 +2,11 @@ package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.BaseTest;
 import com.nedap.healthcare.aqlparser.exception.AQLUnsupportedFeatureException;
-import com.nedap.healthcare.aqlparser.model.Lookup;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.time.*;
-import java.time.chrono.ChronoLocalDate;
-import java.time.temporal.Temporal;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
