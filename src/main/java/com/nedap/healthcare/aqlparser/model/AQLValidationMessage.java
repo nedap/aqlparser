@@ -2,7 +2,7 @@ package com.nedap.healthcare.aqlparser.model;
 
 public class AQLValidationMessage {
 
-    private Class clazz;
+    private Class<?> clazz;
 
     private String message;
 
