@@ -1,10 +1,12 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,8 @@ public class ObjectPath extends QOMObject {
     }
 
     @Override
-    public void validate() {
+    public List<AQLValidationMessage> validate() {
+        return Collections.emptyList();
     }
 
 }

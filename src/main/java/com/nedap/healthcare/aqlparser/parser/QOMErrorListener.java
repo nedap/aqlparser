@@ -5,7 +5,6 @@ import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.Token;
 
 public class QOMErrorListener extends BaseErrorListener {
 
@@ -23,18 +22,13 @@ public class QOMErrorListener extends BaseErrorListener {
             int charPositionInLine,
             String msg, RecognitionException e) throws AQLValidationException {
 
-        int tokenLength = 0; //in case no length is known
-        if(offendingSymbol != null) {
-            if (offendingSymbol instanceof Token) {
-                tokenLength = ((Token) offendingSymbol).getText().length();
-            } else {
-                tokenLength = offendingSymbol.toString().length();
-            }
-        }
-
         String error = String.format("syntax error at %d:%d: %s. msg: %s", line, charPositionInLine, offendingSymbol, msg);
-        errors.addError(error);
-        throw new AQLValidationException(msg, line, charPositionInLine, tokenLength);
+        String offendingSymbolString = offendingSymbol.toString();
+        errors.addError(error, msg, line, charPositionInLine, offendingSymbolString.length(), offendingSymbolString);
+    }
+
+    public ANTLRParserErrors getErrors() {
+        return errors;
     }
 
 }

@@ -8,3 +8,9 @@
  */
 
 rootProject.name = 'aqlparser'
+
+// use Settings.getRootDir() so that it doesn't matter which directory you are executing from
+File localSettings = new File(rootDir, 'local-settings.gradle')
+if (localSettings.exists()) {
+    apply from: localSettings
+}

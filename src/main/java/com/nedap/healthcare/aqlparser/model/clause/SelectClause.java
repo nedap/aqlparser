@@ -1,7 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.leaf.SelectOperand;
@@ -21,11 +21,13 @@ public class SelectClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
-        if (topClause != null) topClause.validate();
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
+        if (topClause != null) messages.addAll(topClause.validate());
         for (SelectOperand selectOperand : selection) {
-            selectOperand.validate();
+            messages.addAll(selectOperand.validate());
         }
+        return messages;
     }
 
     public List<SelectOperand> getSelection() {

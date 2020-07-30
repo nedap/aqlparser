@@ -1,9 +1,12 @@
 package com.nedap.healthcare.aqlparser.model.clause;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
+import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QueryClause extends QOMObject {
 
@@ -40,14 +43,16 @@ public class QueryClause extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
-        selectClause.validate();
-        fromClause.validate();
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
+        messages.addAll(selectClause.validate());
+        messages.addAll(fromClause.validate());
         if (whereClause != null) {
-            whereClause.validate();
+            messages.addAll(whereClause.validate());
         }
         if (orderByClause != null) {
-            orderByClause.validate();
+            messages.addAll(orderByClause.validate());
         }
+        return messages;
     }
 }

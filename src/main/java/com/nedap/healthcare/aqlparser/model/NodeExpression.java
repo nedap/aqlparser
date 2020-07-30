@@ -1,7 +1,6 @@
 package com.nedap.healthcare.aqlparser.model;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
-import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.leaf.Operator;
 import com.nedap.healthcare.aqlparser.model.leaf.OperatorType;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
@@ -191,13 +190,15 @@ public class NodeExpression extends QOMObject {
     }
 
     @Override
-    public void validate() throws AQLValidationException {
-        if (object != null) getObject().validate();
+    public List<AQLValidationMessage> validate() {
+        List<AQLValidationMessage> messages = new ArrayList<>();
+        if (object != null) messages.addAll(getObject().validate());
         if (children != null) {
             for (NodeExpression child : children) {
-                child.validate();
+                messages.addAll(child.validate());
             }
         }
+        return messages;
     }
 
     public Lookup getLookup() {
