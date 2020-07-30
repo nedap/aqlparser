@@ -6,7 +6,7 @@ public class AQLValidationMessage {
 
     private String message;
 
-    public AQLValidationMessage(Class clazz, String message) {
+    public AQLValidationMessage(Class<?> clazz, String message) {
         this.clazz = clazz;
         this.message = message;
     }
