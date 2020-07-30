@@ -20,7 +20,7 @@ public class ArchetypeId extends TerminalNodeLeaf  {
             new ArchetypeHRID(getValue());
         } catch (IllegalArgumentException e) {
             //This should not be possible. Already checked in the grammer
-            messages.add(new AQLValidationMessage("ArchetypeId " + getValue() + " could not be validated"));
+            messages.add(new AQLValidationMessage(this.getClass(),  "ArchetypeId " + getValue() + " could not be validated"));
         }
         return messages;
     }

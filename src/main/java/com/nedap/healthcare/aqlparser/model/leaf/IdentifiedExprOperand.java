@@ -34,7 +34,7 @@ public class IdentifiedExprOperand extends NodeExpression {
         IdentifiedPath identifiedPath = getIdentifiedPath();
         List<AQLValidationMessage> messages = new ArrayList<>();
         if (identifiedPath == null) {
-            messages.add(new AQLValidationMessage("Failed to set identified Path. Check parameters."));
+            messages.add(new AQLValidationMessage(this.getClass(), "Failed to set identified Path. Check parameters."));
         }
         return messages;
     }

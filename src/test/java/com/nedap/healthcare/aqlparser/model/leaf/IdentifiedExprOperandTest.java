@@ -42,7 +42,7 @@ public class IdentifiedExprOperandTest extends BaseTest {
         String aql = "variable MATCHES {42, 1909}";
 
         thrown.expect(AQLValidationException.class);
-        thrown.expectMessage("Failed to set identified Path");
+        thrown.expectMessage("IdentifiedExprOperand: Failed to set identified Path. Check parameters.");
         QOMParser.parse(aql,"identifiedExprOperand", lookup);
     }
 

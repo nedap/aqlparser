@@ -4,7 +4,7 @@ import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TerminalNodeLeaf extends QOMObject {
@@ -17,7 +17,7 @@ public class TerminalNodeLeaf extends QOMObject {
 
     @Override
     public List<AQLValidationMessage> validate() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public String getValue() {

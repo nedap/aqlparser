@@ -24,13 +24,13 @@ public class ArchetypePredicate extends Predicate {
         if (getPredicateExpression() instanceof PrimitiveOperand) {
             PrimitiveOperand parameter = (PrimitiveOperand) getPredicateExpression();
             if (!(parameter.getValue() instanceof String)) {
-                messages.add(new AQLValidationMessage("Expected Parameter " + lookup.getParameterKey(parameter) + " in " +
+                messages.add(new AQLValidationMessage(this.getClass(), "Expected Parameter " + lookup.getParameterKey(parameter) + " in " +
                         "ArchetypePredicate to be of type STRING"));
             } else {
                 try {
                     new ArchetypeHRID((String) parameter.getValue());
                 } catch (IllegalArgumentException e) {
-                    messages.add(new AQLValidationMessage(parameter.getValue().toString() + " is not a valid archetype human readable id."));
+                    messages.add(new AQLValidationMessage(this.getClass(), parameter.getValue().toString() + " is not a valid archetype human readable id."));
                 }
             }
         }

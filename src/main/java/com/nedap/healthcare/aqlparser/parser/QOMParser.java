@@ -48,7 +48,7 @@ public class QOMParser {
         if (!validationMessages.isEmpty()) {
             String message = validationMessages.
                     stream().
-                    map(AQLValidationMessage::getMessage).
+                    map(AQLValidationMessage::toString).
                     collect(Collectors.joining("; "));
             throw new AQLValidationException(message);
         }

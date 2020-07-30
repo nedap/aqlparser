@@ -6,6 +6,7 @@ import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class ObjectPath extends QOMObject {
 
     @Override
     public List<AQLValidationMessage> validate() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
 }

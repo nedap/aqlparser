@@ -30,7 +30,7 @@ public class SelectOperand extends QOMObject {
         List<AQLValidationMessage> messages = new ArrayList<>(identifiedPath.validate());
         IdentifiedPath testPath = lookup.getIdentifiedPath(alias);
         if (testPath != null && !testPath.getVariableName().equals(identifiedPath.getVariableName())) {
-            messages.add(new AQLValidationMessage("Alias " + alias + " used multiple times"));
+            messages.add(new AQLValidationMessage(this.getClass(), "Alias " + alias + " used multiple times"));
         }
         return messages;
     }

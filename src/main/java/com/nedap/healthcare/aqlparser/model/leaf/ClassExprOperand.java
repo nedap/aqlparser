@@ -7,7 +7,7 @@ import com.nedap.healthcare.aqlparser.model.QOMObject;
 import com.nedap.healthcare.aqlparser.model.Predicate;
 import com.nedap.healthcare.aqlparser.util.QOMParserUtil;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,6 +58,6 @@ public class ClassExprOperand extends QOMObject {
         if (predicate != null) {
             return predicate.validate();
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 }

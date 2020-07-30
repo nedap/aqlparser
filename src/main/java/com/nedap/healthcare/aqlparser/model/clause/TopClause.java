@@ -4,7 +4,7 @@ import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TopClause extends QOMObject {
@@ -25,7 +25,7 @@ public class TopClause extends QOMObject {
 
     @Override
     public List<AQLValidationMessage> validate() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public Integer getLimit() {

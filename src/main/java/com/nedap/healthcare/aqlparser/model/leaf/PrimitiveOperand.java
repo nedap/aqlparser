@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.Temporal;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -100,7 +100,7 @@ public class PrimitiveOperand extends QOMObject {
 
     @Override
     public List<AQLValidationMessage> validate() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     private Temporal parseDate(String date) {

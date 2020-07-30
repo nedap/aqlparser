@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Operator extends QOMObject {
@@ -94,6 +94,6 @@ public class Operator extends QOMObject {
 
     @Override
     public List<AQLValidationMessage> validate() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 }
