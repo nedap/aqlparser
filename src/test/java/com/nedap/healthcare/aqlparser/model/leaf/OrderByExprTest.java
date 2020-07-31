@@ -13,6 +13,8 @@ public class OrderByExprTest extends BaseTest {
 
     @Test
     public void identifiedPath() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         String aql = "c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude";
         OrderByExpression orderByExpression = (OrderByExpression) QOMParser.parse(aql,"orderByExpr", lookup);
         assertEquals("/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude",orderByExpression.getIdentifiedPath().getObjectPath().toString());
@@ -21,6 +23,8 @@ public class OrderByExprTest extends BaseTest {
 
     @Test
     public void identifiedPath_asc() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         String aql = "c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude ASC";
         OrderByExpression orderByExpression = (OrderByExpression) QOMParser.parse(aql,"orderByExpr", lookup);
         assertEquals("/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude",orderByExpression.getIdentifiedPath().getObjectPath().toString());
@@ -34,6 +38,8 @@ public class OrderByExprTest extends BaseTest {
 
     @Test
     public void identifiedPath_desc() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         String aql = "c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude DESC";
         OrderByExpression orderByExpression = (OrderByExpression) QOMParser.parse(aql,"orderByExpr", lookup);
         assertEquals("/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude",orderByExpression.getIdentifiedPath().getObjectPath().toString());
@@ -47,6 +53,8 @@ public class OrderByExprTest extends BaseTest {
 
     @Test
     public void identifiedPath_alias() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         lookup.addAlias("orderByAlias", (IdentifiedPath) QOMParser.parse("c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude","identifiedPath", lookup));
         String aql = "orderByAlias";
         OrderByExpression orderByExpression = (OrderByExpression) QOMParser.parse(aql,"orderByExpr", lookup);
