@@ -1,6 +1,7 @@
 package com.nedap.healthcare.aqlparser.model.leaf;
 
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
 import com.nedap.healthcare.aqlparser.model.QOMObject;
@@ -62,6 +63,10 @@ public class IdentifiedPath extends QOMObject {
         List<AQLValidationMessage> messages = new ArrayList<>();
         if (nodePredicate != null) messages.addAll(nodePredicate.validate());
         if (objectPath != null) messages.addAll(objectPath.validate());
+        ClassExprOperand classExprOperand = lookup.getClassExprOperand(variableName);
+        if (classExprOperand == null) {
+            messages.add(new AQLValidationMessage(this.getClass(), "Invalid variable: " + variableName));
+        }
         return messages;
     }
 

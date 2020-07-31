@@ -14,6 +14,8 @@ public class OrderByClauseTest extends BaseTest {
 
     @Test
     public void orderByExpr() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         lookup.addAlias("orderByAlias", (IdentifiedPath) QOMParser.parse("c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude","identifiedPath", lookup));
         String aql = "ORDER BY orderByAlias";
         OrderByClause orderByClause = (OrderByClause) QOMParser.parse(aql,"orderByClause", lookup);
@@ -23,6 +25,8 @@ public class OrderByClauseTest extends BaseTest {
 
     @Test
     public void orderByMultiple() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         lookup.addAlias("orderByAlias1", (IdentifiedPath) QOMParser.parse("c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude","identifiedPath", lookup));
         lookup.addAlias("orderByAlias2", (IdentifiedPath) QOMParser.parse("c/content[id0.0.100.1]/data[id3]/events[id4]/time/value","identifiedPath", lookup));
         String aql = "ORDER BY orderByAlias1 DESC, orderByAlias2 ASC";
