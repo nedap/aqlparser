@@ -47,8 +47,8 @@ public class IdentifiedPath extends QOMObject {
     private Lookup lookup;
 
     public IdentifiedPath(AQLParser.IdentifiedPathContext ctx, Lookup lookup) {
-        initialize(ctx);
         this.lookup = lookup;
+        initialize(ctx);
     }
 
     private void initialize(AQLParser.IdentifiedPathContext ctx) {
