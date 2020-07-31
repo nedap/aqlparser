@@ -36,7 +36,7 @@ repositories {
 dependencies {
     antlr group: 'org.antlr', name: 'antlr4', version: '4.8-1'
 
-    compile group: 'com.nedap.healthcare.archie', name: 'archie-all', version: '0.11.1'
+    compile group: 'com.nedap.healthcare.archie', name: 'archie-all', version: '0.14.0'
 
     testCompile 'junit:junit:4.12'
 
