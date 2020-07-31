@@ -9,7 +9,7 @@ Note that this library does not contain any query logic. This logic is e.g. cont
 The aqlparser is available internally from artifactory and can be included in your gradle project using
 ```gradle
 dependencies {
-    compile(group: 'com.nedap.healthcare', name: 'aqlparser', version: '0.1.0')
+    compile(group: 'com.nedap.healthcare', name: 'aqlparser', version: '0.1.1')
 }
 ```
 or using maven
@@ -17,7 +17,7 @@ or using maven
 <dependency>
     <groupId>com.nedap.healthcare</groupId>
     <artifactId>aqlparser</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
