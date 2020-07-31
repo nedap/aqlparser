@@ -26,7 +26,7 @@ plugins {
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 group = 'com.nedap.healthcare'
-version = '0.0.13'
+version = '0.1.0'
 
 repositories {
     add buildscript.repositories.getByName("maven-main-cache")
