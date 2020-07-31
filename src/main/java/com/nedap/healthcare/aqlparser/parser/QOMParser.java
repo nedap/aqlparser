@@ -1,10 +1,10 @@
 package com.nedap.healthcare.aqlparser.parser;
 
 import com.nedap.archie.antlr.errors.ANTLRParserErrors;
+import com.nedap.archie.antlr.errors.ArchieErrorListener;
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
 import com.nedap.healthcare.aqlparser.exception.AQLParsingException;
-import com.nedap.healthcare.aqlparser.exception.AQLRuntimeException;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
@@ -27,14 +27,14 @@ public class QOMParser {
         return (QueryClause) parse(aql,"queryClause", lookup);
     }
 
-    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) throws AQLValidationException {
+    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) throws AQLValidationException, AQLParsingException {
         final CharStream input = CharStreams.fromString(aql);
         final AQLLexer lexer = new AQLLexer(input);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         final AQLParser parser = new AQLParser(tokenStream);
 
         final ANTLRParserErrors errors = new ANTLRParserErrors();
-        final QOMErrorListener errorListener = new QOMErrorListener(errors);
+        final ArchieErrorListener errorListener = new ArchieErrorListener(errors);
 
         parser.removeErrorListeners();
         parser.addErrorListener(errorListener);
@@ -54,7 +54,7 @@ public class QOMParser {
         final QOMObject object = QOMParserUtil.parse(lookup, parseTree);
 
         if (errorListener.getErrors().hasErrors()) {
-            throw new AQLParsingException("Could not parse QOM: \n" + errorListener.getErrors().toString());
+            throw new AQLParsingException(errorListener.getErrors());
         }
 
         final List<AQLValidationMessage> validationMessages= object.validate();
