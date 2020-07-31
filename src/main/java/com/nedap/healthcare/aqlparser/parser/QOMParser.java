@@ -1,7 +1,10 @@
 package com.nedap.healthcare.aqlparser.parser;
 
+import com.nedap.archie.antlr.errors.ANTLRParserErrors;
+import com.nedap.archie.antlr.errors.ArchieErrorListener;
 import com.nedap.healthcare.aqlparser.AQLLexer;
 import com.nedap.healthcare.aqlparser.AQLParser;
+import com.nedap.healthcare.aqlparser.exception.AQLParsingException;
 import com.nedap.healthcare.aqlparser.exception.AQLValidationException;
 import com.nedap.healthcare.aqlparser.model.AQLValidationMessage;
 import com.nedap.healthcare.aqlparser.model.Lookup;
@@ -24,13 +27,18 @@ public class QOMParser {
         return (QueryClause) parse(aql,"queryClause", lookup);
     }
 
-    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) throws AQLValidationException {
+    public static QOMObject parse(String aql, String startRuleName, Lookup lookup) throws AQLValidationException, AQLParsingException {
         final CharStream input = CharStreams.fromString(aql);
         final AQLLexer lexer = new AQLLexer(input);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         final AQLParser parser = new AQLParser(tokenStream);
+
+        final ANTLRParserErrors errors = new ANTLRParserErrors();
+        final ArchieErrorListener errorListener = new ArchieErrorListener(errors);
+
         parser.removeErrorListeners();
-        parser.addErrorListener(QOMErrorListener.getInstance());
+        parser.addErrorListener(errorListener);
+
         ParseTree parseTree;
         try {
             Method method = parser.getClass().getMethod(startRuleName);
@@ -43,8 +51,13 @@ public class QOMParser {
             }
             throw new AQLValidationException("Invoking " + startRuleName + " failed", e);
         }
-        QOMObject object = QOMParserUtil.parse(lookup, parseTree);
-        List<AQLValidationMessage> validationMessages= object.validate();
+        final QOMObject object = QOMParserUtil.parse(lookup, parseTree);
+
+        if (errorListener.getErrors().hasErrors()) {
+            throw new AQLParsingException(errorListener.getErrors());
+        }
+
+        final List<AQLValidationMessage> validationMessages= object.validate();
         if (!validationMessages.isEmpty()) {
             String message = validationMessages.
                     stream().
