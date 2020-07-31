@@ -26,7 +26,7 @@ plugins {
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 group = 'com.nedap.healthcare'
-version = '0.0.13'
+version = '0.1.0'
 
 repositories {
     add buildscript.repositories.getByName("maven-main-cache")
@@ -36,7 +36,7 @@ repositories {
 dependencies {
     antlr group: 'org.antlr', name: 'antlr4', version: '4.8-1'
 
-    compile group: 'com.nedap.healthcare.archie', name: 'archie-all', version: '0.14.0'
+    compile group: 'com.nedap.healthcare.archie', name: 'archie-all', version: '0.11.1'
 
     testCompile 'junit:junit:4.12'
 
