@@ -13,6 +13,8 @@ public class SelectClauseTest extends BaseTest {
 
     @Test
     public void selectOperand() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         String aql = "SELECT c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude";
         SelectClause selectClause = (SelectClause) QOMParser.parse(aql,"selectClause", lookup);
         assertEquals("c",selectClause.getSelection().get(0).getIdentifiedPath().getVariableName());
@@ -21,6 +23,8 @@ public class SelectClauseTest extends BaseTest {
 
     @Test
     public void selectMultiple() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         String aql = "SELECT c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude, c/content[id0.0.100.1]/data[id3]/events[id4]/time/value";
         SelectClause selectClause = (SelectClause) QOMParser.parse(aql,"selectClause", lookup);
         assertEquals("c",selectClause.getSelection().get(0).getIdentifiedPath().getVariableName());
@@ -31,6 +35,8 @@ public class SelectClauseTest extends BaseTest {
 
     @Test
     public void topClause_selectOperand() throws AQLValidationException {
+        //Add variable c -- will throw AQLValidationException otherwise
+        QOMParser.parse("COMPOSITION c","classExprOperand", lookup);
         String aql = "SELECT TOP 10 FORWARD c/content[id0.0.100.1]/data[id3]/events[id4]/data[id2]/items[id5]/value[id27]/magnitude";
         SelectClause selectClause = (SelectClause) QOMParser.parse(aql,"selectClause", lookup);
         assertEquals("c",selectClause.getSelection().get(0).getIdentifiedPath().getVariableName());
