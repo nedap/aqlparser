@@ -4,7 +4,7 @@ The aqlparser is a library that creates a class representation (Query Object Mod
 This QOM can be used to create an AQL query.
 
 Note that this library does not contain any query logic. This logic is e.g. contained in the query package of chiron.
- 
+
 ## Dependency
 The aqlparser is available internally from artifactory and can be included in your gradle project using
 ```gradle
@@ -33,9 +33,13 @@ to it. Rember that if you build aqlparser for the first time (or altered the gra
 ```
 first.
 
-## Publishing
-In order to upload a new version of aqlparser to artifactory, update ```version``` in ```build.gradle``` and 
-```README.md``` and run 
+## License
+
+This project is published under the Apache 2 license. The ANTL grammar used in this project is an exception, and is LGPL.
+
+## Publishing (sorry, this is an internal comment for now)
+In order to upload a new version of aqlparser to artifactory, update ```version``` in ```build.gradle``` and
+```README.md``` and run
 ```shell script
 ./gradlew clean
 ./gradlew artifactoryPublish
