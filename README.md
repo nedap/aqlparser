@@ -18,3 +18,8 @@ to it. If you're not working at Nedap, just add a random string there.
 ./gradlew generateGrammarSource
 ```
 first.
+
+## Using as a dependency
+
+This project is not yet hosted on a public repository yet, but feel free to add to your own internal repositories for now.
+ If you're a Nedap Healthcare employee, see https://github.com/nedap/aqlparser/wiki/Nedap-Healthcare-internal-build-instructions . 
