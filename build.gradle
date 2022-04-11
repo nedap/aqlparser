@@ -18,8 +18,8 @@ plugins {
     id 'java'
     id 'antlr'
     id "com.jfrog.artifactory" version "4.15.2"
-    id 'maven'
-    id "maven-publish"
+//    id 'maven'
+//    id "maven-publish"
     id 'jacoco'
 }
 
@@ -36,9 +36,9 @@ repositories {
 dependencies {
     antlr group: 'org.antlr', name: 'antlr4', version: '4.8-1'
 
-    compile group: 'com.nedap.healthcare.archie', name: 'archie-all', version: '0.14.0'
+    api group: 'com.nedap.healthcare.archie', name: 'archie-all', version: '2.0.0'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
 }
 
@@ -46,7 +46,7 @@ generateGrammarSource {
     arguments += ["-visitor", "-package", "com.nedap.healthcare.aqlparser"]
 }
 
-publishing {
+/*publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = 'aqlparser'
@@ -54,23 +54,23 @@ publishing {
         }
     }
 }
-
+*/
 artifactory {
     contextUrl = "https://nedap.jfrog.io/artifactory"
-    publish {
-        repository {
-            repoKey = 'libs-releases-local'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true
-        }
-        defaults {
-            publications('mavenJava')
-            publishArtifacts = true
-            properties = ['qa.level': 'basic', 'dev.team' : 'core']
-            publishPom = true
-        }
-    }
+//    publish {
+//        repository {
+//            repoKey = 'libs-releases-local'
+//            username = "${artifactory_user}"
+//            password = "${artifactory_password}"
+//            maven = true
+//        }
+//        defaults {
+//            publications('mavenJava')
+//            publishArtifacts = true
+//            properties = ['qa.level': 'basic', 'dev.team' : 'core']
+//            publishPom = true
+//        }
+//    }
     resolve {
         repository {
             repoKey = 'libs-releases'
