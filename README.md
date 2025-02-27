@@ -1,3 +1,8 @@
+> [!WARNING]
+> This project is no longer maintained.
+>
+> A newer AQL grammar is available in [Archie](https://github.com/openEHR/archie).
+
 # aqlparser
 
 The aqlparser is a library that creates a class representation (Query Object Model, QOM) from a given AQL string.
